@@ -1,0 +1,25 @@
+<div class="column1">
+    <div class="container-logo"> <h2>G<span style="color:green">A</span>BLER</h2> </div>
+    <div class="profil-box" *ngIf="userLoggedIn">
+        <div class="avatar-box">
+        </div>
+        <h3>Loris</h3>
+        <i class="arrow down"></i>
+    </div>
+    <div class="nav-box">
+      <div class="" *ngIf="userLoggedIn"><span class="material-symbols-outlined">home</span>Accueil</div>
+      <div class=""><span class="material-symbols-outlined">language</span>Explore</div>
+      <hr width="90%">
+      <div class="" *ngIf="userLoggedIn">
+        <span class="material-symbols-outlined">notifications</span>
+        Notifications
+      </div>
+      <div class="">
+        <span class="material-symbols-outlined">settings</span>
+        Paramètre
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="userLoggedIn = !userLoggedIn" >
+      Clique pour te connecter ou te déconnecter
+  </button>
+</div>
