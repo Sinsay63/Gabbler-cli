@@ -18,6 +18,8 @@ import { ParametreComponent } from './components/parametre/parametre.component';
 import { BodyComponent } from './components/body/body.component';
 import { HomeComponent } from './components/home/home.component';
 
+import { NgImageSliderModule } from 'ng-image-slider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { HomeComponent } from './components/home/home.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgImageSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
