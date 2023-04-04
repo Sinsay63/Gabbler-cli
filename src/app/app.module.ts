@@ -28,7 +28,7 @@ import { SliderComponent } from './components/identification/slider/slider.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
