@@ -1,6 +1,5 @@
-
-  <!--<li *ngFor= "let user of users">
-      {{user.username}}
-  </li>-->
-
-<router-outlet></router-outlet>
+  <side-menu (onToggleSideNav)="onToggleSideNav($event)"></side-menu>
+  <app-body>
+    [collapsed]="isSideNavCollapsed"
+    [screenWidth]="screenWidth"
+  </app-body>

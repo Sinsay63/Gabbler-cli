@@ -1,23 +1,33 @@
 import { Component } from '@angular/core';
-import { UsersService } from './users.service';
-import { OnInit } from '@angular/core';
+
+interface SideNavToggle {
+  screenWidth: number;
+  collapsed: boolean;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [ UsersService ]
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'gabbler-cli';
-  users: any;
+    
+  isSideNavCollapsed = false;
+  screenWidth = 0;
 
-  constructor(private usersService: UsersService) {
-    this.users = [];
+  onToggleSideNav(data: SideNavToggle): void {
+    this.screenWidth = data.screenWidth;
+    this.isSideNavCollapsed = data.collapsed;
   }
-  ngOnInit(): void {
-      console.log("On init......");
-      this.usersService.getUsers().subscribe((data) => {
-        this.users = data;
-      })
-  }
+
+  // constructor(private usersService: UsersService) {
+  //   this.users = [];
+  // }
+  // ngOnInit(): void {
+  //     console.log("On init......");
+  //     this.usersService.getUsers().subscribe((data) => {
+  //       this.users = data;
+  //     })
+  // }
 }
