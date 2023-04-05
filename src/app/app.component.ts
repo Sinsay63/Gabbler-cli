@@ -13,7 +13,7 @@ interface SideNavToggle {
 export class AppComponent {
   title = 'gabbler-cli';
     
-  isSideNavCollapsed = false;
+  isSideNavCollapsed = true;
   screenWidth = 0;
 
   onToggleSideNav(data: SideNavToggle): void {

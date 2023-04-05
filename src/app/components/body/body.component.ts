@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class BodyComponent {
 
-  @Input() collapsed = false;
+  @Input() collapsed = true;
   @Input() screenWidth = 0;
 
   getBodyClass(): string {
@@ -15,6 +15,9 @@ export class BodyComponent {
     if(this.collapsed && this.screenWidth > 768) {
       styleClass = 'body-trimmed';
     } else if(this.collapsed && this.screenWidth <= 768 && this.screenWidth > 0){
+      styleClass = 'body-md-screen'
+    }
+    else if (this.collapsed==false){
       styleClass = 'body-md-screen'
     }
     return styleClass;
