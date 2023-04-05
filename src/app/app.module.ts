@@ -17,7 +17,6 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
 import { BodyComponent } from './components/body/body.component';
 import { HomeComponent } from './components/home/home.component';
-
 import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
