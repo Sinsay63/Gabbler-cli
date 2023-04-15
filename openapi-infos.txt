@@ -1,0 +1,2 @@
+Commandes pour mettre à jour 
+openapi-generator-cli generate -g typescript-angular -i http://localhost:8081/api/doc/json -o src/app/api -t src/app/openapi-templates --remove-operation-id-prefix

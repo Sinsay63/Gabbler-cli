@@ -63,10 +63,14 @@
               "browserTarget": "gabbler-cli:build:production"
             },
             "development": {
-              "browserTarget": "gabbler-cli:build:development"
+              "browserTarget": "gabbler-cli:build:development",
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "browserTarget": "gabbler-cli:build",
+            "proxyConfig": "proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
