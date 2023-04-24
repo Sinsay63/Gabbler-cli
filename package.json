@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "prestart": "npm run openapi-generate",
-    "openapi-generate":"openapi-generator-cli generate -g typescript-angular -i http://localhost:8081/api/doc/json -o src/app/api -t src/app/openapi-templates --remove-operation-id-prefix",
+    "openapi-generate": "openapi-generator-cli generate -g typescript-angular -i http://localhost:8081/api/doc/json -o src/app/api -t src/app/openapi-templates --remove-operation-id-prefix",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
