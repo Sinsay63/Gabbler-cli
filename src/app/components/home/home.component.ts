@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit{
   users ?= new Array<User>();
   gabs ?= new Array<Gab>();
 
-  //@ViewChild('likeButton', { static: true }) likeButton: ElementRef;
+  @ViewChild('likeButton', { static: true }) likeButton: ElementRef | undefined;;
 
 
   constructor(private userService: UserService,
@@ -21,18 +21,20 @@ export class HomeComponent implements OnInit{
    }
    countLike = 0;
 
-  //  toggleLike() {
-  //   const like = this.likeButton.nativeElement;
+   toggleLike() {
+    if (this.likeButton) {
+      const like = this.likeButton.nativeElement;
 
-  //   if (this.countLike === 0) {
-  //     like.classList.toggle('anim-like');
-  //     this.countLike = 1;
-  //     like.style.backgroundPosition = 'right';
-  //   } else {
-  //     this.countLike = 0;
-  //     like.style.backgroundPosition = 'left';
-  //   }
-  // }
+      if (this.countLike === 0) {
+        like.classList.toggle('anim-like');
+        this.countLike = 1;
+        like.style.backgroundPosition = 'right';
+      } else {
+        this.countLike = 0;
+        like.style.backgroundPosition = 'left';
+      }
+    }
+  }
    
   ngOnInit(): void {
     this.gabService.getGabs().subscribe(data => {

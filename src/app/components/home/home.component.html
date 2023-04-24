@@ -1,36 +1,38 @@
-<h1 class="title">Accueil</h1>
+<div class="home-body">
+    <h1 class="title">Accueil</h1>
 
-        <div class="add-box">
-            <input class="text-field1" type="text" placeholder="Gabbl tes pensées ...">
-        
-        <div class="post-box">
-            <div class="add-attachement">
-                <div class="photo"><i class="fa-regular fa-image"></i>Photo</div>
-                <div class="video"><i class="fa-solid fa-clapperboard-play"></i>Vidéo</div>
+            <div class="add-box">
+                <input class="text-field1" type="text" placeholder="Gabbl tes pensées ...">
+            
+            <div class="post-box">
+                <div class="add-attachement">
+                    <div class="photo"><i class="fa-regular fa-image"></i>Photo</div>
+                    <div class="video"><i class="fa-solid fa-clapperboard-play"></i>Vidéo</div>
+                </div>
+                    <div class="gab-button">Gabbler</div>
             </div>
-                <div class="gab-button">Gabbler</div>
         </div>
-    </div>
 
-        <div class="gabble" *ngFor= "let gab of gabs">
+            <div class="gabble" *ngFor= "let gab of gabs">
 
-            <div class="user">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEl6wfeUKerfghn-raioV8lJZXDDoU4sBXsLlfhV-hDQ&s" class="pp">
-                <div class="name-date-box">
-                    <div class="user-name">{{gab.user?.username}}</div>
-                    <div class="date-field">il y a 3 jours</div>
+                <div class="user">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEl6wfeUKerfghn-raioV8lJZXDDoU4sBXsLlfhV-hDQ&s" class="pp">
+                    <div class="name-date-box">
+                        <div class="user-name">{{gab.user?.username}}</div>
+                        <div class="date-field">il y a 3 jours</div>
+                    </div>
+                </div>
+
+                <div class="text-field">{{gab.content}}</div>
+                <div class="attachements-box">
+                    <img class="gabble-img" src="https://www.commeuncamion.com/content/uploads/2021/04/basketball-sneaker-nike-jordan.jpg">
+                    <img class="gabble-img" src="https://www.sneakers.fr/wp-content/uploads/sb-instagram-feed-images/273936047_1552514101797246_7825181873217631434_nfull.jpg">
+                    <img class="gabble-img" src="https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-jordan-4-military-black-sneaker-kikikickz-365087_800x.progressive.jpg?v=1642713501">
+                </div>
+                <div class="interactive-box">
+                    <div class="like" (click)="toggleLike()" #likeButton></div>
+                    <p class="nblike">{{gab.nbLikes}}</p>
+                    <div class="dislike"><i class="fal fa-thumbs-down"></i>{{gab.nbDislikes}}</div>
                 </div>
             </div>
-
-            <div class="text-field">{{gab.content}}</div>
-            <div class="attachements-box">
-                <img class="gabble-img" src="https://www.commeuncamion.com/content/uploads/2021/04/basketball-sneaker-nike-jordan.jpg">
-                <img class="gabble-img" src="https://www.sneakers.fr/wp-content/uploads/sb-instagram-feed-images/273936047_1552514101797246_7825181873217631434_nfull.jpg">
-                <img class="gabble-img" src="https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-air-jordan-4-military-black-sneaker-kikikickz-365087_800x.progressive.jpg?v=1642713501">
-            </div>
-            <div class="interactive-box">
-                <!-- <div class="like" (click)="toggleLike()" #likeButton></div> -->
-                <p class="nblike">{{gab.nbLikes}}</p>
-                <div class="dislike"><i class="fal fa-thumbs-down"></i>{{gab.nbDislikes}}</div>
-            </div>
-        </div>
+</div>

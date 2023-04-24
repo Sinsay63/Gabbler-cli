@@ -1,7 +1,8 @@
 .column3{
-    
+    position: fixed;
     height:100vh;
     top:0;
-    width : 5rem;
+    right: 0;
+    width : 16.5625rem;
     background-color: red;
 }
