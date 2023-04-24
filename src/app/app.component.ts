@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeService } from './components/parametre/theme.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -12,6 +13,16 @@ interface SideNavToggle {
 })
 export class AppComponent {
   title = 'gabbler-cli';
+
+  constructor(public themeService: ThemeService) {}
+
+  setDefaultTheme() {
+    this.themeService.setTheme('default');
+  }
+
+  setDarkTheme() {
+    this.themeService.setTheme('dark');
+  }
     
   isSideNavCollapsed = true;
   screenWidth = 0;
@@ -20,14 +31,4 @@ export class AppComponent {
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
   }
-
-  // constructor(private usersService: UsersService) {
-  //   this.users = [];
-  // }
-  // ngOnInit(): void {
-  //     console.log("On init......");
-  //     this.usersService.getUsers().subscribe((data) => {
-  //       this.users = data;
-  //     })
-  // }
 }

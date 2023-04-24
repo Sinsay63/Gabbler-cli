@@ -2,16 +2,16 @@ export const navbarData = [
     {
         routeLink: 'home',
         icon: 'fal fa-home',
-        label: 'Home'
+        label: 'Accueil'
     },
     {
         routeLink: 'explore',
         icon: 'fal fa-compass',
-        label: 'Explore'
+        label: 'Explorer'
     },
     {
         routeLink: 'parametre',
         icon: 'fal fa-cog',
-        label: 'Parametre'
+        label: 'Paramétres'
     }
 ];

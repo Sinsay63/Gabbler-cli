@@ -5,10 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AccueilComponent } from './components/accueil/accueil.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { MainContentComponent } from './components/accueil/main-content/main-content.component';
-import { SuggestionComponent } from './components/accueil/suggestion/suggestion.component';
 import { IdentificationComponent } from './components/identification/identification.component';
 import { LoginComponent } from './components/identification/login/login.component';
 import { RegisterComponent } from './components/identification/register/register.component';
@@ -22,10 +19,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
   declarations: [
     AppComponent,
-    AccueilComponent,
     SideMenuComponent,
-    MainContentComponent,
-    SuggestionComponent,
     IdentificationComponent,
     LoginComponent,
     RegisterComponent,

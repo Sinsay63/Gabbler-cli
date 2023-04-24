@@ -10,3 +10,21 @@ body {
     position: relative;
     font-family: 'Roboto', sans-serif;
 }
+
+// thème par défaut
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #263238;
+    --text-color-hover: #263238;
+    --bg-color-hover: #fff;
+    --bg-logo: #fff;
+    --color-logo: #263238;
+  }
+  
+  // thème sombre
+  .theme-dark {
+    --bg-color: #263238;
+    --text-color: #f0f0f0;
+    --text-color-hover: #263238;
+    --bg-color-hover: #f0f0f0;
+  }

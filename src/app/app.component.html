@@ -1,5 +1,7 @@
-  <side-menu (onToggleSideNav)="onToggleSideNav($event)"></side-menu>
-  <app-body
-    [collapsed]="isSideNavCollapsed"
-    [screenWidth]="screenWidth">
-  </app-body>
+  <div [ngClass]="{'theme-default': (themeService.theme$ | async) === 'default', 'theme-dark': (themeService.theme$ | async) === 'dark'}">
+    <side-menu (onToggleSideNav)="onToggleSideNav($event)" ></side-menu>
+    <app-body
+      [collapsed]="isSideNavCollapsed"
+      [screenWidth]="screenWidth">
+    </app-body>
+  </div>

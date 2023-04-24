@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserService, Users } from 'app/api';
+import { GabService, User, UserService, Users , Gab} from 'app/api';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -11,17 +11,19 @@ export class ExploreComponent implements OnInit{
 
   //attributs
   users ?= new Array<User>();
+  gabs ?= new Array<Gab>();
 
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+    private gabService: GabService) {
    }
 
 
   ngOnInit(): void {
       
-    this.userService.getUsers().subscribe(data => {
+    this.gabService.getGabs().subscribe(data => {
       console.log(data);
-      this.users = data.users;
+      this.gabs= data.gabs;
     }, (error => {
       console.log(error);
     }));

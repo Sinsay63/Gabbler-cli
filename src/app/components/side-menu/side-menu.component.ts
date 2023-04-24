@@ -1,6 +1,7 @@
 import { transition, trigger, style, animate, keyframes} from '@angular/animations';
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { navbarData } from './nav-data';
+import { ThemeService } from '../parametre/theme.service';
 import { from } from 'rxjs';
 
 interface SideNavToggle{
@@ -41,6 +42,16 @@ interface SideNavToggle{
 })
 export class SideMenuComponent implements OnInit{
   userLoggedIn: boolean = false;
+
+  constructor(public themeService: ThemeService) {}
+
+  setDefaultTheme() {
+    this.themeService.setTheme('default');
+  }
+
+  setDarkTheme() {
+    this.themeService.setTheme('dark');
+  }
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = true;

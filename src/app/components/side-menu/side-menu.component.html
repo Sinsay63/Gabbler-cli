@@ -19,4 +19,8 @@
       </a> 
     </li>
   </ul>
+  <div [ngClass]="{'theme-default': (themeService.theme$ | async) === 'default', 'theme-dark': (themeService.theme$ | async) === 'dark'}">
+    <button (click)="setDefaultTheme()">Thème par défaut</button>
+    <button (click)="setDarkTheme()">Thème sombre</button>
+  </div>
 </div>
