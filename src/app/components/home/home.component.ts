@@ -24,12 +24,15 @@ export class HomeComponent implements OnInit{
    toggleLike() {
     if (this.likeButton) {
       const like = this.likeButton.nativeElement;
+      console.log("test");
 
       if (this.countLike === 0) {
+        console.log("test1");
         like.classList.toggle('anim-like');
         this.countLike = 1;
         like.style.backgroundPosition = 'right';
       } else {
+        console.log("test2");
         this.countLike = 0;
         like.style.backgroundPosition = 'left';
       }
