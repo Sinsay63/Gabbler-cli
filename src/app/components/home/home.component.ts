@@ -13,29 +13,35 @@ export class HomeComponent implements OnInit{
   users ?= new Array<User>();
   gabs ?= new Array<Gab>();
 
-  @ViewChild('likeButton', { static: true }) likeButton: ElementRef | undefined;;
-
 
   constructor(private userService: UserService,
     private gabService: GabService) {
    }
+   lastClickedLikeButton: HTMLElement | null = null;
    countLike = 0;
 
-   toggleLike() {
-    if (this.likeButton) {
-      const like = this.likeButton.nativeElement;
-      console.log("test");
-
+   toggleLike(event: MouseEvent) {
+    const likeButton = event.target as HTMLElement;
+  
+    if (likeButton.classList.contains('like')) {
+      // if (this.lastClickedLikeButton && this.lastClickedLikeButton !== likeButton) {
+      //   // Si l'utilisateur a cliqué sur un autre élément "like" depuis la dernière fois,
+      //   // on remet l'état du dernier élément cliqué à zéro
+      //   this.lastClickedLikeButton.classList.remove('anim-like');
+      //   this.lastClickedLikeButton.style.backgroundPosition = 'left';
+      //   this.countLike = 0;
+      // }
+  
       if (this.countLike === 0) {
-        console.log("test1");
-        like.classList.toggle('anim-like');
+        likeButton.classList.add('anim-like');
         this.countLike = 1;
-        like.style.backgroundPosition = 'right';
+        likeButton.style.backgroundPosition = 'right';
       } else {
-        console.log("test2");
         this.countLike = 0;
-        like.style.backgroundPosition = 'left';
+        likeButton.style.backgroundPosition = 'left';
       }
+  
+      // this.lastClickedLikeButton = likeButton;
     }
   }
    
