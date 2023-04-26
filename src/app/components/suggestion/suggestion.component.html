@@ -19,7 +19,7 @@
             </div>
             <div class="user-info">
                 <div style="display:flex; align-items:center">
-                    <div style="background-image: url(' {{ usersearch.avatar?.url }} ')" class="suggest-pp"></div>
+                    <div style="background-image: url('assets/images/{{ usersearch.avatar?.url }} ')" class="suggest-pp"></div>
                     <div class="suggest-name">{{usersearch.username}}</div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
     <div *ngIf="isSearch === false">
         <h1 class="title-suggest">Suggestions :</h1>
         <div class="container-suggest" *ngFor= "let user of users">
-            <div class="suggest-user" style="background-image:url('{{ user.banner?.url }}');" >
+            <div class="suggest-user" style="background-image:url('assets/images/{{ user.banner?.url }}');" >
                 
                 <div class="add-container">
                     <div class="add-button">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="user-info">
                     <div style="display:flex; align-items:center">
-                        <div style="background-image: url(' {{ user.avatar?.url }} ')" class="suggest-pp"></div>
+                        <div style="background-image: url('assets/images/{{ user.avatar?.url }} ')" class="suggest-pp"></div>
                         <div class="suggest-name">{{user.username}}</div>
                     </div>
                 </div>
