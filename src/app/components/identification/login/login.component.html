@@ -2,15 +2,21 @@
     <div class="container-form">
         <form class="login-form" method="post">
             <h2>G<span style="color:green;">a</span>bbler</h2>
-            <input class="champs" type="text" placeholder="Nom" />
-            <input class="champs" type="password" placeholder="Mot de passe" />
+            <label>
+                Email:
+                <input class="champs" name="email" type="email" placeholder="Email" [(ngModel)]="email"/>
+            </label>
+            <label>
+                Mot de passe:
+                <input class="champs" name="password" type="password" placeholder="Mot de passe"  [(ngModel)]="password" />
+            </label>
 
             <div style="display:flex; align-items: center; padding-top:10px;" > 
                 <input name="remember" type="checkbox" /><label class="remember" for="remember">Se souvenir de moi</label>
                 <span href="" style="text-decoration: underline;" >mot de passe oublié ?</span>
             </div>
 
-            <input class="button-login" type="submit" value="Se connecter" />
+            <button class="button-login" type="submit" (click)="onSubmit()">Connexion</button>
             
             <div class="google-connect">
                 <div style="display:flex; align-items:center;">

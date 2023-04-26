@@ -1,5 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
@@ -15,6 +16,7 @@ import { ParametreComponent } from './components/parametre/parametre.component';
 import { BodyComponent } from './components/body/body.component';
 import { HomeComponent } from './components/home/home.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
+import { UserAuth } from './api';
 import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
@@ -36,9 +38,10 @@ import { NgImageSliderModule } from 'ng-image-slider';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [UserAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

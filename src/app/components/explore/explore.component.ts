@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GabService, User, UserService, Users , Gab} from 'app/api';
+import { GabService, User, UserService, Gab} from 'app/api';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -10,12 +10,10 @@ import { firstValueFrom } from 'rxjs';
 export class ExploreComponent implements OnInit{
 
   //attributs
-  users ?= new Array<User>();
   gabs ?= new Array<Gab>();
 
 
-  constructor(private userService: UserService,
-    private gabService: GabService) {
+  constructor(private gabService: GabService) {
    }
 
 
@@ -23,7 +21,7 @@ export class ExploreComponent implements OnInit{
       
     this.gabService.getGabs().subscribe(data => {
       console.log(data);
-      this.gabs= data.gabs;
+      this.gabs= data;
     }, (error => {
       console.log(error);
     }));
