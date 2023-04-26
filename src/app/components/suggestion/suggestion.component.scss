@@ -1,0 +1,119 @@
+.column3{
+    position: fixed;
+    height:100vh;
+    top:0;
+    right: 0;
+    width : 16.5625rem;
+    background-color: var(--bg-color);
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+}
+.title-suggest{
+    padding-top:50px;
+    padding-left: 10px;
+}
+.container-suggest{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+.suggest-user{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width:90%;
+    height: 125px;
+    margin: 10px 0px 10px 0px;
+    border-radius: 10px;
+}
+.suggest-pp{
+    height:50px;
+    width:50px;
+    border-radius: 50%;
+    margin:5px;
+    background-repeat :no-repeat;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+}
+.suggest-pp:hover{
+    border: solid 1px #DBFF00;
+}
+.suggest-name{
+    color:white;
+    font-size: 16px;
+    font-weight: 700;
+    transform-origin: bottom left;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.suggest-name::after {
+    content: '';
+    position: relative;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+.suggest-name:hover::after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.form-search{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-top: 20px;
+    border: solid 1px rgb(161, 161, 161);
+    border-radius: 10px;
+    width: 90%;
+    height: 30px;
+}
+.container-search{
+    display: flex;
+    justify-content: center;
+}
+.search-bar{
+    border:none;
+    background-color: transparent;
+    height: 30px;    
+}
+.search-bar:focus{
+    outline: none;
+}
+.button-search{
+    border: none;
+    cursor: pointer;
+}
+.add-button{
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 10px 10px 0px 0px;
+}
+.add-container{
+    display: flex;
+    justify-content: flex-end;
+}
+.user-info{
+    display: flex;
+    height: 65%;
+    align-items: flex-end;
+    
+}
+.icon{
+    opacity: 0.6;
+    font-size: 25px; 
+    color:White;
+    transition: 0.2s ease-in-out;
+}
+.icon:hover{
+    opacity: 1;
+}

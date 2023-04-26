@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
 import { UserAuth } from './api';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     AppRoutingModule,
     HttpClientModule,
     NgImageSliderModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [UserAuth],
   bootstrap: [AppComponent]
