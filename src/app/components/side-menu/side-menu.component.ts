@@ -1,12 +1,13 @@
 import { transition, trigger, style, animate, keyframes} from '@angular/animations';
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning, faLightbulb, faMoon, faUmbrellaBeach} from '@fortawesome/free-solid-svg-icons'
 import { navbarData } from './nav-data';
 import { User, UserService } from 'app/api';
 import { ThemeService } from '../parametre/theme.service';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
+import { faSun } from '@fortawesome/free-regular-svg-icons';
 
 interface SideNavToggle{
   screenWidth: number;
@@ -48,6 +49,9 @@ export class SideMenuComponent implements OnInit{
   userLoggedIn: boolean = false;
   isConnected: boolean | undefined;
   faRightFromBracket = faPersonRunning;
+  lightOn = true;
+  sunBright = faSun;
+  faMoon = faMoon;
   user ?= new User;
 
   constructor(public themeService: ThemeService, private globalDataService: GlobalDataService, private userService: UserService, private router: Router) {}
@@ -55,10 +59,12 @@ export class SideMenuComponent implements OnInit{
   uuid = this.globalDataService.uuid;
   setDefaultTheme() {
     this.themeService.setTheme('default');
+    this.lightOn = true;
   }
 
   setDarkTheme() {
     this.themeService.setTheme('dark');
+    this.lightOn = false;
   }
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();

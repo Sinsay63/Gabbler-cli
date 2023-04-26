@@ -60,7 +60,7 @@
     .profil{
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-around;
         margin-top: 20px;
         background-color: #fff;
         border-radius: 0.625rem;
@@ -79,6 +79,77 @@
         color: var(--color-logo);
         font-size: 24px;
         cursor: pointer;
+    }
+    .dark-theme{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0.938rem;
+        .btn-theme{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 0.625rem;
+            width: 100%;
+            height: 3rem;
+            .lightOn{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 50%;
+                background-color: #263238;
+                margin: 4px;
+                border-radius: 0.625rem;
+                cursor: pointer;
+                .icon{
+                    color: #fff;
+                }
+                p{
+                    margin: 10px;
+                    color: #fff;
+                }
+            }
+            .light{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 50%;
+                cursor: pointer;
+                p{
+                    margin: 10px;
+                }
+            }
+            .darkOn{
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                width: 50%;
+                background-color: #263238;
+                margin: 4px;
+                border-radius: 0.625rem;
+                cursor: pointer;
+                .icon{
+                    color: #fff;
+                }
+                p{
+                    margin: 10px;
+                    color: #fff;
+                }
+            }
+            .dark{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 50%;
+                cursor: pointer;
+                p{
+                    margin: 10px;
+                }
+            }
+        }
+        
     }
 }
 
