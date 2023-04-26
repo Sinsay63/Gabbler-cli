@@ -52,6 +52,34 @@
             }
         }
     }
+    .pp{
+        width: 3rem;
+        min-width: 3rem;
+        border-radius: 0.313rem;
+    }
+    .profil{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 0.625rem;
+        width: 100%;
+        padding: 0.7rem 0 0.7rem 0;
+    }
+    .user{
+        width: 100%;
+        padding: 0.938rem;
+        position: absolute;
+        bottom: 0;
+        margin: 0;
+        display: flex;
+    }
+    .icon{
+        color: var(--color-logo);
+        font-size: 24px;
+        cursor: pointer;
+    }
 }
 
 .sidenav-collapsed {
@@ -110,4 +138,5 @@
     .sidenav-link-text {
         color: #000;
     }
+    
 }

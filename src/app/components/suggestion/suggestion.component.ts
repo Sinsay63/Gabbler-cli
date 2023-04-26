@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SearchService, User, UserService} from 'app/api';
 import { faMagnifyingGlass, faCirclePlus} from '@fortawesome/free-solid-svg-icons'
 import { Router } from '@angular/router';
-import {AuthClientService } from 'app/auth.client.service'
+import {GlobalDataService } from 'app/global.data.service'
 @Component({
   selector: 'app-suggestion',
   templateUrl: './suggestion.component.html',
@@ -10,7 +10,7 @@ import {AuthClientService } from 'app/auth.client.service'
 })
 export class SuggestionComponent {
 
-  constructor(private userService: UserService, private searchService: SearchService, private router: Router, private authService: AuthClientService) {
+  constructor(private userService: UserService, private searchService: SearchService, private router: Router, private authService: GlobalDataService) {
   }
 
   //attributs

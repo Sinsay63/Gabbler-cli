@@ -1,8 +1,11 @@
 import { transition, trigger, style, animate, keyframes} from '@angular/animations';
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning} from '@fortawesome/free-solid-svg-icons'
 import { navbarData } from './nav-data';
+import { User, UserService } from 'app/api';
 import { ThemeService } from '../parametre/theme.service';
-import { AuthClientService } from 'app/auth.client.service';
+import { GlobalDataService } from 'app/global.data.service';
+import { Router } from '@angular/router';
 import { from } from 'rxjs';
 
 interface SideNavToggle{
@@ -44,9 +47,12 @@ interface SideNavToggle{
 export class SideMenuComponent implements OnInit{
   userLoggedIn: boolean = false;
   isConnected: boolean | undefined;
+  faRightFromBracket = faPersonRunning;
+  user ?= new User;
 
-  constructor(public themeService: ThemeService, private authClientService: AuthClientService) {}
+  constructor(public themeService: ThemeService, private globalDataService: GlobalDataService, private userService: UserService, private router: Router) {}
 
+  uuid = this.globalDataService.uuid;
   setDefaultTheme() {
     this.themeService.setTheme('default');
   }
@@ -71,7 +77,15 @@ export class SideMenuComponent implements OnInit{
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
-    this.isConnected = this.authClientService.isConnected;
+    this.isConnected=this.globalDataService.isConnected;
+    if(this.isConnected){
+      this.userService.getUserByUuid(this.uuid).subscribe(data => {
+        console.log(data);
+        this.user=data;
+      }, (error => {
+        console.log(error);
+      }));
+    }
   }
 
   toggleCollapse(): void {
@@ -82,5 +96,12 @@ export class SideMenuComponent implements OnInit{
   closeSidenav(): void {
     this.collapsed = false;
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+  }
+  
+  logOut(){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['connexion']);
+    })
+    this.globalDataService.isConnected=false;
   }
 }

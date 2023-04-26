@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { GabService, User, UserService, Gab} from 'app/api';
-import { AuthClientService } from 'app/auth.client.service';
+import { GlobalDataService } from 'app/global.data.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit{
   gabs ?= new Array<Gab>();
 
 
-  constructor(private gabService: GabService, private authClientService: AuthClientService) {
+  constructor(private gabService: GabService, private globalDataService: GlobalDataService) {
    }
    lastClickedLikeButton: HTMLElement | null = null;
    countLike = 0;

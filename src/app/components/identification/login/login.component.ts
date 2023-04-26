@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService, UserAuth, UserToken } from 'app/api';
-import { AuthClientService } from 'app/auth.client.service';
+import { GlobalDataService } from 'app/global.data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,8 @@ import { AuthClientService } from 'app/auth.client.service';
 
 export class LoginComponent {
 
-  constructor( private authService: AuthService, private userAuth: UserAuth, private authClientService: AuthClientService) {
+  constructor( private authService: AuthService, private userAuth: UserAuth, private globalDataService: GlobalDataService, private router: Router) {
    }
-  
-  token: UserToken | undefined;
   email: string = '';
   password: string = '';
 
@@ -25,16 +24,19 @@ export class LoginComponent {
       this.userAuth.password = this.password;
   
       const data = await this.authService.authenticateAndGetToken(this.userAuth).toPromise();
-      console.log(data);
-      this.token = data;
-      this.authClientService.isConnected = true;
-  
-      console.log(this.token);
-      console.log(this.authClientService.isConnected);
+      this.globalDataService.token = data?.token;
+      this.globalDataService.isConnected = true;
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate(['home']);
+      })
+      this.getUuidFromToken();
     } catch (error) {
-      this.authClientService.isConnected = false;
-      console.log(error);
-      console.log(this.authClientService.isConnected);
+      this.globalDataService.isConnected = false;
     }
+  }
+
+  getUuidFromToken(){
+    const decodedToken = this.globalDataService.getDecodedToken();
+    this.globalDataService.uuid = decodedToken.uuid;
   }
 }

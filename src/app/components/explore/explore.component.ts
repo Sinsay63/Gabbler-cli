@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GabService, User, UserService, Gab} from 'app/api';
 import { firstValueFrom } from 'rxjs';
-import { AuthClientService } from 'app/auth.client.service';
+import { GlobalDataService } from 'app/global.data.service';
 
 @Component({
   selector: 'app-explore',
@@ -16,7 +16,7 @@ export class ExploreComponent implements OnInit{
 
   
 
-  constructor(private gabService: GabService, private authService: AuthClientService) {
+  constructor(private gabService: GabService, private authService: GlobalDataService) {
    }
 
      //attributs
