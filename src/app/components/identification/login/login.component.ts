@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService, UserAuth, UserToken } from 'app/api';
+import { AuthClientService } from 'app/auth.client.service';
 
 @Component({
   selector: 'app-login',
@@ -9,29 +10,31 @@ import { AuthService, UserAuth, UserToken } from 'app/api';
 
 export class LoginComponent {
 
-  constructor( private authService: AuthService, private userAuth: UserAuth) {
+  constructor( private authService: AuthService, private userAuth: UserAuth, private authClientService: AuthClientService) {
    }
   
-  isConnected: boolean = false;
   token: UserToken | undefined;
   email: string = '';
   password: string = '';
 
-  onSubmit() {
-    // Récupérez les valeurs de l'email et du mot de passe
-    this.userAuth =  new UserAuth();
-    this.userAuth.email = this.email;
-    this.userAuth.password = this.password;
-    this.authService.authenticateAndGetToken(this.userAuth).subscribe(data => {
+  async onSubmit() {
+    try {
+      // Récupérez les valeurs de l'email et du mot de passe
+      this.userAuth = new UserAuth();
+      this.userAuth.email = this.email;
+      this.userAuth.password = this.password;
+  
+      const data = await this.authService.authenticateAndGetToken(this.userAuth).toPromise();
       console.log(data);
       this.token = data;
-      this.isConnected=true;
-    }, (error => {
-      this.isConnected=false;
+      this.authClientService.isConnected = true;
+  
+      console.log(this.token);
+      console.log(this.authClientService.isConnected);
+    } catch (error) {
+      this.authClientService.isConnected = false;
       console.log(error);
-    }));
-    
-    console.log(this.token);
-    console.log(this.isConnected)
+      console.log(this.authClientService.isConnected);
+    }
   }
 }

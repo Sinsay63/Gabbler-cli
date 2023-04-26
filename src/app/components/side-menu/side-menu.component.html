@@ -23,4 +23,7 @@
     <button (click)="setDefaultTheme()">Thème par défaut</button>
     <button (click)="setDarkTheme()">Thème sombre</button>
   </div>
+  <div class="profil" *ngIf="isConnected === false">
+      <a href="" class="sidenav-nav-link" routerLink="connexion"> Se Connecter</a>
+  </div>
 </div>

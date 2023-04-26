@@ -2,6 +2,7 @@ import { transition, trigger, style, animate, keyframes} from '@angular/animatio
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { navbarData } from './nav-data';
 import { ThemeService } from '../parametre/theme.service';
+import { AuthClientService } from 'app/auth.client.service';
 import { from } from 'rxjs';
 
 interface SideNavToggle{
@@ -42,8 +43,9 @@ interface SideNavToggle{
 })
 export class SideMenuComponent implements OnInit{
   userLoggedIn: boolean = false;
+  isConnected: boolean | undefined;
 
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService, private authClientService: AuthClientService) {}
 
   setDefaultTheme() {
     this.themeService.setTheme('default');
@@ -69,6 +71,7 @@ export class SideMenuComponent implements OnInit{
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+    this.isConnected = this.authClientService.isConnected;
   }
 
   toggleCollapse(): void {

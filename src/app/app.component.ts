@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ThemeService } from './components/parametre/theme.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -14,7 +15,7 @@ interface SideNavToggle {
 export class AppComponent {
   title = 'gabbler-cli';
 
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService, private route: ActivatedRoute, public router: Router) {}
 
   setDefaultTheme() {
     this.themeService.setTheme('default');
