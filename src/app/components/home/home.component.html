@@ -13,6 +13,11 @@
             </div>
         </div>
 
+        <div id="loader" class="box-loader">
+            <img class="loader" src="assets/images/loader.svg" />
+            <h1><span class="lettre">G</span>abbler</h1>
+        </div>
+
             <div class="gabble" *ngFor= "let gab of gabs">
                     <div class="user">
                         <img  [src]="'assets/images/' + gab.user?.avatar?.url"  alt="Avatar" class="pp">

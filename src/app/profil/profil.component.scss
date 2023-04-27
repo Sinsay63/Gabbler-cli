@@ -2,32 +2,66 @@
     width:100%;
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
     height: 300px;
     background-position: center;
     background-size: cover;
+    .test{
+        display: flex;
+        align-items: flex-end;
+        margin-left: 3%;
+        .back-avatar{
+            padding: 5px;
+            background-color: var(--bg-color);
+            border-radius: 60% 40% 64% 36% / 40% 59% 41% 60%;
+            margin-bottom: -50px;
+            z-index: 1;
+            .profilpp{
+                height: 150px;
+                width: 150px;
+                border-radius: 60% 40% 64% 36% / 40% 59% 41% 60% ;
+                background-position: center;
+                background-size: cover;
+                
+            }
+        }
+    }
     .profil-box{
         display: flex;
         align-items: center;
-        padding:0% 3% 0% 3%;
-        margin-left: 2%;
-        border-radius: 10px 10px 0px 0px;
+        padding:0% 3% 0% 0%;
+        margin-left: -5px;
+        border-radius: 0px 10px 0px 0px;
         background-color: var(--bg-color);
         border: solid 1px  1px 0px 1px var(--text-color);
-        .profilpp{
-            margin: 5px;
-            height: 100px;
-            width:100px;
-            border-radius:50%;
-            background-position: center;
-            background-size: cover;
-            margin-right: 10px;
-        }
         .username{
             color: var(--text-color);
-            font-size: 25px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 500;
+            padding: 10px 15px 0px 15px;
         }
     }
+    .follow-box{
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 25%;
+        margin-right: 5%;
+        border-radius: 10px 10px 0px 0px;
+        border: solid 1px 1px 0px 1px var(--text-color);
+        background-color: var(--bg-color);
+        .text-banner{
+            color: var(--text-color);
+            font-size: 16px;
+        }
+        .test{
+            color: var(--text-color);
+            height: 30%;
+            border: solid 1px;
+        }
+    }
+    
 }
 .info-user{
     display: flex;
@@ -35,12 +69,15 @@
     .first-line-info{
         display: flex;
         justify-content: space-around;
-        padding-top: 10px;
-        
+        padding-top: 50px;
+        .bio{
+            color: var(--text-color);
+        }
         .button-follow{
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-right: 5px;
             height: 40px;
             width:75px;
             cursor: pointer;
@@ -49,5 +86,165 @@
             background-color: var(--bg-color);
             color: var(--text-color);
         }
+        
     }
 }
+
+
+
+/* Copie du scss de home */
+.home-body{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.gabble{
+    display: flex;
+    flex-direction:column;
+    width:90%;
+    border: solid 1px gray;
+    border-radius:10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.user{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+.name-date-box{
+    padding-left: 10px;
+}
+.user-name{
+    color:black;
+    font-size: 18px;
+}
+.date-field{
+    color:gray;
+}
+.pp{
+    height:50px;
+    width:50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: solid 2px black;
+}
+.text-field{
+    color:black;
+    font-size: 15px;
+    padding: 15px 10px 10px 30px;
+    
+}
+.like{
+    cursor:pointer;
+    height: 100px;
+    width: 100px;
+    background-image: url(https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png);
+    position: absolute;
+}
+.anim-like {
+    animation-name: anim-like;
+    animation-duration: 0.8s;
+    animation-timing-function: steps(28); 
+}
+@keyframes anim-like {
+    from{background-position: left;}
+    to{background-position: right;}
+}
+.nblike{
+    margin-left: 70px;
+}
+.comment, .dislike{
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    padding: 5px 0px 5px 20px;
+    color:black;
+    cursor: pointer;
+}
+
+.attachment-box{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+}
+
+.gabble-img{
+border-radius:10px;
+height :175px;
+background-size: cover; 
+background-repeat: no-repeat;
+margin: 0px 10px 0px 10px;
+}
+
+.interactive-box{
+display:flex;
+flex-direction:row;
+align-items:center;
+margin-top: 10px;
+}
+
+.material-symbols-outlined {
+padding-right: 5px;
+font-variation-settings:
+'FILL' 0,
+'wght' 400,
+'GRAD' 0,
+'opsz' 48
+}
+.title{
+width:100%;
+padding-left: 10%;
+color:black;
+}
+.add-box{
+display:flex;
+flex-direction:column;
+height: 150px;
+width : 90%;
+border: solid 1px gray;
+border-radius: 10px;
+background-color: #1e2732;
+}
+.post-box{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:5px;
+padding-top:5px;
+border-top: solid 1px gray;
+}
+.add-attachement{
+display:flex;
+align-items:center;
+}
+.photo, .video{
+display:flex;
+align-items:center;
+color:gray;
+padding: 0px 10px 0px 10px;
+}
+.gab-button{
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius: 10px;
+padding: 2px;
+height: 30px;
+background-color:#DBFF00;
+margin-right: 5px;
+}
+.text-field1, .text-field1:active{
+height:45px;
+color:black;
+background-color: transparent;
+margin: 5px 0px 0px 0px;
+border-width: 0px !important;
+}
+.column2::-webkit-scrollbar {
+display: none;
+}
+/* -------- FIN ----------*/

@@ -1,11 +1,46 @@
 <div class="banner" style="background-image: url('assets/images/{{ user.banner?.url }}');">
-    <div class="profil-box">
-        <div class="profilpp" style="background-image: url('assets/images/{{ user.avatar?.url }}');"></div>        
-        <div class="username">{{ user.username }}</div>
+    <div class="test">
+        <div class="back-avatar">
+            <div class="profilpp" style="background-image: url('assets/images/{{ user.avatar?.url }}');"></div>
+        </div>
+        <div class="profil-box">       
+            <div class="username">{{ user.username }}</div>
+        </div>
     </div>
+
+    <div class="follow-box">
+        <p class="text-banner">551 followers</p>
+        <hr class="test">
+        <p class="text-banner">468 follows</p>
+    </div>
+    
 </div>
+
 <div class="info-user">
     <div class="first-line-info">
+        <p class="bio">
+            Je ne me suis pas réveillé aujourd'hui pour être médiocre
+        </p>
         <div class="button-follow">Suivre</div>
+    </div>
+</div>
+
+<div class="gabble">
+    <div class="user">
+        <img  [src]="'assets/images/' + user.avatar?.url"  alt="Avatar" class="pp">
+        <div class="name-date-box">
+            <div class="user-name">{{user.username}}</div>
+            <div class="date-field">Il y a 3 jours</div>
+        </div>
+    </div>
+
+    <div class="text-field">Salut les amis</div>
+    <div class="attachements-box">
+        <img class="gabble-img">
+    </div>
+    <div class="interactive-box">
+        <div class="like" (click)="toggleLike($event)" #likeButton></div>
+        <p class="nblike">98</p>
+        <div class="dislike"><i class="fal fa-thumbs-down"></i>3</div>
     </div>
 </div>

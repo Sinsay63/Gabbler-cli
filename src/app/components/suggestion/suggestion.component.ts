@@ -10,7 +10,7 @@ import {GlobalDataService } from 'app/global.data.service'
 })
 export class SuggestionComponent {
 
-  constructor(private userService: UserService, private searchService: SearchService, private router: Router, private authService: GlobalDataService) {
+  constructor(private userService: UserService, private searchService: SearchService, private router: Router, private globalDataService: GlobalDataService) {
   }
 
   //attributs
@@ -25,7 +25,7 @@ export class SuggestionComponent {
     this.searchService.searchUser(this.search).subscribe(data => {
       this.usersSearch = data.users
       this.isSearch = data.users?.length != undefined && data?.users?.length > 0 ? true : false;
-      this.authService.gabs = data.gabs;
+      this.globalDataService.gabs = data.gabs;
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate(['explore']);
       });
@@ -43,12 +43,19 @@ export class SuggestionComponent {
   }
 
    ngOnInit(): void {
-      
-    this.userService.getUsers().subscribe(data => {
-      console.log(data);
-      this.users= data;
-    }, (error => {
-      console.log(error);
-    }));
+    if(this.globalDataService.isConnected){
+      this.userService.getSuggestionUserConnected(this.globalDataService.uuid).subscribe(data => {
+        console.log(data);
+        this.users= data;
+      }, (error => {
+        console.log(error);
+      }));
+    }else{
+      this.userService.getSuggestionUserNotConnected().subscribe(data => {
+        this.users = data
+      }, (error => {
+        console.log(error);
+      }))
+    }
   }
 }

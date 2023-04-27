@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit{
 
   constructor(private gabService: GabService, private globalDataService: GlobalDataService) {
    }
+
+
+
+   
    lastClickedLikeButton: HTMLElement | null = null;
    countLike = 0;
 
@@ -44,12 +48,17 @@ export class HomeComponent implements OnInit{
     }
   }
    
-  ngOnInit(): void {
-    this.gabService.getGabs().subscribe(data => {
-      console.log(data);
+  async ngOnInit(): Promise<void> {
+
+    const loader = document.getElementById("loader");
+
+     await this.gabService.getGabs().subscribe(data => {
       this.gabs= data;
+      if (loader) {
+        loader.style.display = "none";
+      }
     }, (error => {
       console.log(error);
-    }));
+    }));    
   }
 }
