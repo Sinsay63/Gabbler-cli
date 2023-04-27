@@ -19,6 +19,7 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
 import { UserAuth } from './api';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ParametreComponent,
     BodyComponent,
     HomeComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,

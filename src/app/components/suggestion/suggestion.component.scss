@@ -1,3 +1,10 @@
+::placeholder{
+    color: var(--text-color);
+}
+::-webkit-scrollbar{
+    overflow-y: hidden;
+}
+
 .column3{
     position: fixed;
     height:100vh;
@@ -6,10 +13,12 @@
     width : 16.5625rem;
     background-color: var(--bg-color);
     box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+    overflow-y: scroll;
 }
 .title-suggest{
     padding-top:50px;
     padding-left: 10px;
+    color: var(--text-color)
 }
 .container-suggest{
     display:flex;
@@ -38,11 +47,11 @@
 .suggest-pp:hover{
     border: solid 1px #DBFF00;
 }
+
 .suggest-name{
     color:white;
     font-size: 16px;
     font-weight: 700;
-    transform-origin: bottom left;
     display: inline-block;
     position: relative;
     cursor: pointer;
@@ -50,7 +59,7 @@
 
 .suggest-name::after {
     content: '';
-    position: relative;
+    position: absolute;
     width: 100%;
     transform: scaleX(0);
     height: 2px;
@@ -60,10 +69,12 @@
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
 }
+
 .suggest-name:hover::after{
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+
 
 .form-search{
     display: flex;
@@ -83,13 +94,16 @@
     border:none;
     background-color: transparent;
     height: 30px;    
+    color: var(--text-color);
 }
 .search-bar:focus{
     outline: none;
+    color: var(--text-color);
 }
 .button-search{
     border: none;
     cursor: pointer;
+    background-color: transparent;
 }
 .add-button{
     display: flex;
@@ -116,4 +130,8 @@
 }
 .icon:hover{
     opacity: 1;
+}
+.glass-icon{
+    font-size: 15px;
+    color: var(--text-color);
 }

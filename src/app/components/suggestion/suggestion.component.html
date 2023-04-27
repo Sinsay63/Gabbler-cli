@@ -4,13 +4,13 @@
     <div class="container-search">
         <form class="form-search" action="/explore" method="get">
             <input class="search-bar" type="text" placeholder="Search" name= "search" [(ngModel)]="search" />
-            <button type="submit" (click)="onSubmit()" class="button-search"><fa-icon style="font-size: 15px;" [icon]="faMagnifingGlass"></fa-icon></button>
+            <button type="submit" (click)="onSubmit()" class="button-search"><fa-icon class="glass-icon"  [icon]="faMagnifingGlass"></fa-icon></button>
         </form>
     </div>
 
 
-    <div class="container-suggest" *ngFor="let usersearch of usersSearch">
-        <div class="suggest-user" style="background-image:url('{{ usersearch.banner?.url }}');" >
+    <div class="container-suggest" *ngFor="let user of usersSearch">
+        <div class="suggest-user" style="background-image:url('assets/images/{{ user.banner?.url }}');" >
             
             <div class="add-container">
                 <div class="add-button">
@@ -19,8 +19,8 @@
             </div>
             <div class="user-info">
                 <div style="display:flex; align-items:center">
-                    <div style="background-image: url('assets/images/{{ usersearch.avatar?.url }} ')" class="suggest-pp"></div>
-                    <div class="suggest-name">{{usersearch.username}}</div>
+                    <div (click)="toProfil( user?.uuid )" style="background-image: url('assets/images/{{ user.avatar?.url }} ')" class="suggest-pp"></div>
+                    <div (click)="toProfil( user?.uuid )" class="suggest-name">{{user.username}}</div>
                 </div>
             </div>
         </div>
@@ -40,8 +40,8 @@
                 </div>
                 <div class="user-info">
                     <div style="display:flex; align-items:center">
-                        <div style="background-image: url('assets/images/{{ user.avatar?.url }} ')" class="suggest-pp"></div>
-                        <div class="suggest-name">{{user.username}}</div>
+                        <div (click)="toProfil( user.uuid )" style="background-image: url('assets/images/{{ user.avatar?.url }} ')" class="suggest-pp"></div>
+                        <div (click)="toProfil( user.uuid )" class="suggest-name">{{user.username}}</div>
                     </div>
                 </div>
             </div>

@@ -36,6 +36,12 @@ export class SuggestionComponent {
     }));
   }
 
+  toProfil(userUuid : any ){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['profil/' + userUuid]);
+    });
+  }
+
    ngOnInit(): void {
       
     this.userService.getUsers().subscribe(data => {
