@@ -2,7 +2,7 @@
     <h1 class="title">Accueil</h1>
 
             <div class="add-box">
-                <input class="text-field1" type="text" placeholder="Gabbl tes pensées ...">
+                <textarea class="text-field1"   placeholder="Gabbl tes pensées ..."></textarea>
             
             <div class="post-box">
                 <div class="add-attachement">
@@ -13,28 +13,30 @@
             </div>
         </div>
 
-        <div id="loader" class="box-loader">
+        <div *ngIf="showLoader" id="loader" class="box-loader">
             <img class="loader" src="assets/images/loader.svg" />
             <h1><span class="lettre">G</span>abbler</h1>
         </div>
 
-            <div class="gabble" *ngFor= "let gab of gabs">
-                    <div class="user">
-                        <img  [src]="'assets/images/' + gab.user?.avatar?.url"  alt="Avatar" class="pp">
-                        <div class="name-date-box">
-                            <div class="user-name">{{gab.user?.username}}</div>
-                            <div class="date-field">il y a 3 jours</div>
-                        </div>
+        <div class="gabble" *ngFor= "let gab of feed" >
+            <div (click)="toGab( gab.id)">
+                <div class="user">
+                    <img  [src]="'assets/images/' + gab.user?.avatar?.url"  alt="Avatar" class="pp">
+                    <div class="name-date-box">
+                        <div class="user-name">{{gab.user?.username}}</div>
+                        <div class="date-field">{{formatDate(gab.post_date)}}</div>
                     </div>
+                </div>
 
-                    <div class="text-field">{{gab.content}}</div>
-                    <div class="attachements-box" *ngFor="let media of gab.medias">
-                        <img class="gabble-img" [src]="media.url">
-                    </div>
-                    <div class="interactive-box">
-                        <div class="like" (click)="toggleLike($event)" #likeButton></div>
-                        <p class="nblike">{{gab.nbLikes}}</p>
-                        <div class="dislike"><i class="fal fa-thumbs-down"></i>{{gab.nbDislikes}}</div>
-                    </div>
+                <div class="text-field">{{gab.content}}</div>
+                <div class="attachements-box" *ngFor="let media of gab.medias">
+                    <img class="gabble-img" [src]="media.url">
+                </div>
+                <div class="interactive-box">
+                    <div class="like" (click)="toggleLike($event)" #likeButton></div>
+                    <p class="nblike">{{gab.nbLikes}}</p>
+                    <div class="dislike"><i class="fal fa-thumbs-down"></i>{{gab.nbDislikes}}</div>
+                </div>
             </div>
+        </div>
 </div>

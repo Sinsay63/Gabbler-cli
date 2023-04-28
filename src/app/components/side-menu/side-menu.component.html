@@ -1,52 +1,62 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''" >
-  <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">G</button>
-    <div  class="logo-text" @fadeInOut *ngIf="collapsed">Gabbler</div>
-    <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
-      <i class="fal fa-caret-left close-icon"></i>
-    </button>
+  <div class="up-menu">
+    <div class="logo-container">
+      <button class="logo" (click)="toggleCollapse()">G</button>
+      <div  class="logo-text" @fadeInOut *ngIf="collapsed">Gabbler</div>
+      <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
+        <i class="fal fa-caret-left close-icon"></i>
+      </button>
+    </div>
+    <ul class="sidenav-nav">
+      <li class="sidenav-nav-item" *ngFor="let data of navData">
+        <a href="" class="sidenav-nav-link" [routerLink]="[data.routeLink]"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+        >
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{data.label}}
+          </span>
+        </a> 
+      </li>
+    </ul>
   </div>
-  <ul class="sidenav-nav">
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a href="" class="sidenav-nav-link" [routerLink]="[data.routeLink]"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}"
-      >
-        <i class="sidenav-link-icon" [class]="data.icon"></i>
-        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
-          {{data.label}}
-        </span>
-      </a> 
-    </li>
-  </ul>
-  <div [ngClass]="{'theme-default': (themeService.theme$ | async) === 'default', 'theme-dark': (themeService.theme$ | async) === 'dark'}">
-    <div class="dark-theme">
-      <div class="btn-theme">
-        <div class="light" *ngIf="lightOn == false" (click)="setDefaultTheme()">
+  <div class="down-menu">
+    <div [ngClass]="{'theme-default': (themeService.theme$ | async) === 'default', 'theme-dark': (themeService.theme$ | async) === 'dark'}">
+      <div class="dark-theme">
+        <div class="btn-theme">
+          <div class="light" *ngIf="lightOn == false && collapsed" (click)="setDefaultTheme()">
+              <fa-icon class="icon" [icon]="sunBright"></fa-icon>
+              <p>Clair</p>
+          </div>
+          <div class="light" *ngIf="lightOn == false && collapsed == false" (click)="setDefaultTheme()">
             <fa-icon class="icon" [icon]="sunBright"></fa-icon>
-            <p>Light</p>
         </div>
-        <div class="lightOn" *ngIf="lightOn" (click)="setDefaultTheme()">
-          <fa-icon class="icon" [icon]="sunBright"></fa-icon>
-          <p>Light</p>
-        </div>
-        <div class="dark" *ngIf="lightOn" (click)="setDarkTheme()">
-          <fa-icon class="icon" [icon]="faMoon"></fa-icon>
-          <p>Dark</p>
-        </div>
-        <div class="darkOn" *ngIf="lightOn == false" (click)="setDarkTheme()">
-          <fa-icon class="icon" [icon]="faMoon"></fa-icon>
-          <p>Dark</p>
+          <div class="lightOn" *ngIf="lightOn && collapsed" (click)="setDefaultTheme()">
+            <fa-icon class="icon" [icon]="sunBright"></fa-icon>
+            <p *ngIf="collapsed">Clair</p>
+          </div>
+          <div class="dark" *ngIf="lightOn && collapsed" (click)="setDarkTheme()">
+            <fa-icon class="icon" [icon]="faMoon"></fa-icon>
+            <p>Sombre</p>
+          </div>
+          <div class="dark" *ngIf="lightOn && collapsed==false" (click)="setDarkTheme()">
+            <fa-icon class="icon" [icon]="faMoon"></fa-icon>
+          </div>
+          <div class="darkOn" *ngIf="lightOn == false && collapsed" (click)="setDarkTheme()">
+            <fa-icon class="icon" [icon]="faMoon"></fa-icon>
+            <p *ngIf="collapsed">Sombre</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="user">
-    <div class="profil" *ngIf="isConnected">
-        <img  *ngIf="collapsed" @fadeInOut src="assets/images/{{user?.avatar?.url}}" alt="Avatar" class="pp">
-        <div *ngIf="collapsed" @fadeInOut class="user-name">{{user?.username}}</div>
-        <fa-icon class="icon" [icon]="faRightFromBracket" (click)="logOut()"></fa-icon>
+    <div class="user">
+      <div class="profil" *ngIf="isConnected">
+          <img  *ngIf="collapsed" @fadeInOut src="assets/images/{{user?.avatar?.url}}" alt="Avatar" class="pp">
+          <div *ngIf="collapsed" @fadeInOut class="user-name">{{user?.username}}</div>
+          <fa-icon class="icon" [icon]="faRightFromBracket" (click)="logOut()"></fa-icon>
+      </div>
     </div>
+    <a *ngIf="isConnected === false" href="" class="sidenav-nav-link" routerLink="connexion"> Se Connecter</a>
   </div>
-  <a *ngIf="isConnected === false" href="" class="sidenav-nav-link" routerLink="connexion"> Se Connecter</a>
 </div>

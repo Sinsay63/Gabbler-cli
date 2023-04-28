@@ -1,0 +1,68 @@
+.gab{
+    display: flex;
+    flex-direction: column;
+    padding: 0.938rem 10rem 0 10rem;
+    h2{
+        color: var(--text-color);
+        font-weight: 900;
+        font-size: 24px;
+    }
+
+
+    .user{
+        margin-top: 0.938rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        .name-date-user{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 10px;
+            .username{
+                color: var(--text-color);
+                font-size: 18px;
+                font-weight: 500;
+            }
+            .gab-content-date{
+                color: var(--text-color);
+                font-size: 13px;
+                font-weight: 400;
+            }
+        }
+        
+        .img-user{
+            height:90px;
+            width:90px;
+            border-radius: var(--border-radius);
+            background-color: var(--bg-logo);
+            padding: 5px;
+            .pp{
+                height:80px;
+                width:80px;
+                border-radius: var(--border-radius);
+            }
+        }
+        
+    }
+    .gab-content{
+        margin-top: 0.938rem;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        .gab-content-text, .gab-content-date{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .gab-img{
+            margin-top: 0.938rem;
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+        }
+    }
+
+}

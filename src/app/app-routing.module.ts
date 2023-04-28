@@ -5,6 +5,7 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { HomeComponent } from './components/home/home.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
 import { ProfilComponent } from './profil/profil.component';
+import { ViewGabComponent } from './view-gab/view-gab.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -12,7 +13,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'explore', component: ExploreComponent},
   { path: 'parametre', component: ParametreComponent},
-  { path: 'profil/:uuid', component: ProfilComponent}
+  { path: 'profil/:uuid', component: ProfilComponent},
+  { path: 'gab/:id', component: ViewGabComponent},
+  { path: 'home/:uuid', component: HomeComponent}
 ];
 
 @NgModule({

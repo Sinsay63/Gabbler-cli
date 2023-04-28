@@ -26,13 +26,17 @@ export class LoginComponent {
       const data = await this.authService.authenticateAndGetToken(this.userAuth).toPromise();
       this.globalDataService.token = data?.token;
       this.globalDataService.isConnected = true;
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate(['home']);
-      })
       this.getUuidFromToken();
+      this.toHome(this.globalDataService.uuid);
     } catch (error) {
       this.globalDataService.isConnected = false;
     }
+  }
+
+  toHome(userUuid : any ){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['home/' + userUuid]);
+    });
   }
 
   getUuidFromToken(){

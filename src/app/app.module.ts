@@ -20,6 +20,7 @@ import { UserAuth } from './api';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfilComponent } from './profil/profil.component';
+import { ViewGabComponent } from './view-gab/view-gab.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ProfilComponent } from './profil/profil.component';
     BodyComponent,
     HomeComponent,
     SuggestionComponent,
-    ProfilComponent
+    ProfilComponent,
+    ViewGabComponent
   ],
   imports: [
     BrowserModule,

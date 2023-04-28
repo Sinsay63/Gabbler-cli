@@ -1,4 +1,6 @@
 .sidenav {
+    display: flex;
+    flex-direction: column;
     background: var(--bg-color);
     transition: all .5s ease;
     position: fixed;
@@ -7,6 +9,17 @@
     width: 5rem;
     height: 100vh;
     box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+
+    .up-menu{
+        display: flex;
+        flex-direction: column;
+    }
+    .down-menu{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: end;
+    }
 
     .logo-container {
         display: flex;
@@ -69,9 +82,7 @@
     }
     .user{
         width: 100%;
-        padding: 0.938rem;
-        position: absolute;
-        bottom: 0;
+        padding: 0 0.938rem 0.938rem 0.938rem;
         margin: 0;
         display: flex;
     }
@@ -85,7 +96,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding: 0.938rem;
+        padding: 0.938rem 0.938rem 0 0.938rem;
         .btn-theme{
             display: flex;
             justify-content: center;

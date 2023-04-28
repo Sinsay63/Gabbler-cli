@@ -1,13 +1,12 @@
 import { transition, trigger, style, animate, keyframes} from '@angular/animations';
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning, faLightbulb, faMoon, faUmbrellaBeach} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning, faLightbulb, faMoon, faUmbrellaBeach, faSun} from '@fortawesome/free-solid-svg-icons'
 import { navbarData } from './nav-data';
 import { User, UserService } from 'app/api';
 import { ThemeService } from '../parametre/theme.service';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
-import { faSun } from '@fortawesome/free-regular-svg-icons';
 
 interface SideNavToggle{
   screenWidth: number;
@@ -106,8 +105,9 @@ export class SideMenuComponent implements OnInit{
   
   logOut(){
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(['connexion']);
+      this.router.navigate(['home']);
     })
     this.globalDataService.isConnected=false;
+    this.isConnected=false;
   }
 }

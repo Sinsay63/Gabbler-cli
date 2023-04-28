@@ -21,4 +21,13 @@ export class GlobalDataService {
       return null;
     }
   }
+  
+  formatDate(date?: string): string {
+    let dateObj = new Date();
+    if(date){
+      dateObj = new Date(date);
+      return dateObj.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+  return "";
+  }
 }
