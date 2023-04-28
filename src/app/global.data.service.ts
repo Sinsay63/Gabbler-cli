@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Gab, UserToken } from 'app/api';
+import { User, Gab, UserToken } from 'app/api';
 import jwt_decode from 'jwt-decode';
 
 
@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 export class GlobalDataService {
   isConnected: boolean = false;
   gabs ?= new Array<Gab>();
+  users ?= new Array<User>();
   token ?: string;
   uuid: string = '';
 

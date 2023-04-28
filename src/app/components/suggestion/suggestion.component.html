@@ -1,13 +1,12 @@
 
 
 <div class="column3">
-    <div class="container-search">
+    <div *ngIf="currentPage != 'explore' " class="container-search">
         <form class="form-search" action="/explore" method="get">
-            <input class="search-bar" type="text" placeholder="Search" name= "search" [(ngModel)]="search" />
+            <input class="search-bar" type="text" placeholder="Rechercher..." name= "search" [(ngModel)]="search" />
             <button type="submit" (click)="onSubmit()" class="button-search"><fa-icon class="glass-icon"  [icon]="faMagnifingGlass"></fa-icon></button>
         </form>
     </div>
-
 
     <div class="container-suggest" *ngFor="let user of usersSearch">
         <div class="suggest-user" style="background-image:url('assets/images/{{ user.banner?.url }}');" >
@@ -29,7 +28,7 @@
 
 
     <div *ngIf="isSearch === false">
-        <h1 class="title-suggest">Suggestions :</h1>
+        <h2 class="title-suggest">Suggestions :</h2>
         <div class="container-suggest" *ngFor= "let user of users">
             <div class="suggest-user" style="background-image:url('assets/images/{{ user.banner?.url }}');" >
                 

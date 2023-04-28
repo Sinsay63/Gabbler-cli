@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { GabService, User, UserService, Gab} from 'app/api';
+import { GabService, User, UserService, Gab, SearchService} from 'app/api';
+import { faMagnifyingGlass, faCirclePlus} from '@fortawesome/free-solid-svg-icons'
 import { firstValueFrom } from 'rxjs';
 import { GlobalDataService } from 'app/global.data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-explore',
@@ -16,14 +18,39 @@ export class ExploreComponent implements OnInit{
 
   
 
-  constructor(private gabService: GabService, private authService: GlobalDataService) {
+  constructor(private gabService: GabService,private router: Router,  private globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService) {
    }
+  gabsSearch ?= new Array<Gab>();
+  faMagnifingGlass = faMagnifyingGlass;
+  faCirclePlus = faCirclePlus;
+  search: string = '';
+  isSearch = false;
 
-     //attributs
-    gabs ?= new Array<Gab>();
-    searchedGabs = this.authService.gabs;
-    lastClickedLikeButton: HTMLElement | null = null;
-    countLike = 0;
+  gabs ?= new Array<Gab>();
+  searchedGabs = this.globalDataService.gabs;
+  lastClickedLikeButton: HTMLElement | null = null;
+  countLike = 0;
+
+   //Recuperation des infos de la barre de recherche
+   onSubmit() {
+    this.searchService.searchUser(this.search).subscribe(data => {
+
+      this.isSearch = data.users?.length != undefined && data?.users?.length > 0 ? true : false;
+
+      this.globalDataService.users = data.users;
+      this.globalDataService.gabs = data.gabs;
+
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate(['explore']);
+      });
+      
+    },
+      (error =>{
+        console.log(error)
+    }));
+  }
+
+    
 
 
     toggleLike(event: MouseEvent) {

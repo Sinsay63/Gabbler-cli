@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SearchService, User, UserService} from 'app/api';
 import { faMagnifyingGlass, faCirclePlus} from '@fortawesome/free-solid-svg-icons'
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import {GlobalDataService } from 'app/global.data.service'
 @Component({
   selector: 'app-suggestion',
@@ -11,21 +11,38 @@ import {GlobalDataService } from 'app/global.data.service'
 export class SuggestionComponent {
 
   constructor(private userService: UserService, private searchService: SearchService, private router: Router, private globalDataService: GlobalDataService) {
+   // Recuperation de l'url pour supprimer la barre de recherche si on est sur la page 'explore'
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentPage = this.extractPageName(this.router.url);
+      }
+    });
+  }
+
+  private extractPageName(url: any): string {
+    // Extrait le nom de la page à partir de l'URL
+    const pageName = url.split('/').pop();
+    return pageName;
   }
 
   //attributs
   users ?= new Array<User>();
-  usersSearch ?= new Array<User>();
+  usersSearch ?= this.globalDataService.users
   faMagnifingGlass = faMagnifyingGlass;
   faCirclePlus = faCirclePlus;
   search: string = '';
   isSearch = false;
+  currentPage: string = ''
 
   onSubmit() {
     this.searchService.searchUser(this.search).subscribe(data => {
-      this.usersSearch = data.users
+
+      this.globalDataService.users = data.users
+
       this.isSearch = data.users?.length != undefined && data?.users?.length > 0 ? true : false;
+
       this.globalDataService.gabs = data.gabs;
+
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate(['explore']);
       });
@@ -43,6 +60,8 @@ export class SuggestionComponent {
   }
 
    ngOnInit(): void {
+
+
     if(this.globalDataService.isConnected){
       this.userService.getSuggestionUserConnected(this.globalDataService.uuid).subscribe(data => {
         console.log(data);

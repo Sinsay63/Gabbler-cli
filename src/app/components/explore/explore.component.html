@@ -1,6 +1,11 @@
 <div class="home-body">
       <h1 class="title"> Explorer </h1>
 
+      <form class="form-search" action="/explore" method="get">
+            <input class="search-bar" type="text" placeholder="Rechercher..." name= "search" [(ngModel)]="search" />
+            <button type="submit" (click)="onSubmit()" class="button-search"><fa-icon class="glass-icon"  [icon]="faMagnifingGlass"></fa-icon></button>
+      </form>
+
       <div class="gabble" *ngFor= "let gab of searchedGabs">
             <div class="user">
             <img  [src]="'assets/images/' + gab.user?.avatar?.url"  alt="Avatar" class="pp">

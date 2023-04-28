@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User, UserService} from 'app/api';
+import {  User, UserService} from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { EMPTY } from 'rxjs';
   templateUrl: './profil.component.html',
   styleUrls: ['./profil.component.scss'],
   template: `
-  <div class="like" (click)="toggleLike()" #likeButton></div>
+  <div class="like" (click)="toggleLike()" ></div>
 `
 })
 export class ProfilComponent {
@@ -48,7 +48,7 @@ export class ProfilComponent {
   
   ngOnInit() {
     const uuid = this.route.snapshot.paramMap.get('uuid') ?? ""
-    this.userService.getUserByUuid( uuid ).pipe(
+    this.userService.getUserProfile( uuid ).pipe(
       catchError(() => {
         console.log('Erreur lors de la récupération de l\'utilisateur');
         return EMPTY;
