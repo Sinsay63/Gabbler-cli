@@ -53,14 +53,17 @@ export class HomeComponent implements OnInit{
   async ngOnInit(): Promise<void> {
     this.isConnected=this.globalDataService.isConnected;
     if(this.isConnected){
-      const uuid = this.route.snapshot.paramMap.get('uuid') ?? ""
-      await this.gabService.getFeedUserConnected(uuid).subscribe(data => {
-        console.log(data);
-        this.feed= data;
-        this.showLoader = false;
-      }, (error => {
-        console.log(error);
-      }));
+      const token = sessionStorage.getItem('token');
+      if(token){
+        const uuid = this.globalDataService.getUuidFromToken(token);
+        await this.gabService.getFeedUserConnected(uuid).subscribe(data => {
+          console.log(data);
+          this.feed= data;
+          this.showLoader = false;
+        }, (error => {
+          console.log(error);
+        }));
+      }
     }
     else{
       await this.gabService.getFeedUserNotConnected().subscribe(data => {
@@ -77,5 +80,9 @@ export class HomeComponent implements OnInit{
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate(['gab/' + id]);
     });
+  }
+
+  onClickInteractiveBox(event: MouseEvent): void {
+    event.stopPropagation();
   }
 }

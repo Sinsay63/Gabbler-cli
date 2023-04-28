@@ -11,11 +11,8 @@ export class GlobalDataService {
   isConnected: boolean = false;
   gabs ?= new Array<Gab>();
   users ?= new Array<User>();
-  token ?: string;
-  uuid: string = '';
 
-  getDecodedToken(): any {
-    const token = this.token;
+  getDecodedToken(token: string): any {
     if (token) {
       return jwt_decode(token);
     } else {
@@ -30,5 +27,10 @@ export class GlobalDataService {
       return dateObj.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
     }
   return "";
+  }
+
+  getUuidFromToken(token: string): string{
+    const decodedToken = this.getDecodedToken(token);
+    return decodedToken.uuid;
   }
 }

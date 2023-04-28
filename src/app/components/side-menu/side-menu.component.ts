@@ -1,6 +1,6 @@
 import { transition, trigger, style, animate, keyframes} from '@angular/animations';
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning, faLightbulb, faMoon, faUmbrellaBeach, faSun} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning, faLightbulb, faMoon, faUmbrellaBeach, faSun, faRightToBracket} from '@fortawesome/free-solid-svg-icons'
 import { navbarData } from './nav-data';
 import { User, UserService } from 'app/api';
 import { ThemeService } from '../parametre/theme.service';
@@ -48,6 +48,7 @@ export class SideMenuComponent implements OnInit{
   userLoggedIn: boolean = false;
   isConnected: boolean | undefined;
   faRightFromBracket = faPersonRunning;
+  faRightToBracket = faRightToBracket;
   lightOn = true;
   sunBright = faSun;
   faMoon = faMoon;
@@ -55,7 +56,6 @@ export class SideMenuComponent implements OnInit{
 
   constructor(public themeService: ThemeService, private globalDataService: GlobalDataService, private userService: UserService, private router: Router) {}
 
-  uuid = this.globalDataService.uuid;
   setDefaultTheme() {
     this.themeService.setTheme('default');
     this.lightOn = true;
@@ -84,12 +84,16 @@ export class SideMenuComponent implements OnInit{
     this.screenWidth = window.innerWidth;
     this.isConnected=this.globalDataService.isConnected;
     if(this.isConnected){
-      this.userService.getUserByUuid(this.uuid).subscribe(data => {
-        console.log(data);
-        this.user=data;
-      }, (error => {
-        console.log(error);
-      }));
+      const token = sessionStorage.getItem('token');
+      if(token){
+        const uuid = this.globalDataService.getUuidFromToken(token);
+        this.userService.getUserByUuid(uuid).subscribe(data => {
+          console.log(data);
+          this.user=data;
+        }, (error => {
+          console.log(error);
+        }));
+      }
     }
   }
 
@@ -104,10 +108,18 @@ export class SideMenuComponent implements OnInit{
   }
   
   logOut(){
+    this.globalDataService.isConnected=false;
+    sessionStorage.removeItem('token')
+    this.isConnected=false;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate(['home']);
+      window.location.reload();
     })
-    this.globalDataService.isConnected=false;
-    this.isConnected=false;
+  }
+
+  logIn(){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['connexion']);
+    })
   }
 }

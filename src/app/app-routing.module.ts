@@ -14,8 +14,7 @@ const routes: Routes = [
   { path: 'explore', component: ExploreComponent},
   { path: 'parametre', component: ParametreComponent},
   { path: 'profil/:uuid', component: ProfilComponent},
-  { path: 'gab/:id', component: ViewGabComponent},
-  { path: 'home/:uuid', component: HomeComponent}
+  { path: 'gab/:id', component: ViewGabComponent}
 ];
 
 @NgModule({

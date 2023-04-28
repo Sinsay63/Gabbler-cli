@@ -24,23 +24,15 @@ export class LoginComponent {
       this.userAuth.password = this.password;
   
       const data = await this.authService.authenticateAndGetToken(this.userAuth).toPromise();
-      this.globalDataService.token = data?.token;
       this.globalDataService.isConnected = true;
-      this.getUuidFromToken();
-      this.toHome(this.globalDataService.uuid);
+      if(data?.token != null){
+        sessionStorage.setItem('token', data?.token);
+      }
+      this.router.navigateByUrl('/', {skipLocationChange: false}).then(() => {
+        this.router.navigate(['home']);
+      });
     } catch (error) {
       this.globalDataService.isConnected = false;
     }
-  }
-
-  toHome(userUuid : any ){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(['home/' + userUuid]);
-    });
-  }
-
-  getUuidFromToken(){
-    const decodedToken = this.globalDataService.getDecodedToken();
-    this.globalDataService.uuid = decodedToken.uuid;
   }
 }

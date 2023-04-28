@@ -63,12 +63,16 @@ export class SuggestionComponent {
 
 
     if(this.globalDataService.isConnected){
-      this.userService.getSuggestionUserConnected(this.globalDataService.uuid).subscribe(data => {
-        console.log(data);
-        this.users= data;
-      }, (error => {
-        console.log(error);
-      }));
+      const token = sessionStorage.getItem('token');
+      if(token){
+        const uuid = this.globalDataService.getUuidFromToken(token);
+        this.userService.getSuggestionUserConnected(uuid).subscribe(data => {
+          console.log(data);
+          this.users= data;
+        }, (error => {
+          console.log(error);
+        }));
+    }
     }else{
       this.userService.getSuggestionUserNotConnected().subscribe(data => {
         this.users = data
