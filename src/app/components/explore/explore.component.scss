@@ -240,3 +240,78 @@ display: none;
     background-color: transparent;
 }
 /*fin style de la barre de recherche */
+
+/* Style des onglets */
+.search-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.tab-titles{
+    margin: 50px 0px 25px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+    .tab-title{
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--text-color);
+        border-bottom: solid 2px rgb(167, 165, 165);
+        cursor: pointer;
+    }
+}
+.gabs-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:90%;
+}
+
+/* affichage des users */
+.users-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    .users{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        margin : 20px 0px 20px 0px;
+        .user-info{
+            display: flex;
+            height: 200px;
+            align-items: center;
+            background-position: center;
+            background-size: cover; 
+            border: solid 1px var(--text-color);
+            border-radius: 10px;
+            width:70%;
+            .back-pp{
+                padding: 3px;
+                background-color: var(--bg-color);
+                border-radius : 60% 40% 64% 36% / 40% 59% 41% 60%;
+                .pp{
+                    width:75px;
+                    height:75px;
+                    border-radius : 60% 40% 64% 36% / 40% 59% 41% 60%;
+                    background-position: center;
+                    background-size: cover;
+                }
+            }
+            .username{
+                color: var(--text-color);
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.disable{
+    display: none;
+}

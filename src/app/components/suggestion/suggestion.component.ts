@@ -31,26 +31,13 @@ export class SuggestionComponent {
   faMagnifingGlass = faMagnifyingGlass;
   faCirclePlus = faCirclePlus;
   search: string = '';
-  isSearch = false;
   currentPage: string = ''
 
   onSubmit() {
-    this.searchService.searchUser(this.search).subscribe(data => {
-
-      this.globalDataService.users = data.users
-
-      this.isSearch = data.users?.length != undefined && data?.users?.length > 0 ? true : false;
-
-      this.globalDataService.gabs = data.gabs;
-
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate(['explore']);
-      });
-      
-    },
-      (error =>{
-        console.log(error)
-    }));
+    this.globalDataService.search = this.search
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['explore']);
+    });
   }
 
   toProfil(userUuid : any ){

@@ -9,8 +9,10 @@ import jwt_decode from 'jwt-decode';
 })
 export class GlobalDataService {
   isConnected: boolean = false;
+  search: string = '';
   gabs ?= new Array<Gab>();
   users ?= new Array<User>();
+
 
   getDecodedToken(token: string): any {
     if (token) {
@@ -19,7 +21,7 @@ export class GlobalDataService {
       return null;
     }
   }
-  
+
   formatDate(date?: string): string {
     let dateObj = new Date();
     if(date){

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {  User, UserService} from 'app/api';
+import {  UserInfosProfile, User, UserService} from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 
@@ -16,7 +16,7 @@ export class ProfilComponent {
 
   constructor( private route: ActivatedRoute, private userService: UserService) { }
 
-  user = new User()
+  user = new UserInfosProfile()
 
   lastClickedLikeButton: HTMLElement | null = null;
    countLike = 0;
@@ -54,8 +54,10 @@ export class ProfilComponent {
         return EMPTY;
       })
     )
-    .subscribe((user: User) => {
+    .subscribe((user: UserInfosProfile) => {
       this.user = user;
+      console.log(this.user);
+      
     });
   }
 }
