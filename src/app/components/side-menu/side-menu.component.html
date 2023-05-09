@@ -60,7 +60,7 @@
     <div class="connect" *ngIf="isConnected === false"> 
       <div class="connect-background" (click)="logIn()">
         <fa-icon class="iconConnect" [icon]="faRightToBracket"></fa-icon>
-        <div class="text-connect" *ngIf="collapsed">Se connecter</div>
+        <div class="text-connect" @fadeInOut *ngIf="collapsed">Se connecter</div>
       </div>
     </div>
   </div>

@@ -33,9 +33,17 @@
                     <img class="gabble-img" [src]="media.url">
                 </div>
                 <div class="interactive-box" (click)="onClickInteractiveBox($event)">
-                    <div class="like" (click)="toggleLike($event)" #likeButton></div>
-                    <p class="nblike">{{gab.nbLikes}}</p>
-                    <div class="dislike"><i class="fal fa-thumbs-down"></i>{{gab.nbDislikes}}</div>
+                    <!-- <div class="button">
+                        <input type="checkbox" id="liked">
+                        <label for="liked">
+                            <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon>
+                        </label>
+                    </div> -->
+                    <div class="like" (click)="toggleLike($event)" #likeButton *ngIf="getInteractionByGabId(gab.id ?? 0,'like')"></div>
+                    <div>
+                        <p class="nblike">{{gab.nbLikes}}</p>
+                    </div>
+                    <div class="dislike" *ngIf="getInteractionByGabId(gab.id ?? 0,'dislike')"><i class="fal fa-thumbs-down"></i>{{gab.nbDislikes}}</div>
                 </div>
             </div>
         </div>

@@ -1,8 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { GabService, User, UserService, Gab} from 'app/api';
+import { GabService, User, UserService, Gab, InteractionUser} from 'app/api';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { InteractionService } from 'app/api';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +17,11 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit{
   feed ?= new Array<Gab>();
   showLoader = true;
+  interactions ?= Array<InteractionUser>();
+  heart = faHeart;
 
 
-  constructor(private gabService: GabService, private globalDataService: GlobalDataService, private route: ActivatedRoute, private router: Router) {
+  constructor(private gabService: GabService, private globalDataService: GlobalDataService, private route: ActivatedRoute, private router: Router, private interactionService: InteractionService) {
    }
    
    lastClickedLikeButton: HTMLElement | null = null;
@@ -63,6 +67,11 @@ export class HomeComponent implements OnInit{
         }, (error => {
           console.log(error);
         }));
+        this.interactionService.getInteractionsByUserUuid(uuid).subscribe(data => {
+          this.interactions=data;
+        },(error => {
+          console.log(error);
+        }));
       }
     }
     else{
@@ -84,5 +93,19 @@ export class HomeComponent implements OnInit{
 
   onClickInteractiveBox(event: MouseEvent): void {
     event.stopPropagation();
+  }
+  
+  getInteractionByGabId(gabId : number , interaction : string): Boolean{
+    let exist = false;
+    if(gabId > 0){
+      if(this.interactions){
+        for (let index = 0; index < this.interactions.length; index++) {
+          if(gabId == this.interactions[index].gab_id && this.interactions[index].interaction == interaction){
+            exist = true;
+          }
+        }
+      }
+    }
+    return exist;
   }
 }
