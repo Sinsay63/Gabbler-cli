@@ -17,7 +17,7 @@
     overflow-y: scroll;
     .title{
         width:100%;
-        padding: 5% 0% 5% 5%;
+        padding: 2% 0% 2% 5%;
         color:var(--text-color);
         }
         .add-box{
@@ -213,11 +213,10 @@ display: none;
     display: flex;
     justify-content: center;
     align-items:center;
-    margin-top: 20px;
-    border: solid 1px rgb(161, 161, 161);
+    margin-top: 5px;
+    border: solid 2px rgb(161, 161, 161);
     border-radius: 10px;
     width: 90%;
-    height: 30px;
 }
 .container-search{
     display: flex;
@@ -226,18 +225,21 @@ display: none;
 .search-bar{
     border:none;
     background-color: transparent;
-    height: 30px;
+    height: 50px;
     width: 90%;
+    font-size: 20px;
     color: var(--text-color);
 }
 .search-bar:focus{
     outline: none;
+    font-size: 20px;
     color: var(--text-color);
 }
 .button-search{
     border: none;
     cursor: pointer;
     background-color: transparent;
+    font-size: 20px;
 }
 /*fin style de la barre de recherche */
 
@@ -285,16 +287,18 @@ display: none;
         margin : 20px 0px 20px 0px;
         .user-info{
             display: flex;
-            height: 200px;
+            justify-content: space-around;
+            height: 125px;
             align-items: center;
             background-position: center;
             background-size: cover; 
             border: solid 1px var(--text-color);
             border-radius: 10px;
             width:70%;
+            background-color: var(--scnd-bg-color);
             .back-pp{
                 padding: 3px;
-                background-color: var(--bg-color);
+                background-color: var(--text-color);
                 border-radius : 60% 40% 64% 36% / 40% 59% 41% 60%;
                 .pp{
                     width:75px;
@@ -302,16 +306,37 @@ display: none;
                     border-radius : 60% 40% 64% 36% / 40% 59% 41% 60%;
                     background-position: center;
                     background-size: cover;
+                    cursor: pointer;
                 }
             }
             .username{
                 color: var(--text-color);
                 font-size: 20px;
+                cursor: pointer;
+            }
+            .button-follow{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 50px;
+                width:100px;
+                border: solid 1px var(--text-color);
+                color: var(--text-color);
+                border-radius: 10px;
+                background-color: var(--bg-color);
+                cursor: pointer;
+            }
+            .button-follow:hover{
+                background-color: var(--text-color);
+                color: var(--bg-color);
             }
         }
     }
 }
 
+.not-current{
+    opacity: 0.5;
+}
 .disable{
     display: none;
 }

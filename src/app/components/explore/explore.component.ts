@@ -24,22 +24,40 @@ export class ExploreComponent implements OnInit{
   faMagnifingGlass = faMagnifyingGlass;
   faCirclePlus = faCirclePlus;
   search = this.globalDataService.search
-  exploreSearch = '';
+  exploreSearch = this.globalDataService.search;
   searchUsers ?= new Array<User>
   searchGabs ?= new Array<Gab>
-
   gabs ?= new Array<Gab>();
   lastClickedLikeButton: HTMLElement | null = null;
   countLike = 0;
+  formatDate=this.globalDataService.formatDate;
+
+  sortByNbInteractionsDesc(tab: Array<Gab>){
+    if (tab){
+      tab.sort((a,b)=>{
+        const nbInteractionsA = (a.nbDislikes ?? 0) + (a.nbLikes ?? 0);
+        const nbInteractionsB = (b.nbDislikes ?? 0) + (b.nbLikes ?? 0);
+        return nbInteractionsB - nbInteractionsA;
+      })
+    }
+  }
 
 
 displaytab1(){
   
     const gabcontent = document.getElementById('gabs-content')
     const usercontent = document.getElementById('user-content')
-
+    
     gabcontent?.classList.remove('disable')
     usercontent?.classList.add('disable')
+
+    const tab1 = document.getElementById('tab1')
+    const tab2 = document.getElementById('tab2')
+
+    tab2?.classList.add('not-current')
+    tab1?.classList.remove('not-current')
+    
+
 }
   displaytab2(){
     const gabcontent = document.getElementById('gabs-content')
@@ -47,15 +65,30 @@ displaytab1(){
 
     usercontent?.classList.remove('disable')
     gabcontent?.classList.add('disable')
+
+    const tab1 = document.getElementById('tab1')
+    const tab2 = document.getElementById('tab2')
+
+    
+    tab2?.classList.remove('not-current')
+    tab1?.classList.add('not-current')
+  }
+
+  toProfil(userUuid : any ){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['profil/' + userUuid]);
+    });
   }
 
    //Recuperation des infos de la barre de recherche
    onSubmit() {
     this.searchService.searchUser(this.exploreSearch).subscribe(data => {
       this.searchGabs = data.gabs;
+      if(this.searchGabs != undefined){
+        this.sortByNbInteractionsDesc(this.searchGabs)
+      }
       this.searchUsers = data.users;
       console.log(this.exploreSearch);
-      
       console.log(data);
       
     },
@@ -94,20 +127,21 @@ displaytab1(){
       this.searchService.searchUser(this.globalDataService.search).subscribe(data => {
         this.searchGabs = data.gabs;
         this.searchUsers = data.users;
-        console.log("barre");
-        console.log(data);
       },
         (error =>{
           console.log(error)
       }));
     }
-
     this.gabService.getGabs().subscribe(data => {
       console.log(data);
       this.gabs= data;
+      if(this.gabs != undefined){
+        this.sortByNbInteractionsDesc(this.gabs)
+      }
     }, (error => {
       console.log(error);
     }));
+
   }
 
   // async truc() {
