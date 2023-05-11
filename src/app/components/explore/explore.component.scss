@@ -156,57 +156,10 @@ width:100%;
 padding-left: 10%;
 color:black;
 }
-.add-box{
-display:flex;
-flex-direction:column;
-height: 150px;
-width : 90%;
-border: solid 1px gray;
-border-radius: 10px;
-background-color: #1e2732;
-}
-.post-box{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:5px;
-padding-top:5px;
-border-top: solid 1px gray;
-}
-.add-attachement{
-display:flex;
-align-items:center;
-}
-.photo, .video{
-display:flex;
-align-items:center;
-color:gray;
-padding: 0px 10px 0px 10px;
-}
-.gab-button{
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius: 10px;
-padding: 2px;
-height: 30px;
-background-color:#DBFF00;
-margin-right: 5px;
-}
-.text-field1, .text-field1:active{
-height:45px;
-color:black;
-background-color: transparent;
-margin: 5px 0px 0px 0px;
-border-width: 0px !important;
-}
+
 .column2::-webkit-scrollbar {
 display: none;
 }
-
-
-
-
 
 /* style de la barre de recherche */
 .form-search{

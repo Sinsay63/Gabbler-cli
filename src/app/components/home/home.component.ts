@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { GabService, User, UserService, Gab, InteractionUser} from 'app/api';
+import { GabService, User, UserService, Gab, InteractionUser, GabCreation} from 'app/api';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -15,19 +15,22 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 `
 })
 export class HomeComponent implements OnInit{
+
+  constructor(private gabService: GabService, private globalDataService: GlobalDataService, private route: ActivatedRoute, private router: Router, private interactionService: InteractionService) {
+   }
+  
+  contentField: string = ''
   feed ?= new Array<Gab>();
   showLoader = true;
   interactions ?= Array<InteractionUser>();
   heart = faHeart;
+  lastClickedLikeButton: HTMLElement | null = null;
+  countLike = 0;
+  isConnected: boolean | undefined;
+  formatDate=this.globalDataService.formatDate;
+ 
 
-
-  constructor(private gabService: GabService, private globalDataService: GlobalDataService, private route: ActivatedRoute, private router: Router, private interactionService: InteractionService) {
-   }
-   
-   lastClickedLikeButton: HTMLElement | null = null;
-   countLike = 0;
-   isConnected: boolean | undefined;
-   formatDate=this.globalDataService.formatDate;
+  
 
    toggleLike(event: MouseEvent) {
     const likeButton = event.target as HTMLElement;
@@ -51,6 +54,34 @@ export class HomeComponent implements OnInit{
       }
   
       // this.lastClickedLikeButton = likeButton;
+    }
+  }
+
+  createPost(){
+    if(this.isConnected){
+      const token = sessionStorage.getItem('token');
+      if(token){
+        const uuid = this.globalDataService.getUuidFromToken(token);
+        const date = new Date();
+        var gab = new GabCreation();
+
+        gab.content = this.contentField;
+        gab.user_uuid = uuid;
+        
+        console.log(gab);
+        
+        this.gabService.createGab(uuid, gab).subscribe(
+          (response) => {
+            console.log('Réponse de l\'API :', response);
+            // Traitez ici la réponse de l'API si nécessaire
+          },
+          (error) => {
+            console.error('Erreur de l\'API :', error);
+            // Gérez ici les erreurs de l'API si nécessaire
+          }
+        );
+        
+      }
     }
   }
 
