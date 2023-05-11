@@ -19,6 +19,17 @@
           </span>
         </a> 
       </li>
+
+      <li class="sidenav-nav-item">
+        <a href="" *ngIf="uuid" class="sidenav-nav-link" [routerLink]="['/profil/' + uuid]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+          <i class="sidenav-link-icon" [class]="'fal fa-user'"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            Profil
+          </span>
+        </a> 
+      </li>
     </ul>
   </div>
   <div class="down-menu">

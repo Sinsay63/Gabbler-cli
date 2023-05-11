@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GabService, User, UserService, Gab, SearchService} from 'app/api';
+import { GabService, User, UserService, Gab, SearchService, RelationshipService, RelationshipsCUDRequest} from 'app/api';
 import { faMagnifyingGlass, faCirclePlus} from '@fortawesome/free-solid-svg-icons'
 import { firstValueFrom } from 'rxjs';
 import { GlobalDataService } from 'app/global.data.service';
@@ -18,7 +18,7 @@ export class ExploreComponent implements OnInit{
 
   
 
-  constructor(private gabService: GabService,private router: Router,  private globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService) {
+  constructor(private gabService: GabService,private relation: RelationshipService, private router: Router,  private globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService) {
    }
   gabsSearch ?= new Array<Gab>();
   faMagnifingGlass = faMagnifyingGlass;
@@ -30,7 +30,27 @@ export class ExploreComponent implements OnInit{
   gabs ?= new Array<Gab>();
   lastClickedLikeButton: HTMLElement | null = null;
   countLike = 0;
+  uuidConnected: string = '';
+  isConnected: boolean = false;
   formatDate=this.globalDataService.formatDate;
+
+  follow(uuidOwner: any, uuidToFollow: any){
+
+    var rel = new RelationshipsCUDRequest();
+
+    rel.user_uuid = uuidOwner;
+    rel.user_related_uuid = uuidToFollow
+    rel.type= 'FOLLOWED'
+    console.log(rel);
+    
+
+    this.relation.relationshipsCUD(rel).subscribe(data => {
+      console.log(data);
+    },
+      (error =>{
+        console.log(error)
+    }));
+  }
 
   sortByNbInteractionsDesc(tab: Array<Gab>){
     if (tab){
@@ -82,6 +102,7 @@ displaytab1(){
 
    //Recuperation des infos de la barre de recherche
    onSubmit() {
+
     this.searchService.searchUser(this.exploreSearch).subscribe(data => {
       this.searchGabs = data.gabs;
       if(this.searchGabs != undefined){
@@ -123,6 +144,15 @@ displaytab1(){
     }
 
   ngOnInit(): void {
+
+    this.isConnected=this.globalDataService.isConnected;
+    if(this.isConnected){
+      const token = sessionStorage.getItem('token');
+      if(token){
+        this.uuidConnected = this.globalDataService.getUuidFromToken(token);
+      }
+    }
+
     if(this.search != ''){
       this.searchService.searchUser(this.globalDataService.search).subscribe(data => {
         this.searchGabs = data.gabs;

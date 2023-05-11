@@ -37,7 +37,7 @@
         <div class="container-gabs" *ngIf="user?.gabs != undefined">
             <div class="gabble" *ngFor= "let gab of user?.gabs">
                 <div class="user">
-                    <img  [src]="'assets/images/' + user.avatar?.url"  alt="Avatar" class="pp">
+                    <img  src="assets/images/{{ user.avatar?.url }}"  alt="Avatar" class="pp">
                     <div class="name-date-box">
                         <div class="user-name">{{user.username}}</div>
                         <div class="date-field">{{formatDate(gab.post_date)}}</div>

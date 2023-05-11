@@ -8,24 +8,6 @@
         </form>
     </div>
 
-    <div class="container-suggest" *ngFor="let user of usersSearch">
-        <div class="suggest-user" style="background-image:url('assets/images/{{ user.banner?.url }}');" >
-            
-            <div class="add-container">
-                <div class="add-button">
-                    <fa-icon class="icon" [icon]="faCirclePlus"></fa-icon>
-                </div>
-            </div>
-            <div class="user-info">
-                <div style="display:flex; align-items:center">
-                    <div (click)="toProfil( user?.uuid )" style="background-image: url('assets/images/{{ user.avatar?.url }} ')" class="suggest-pp"></div>
-                    <div (click)="toProfil( user?.uuid )" class="suggest-name">{{user.username}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <h2 class="title-suggest">Suggestions :</h2>
     <div class="container-suggest" *ngFor= "let user of users">
         <div class="suggest-user" style="background-image:url('assets/images/{{ user.banner?.url }}');" >

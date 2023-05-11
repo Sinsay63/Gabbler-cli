@@ -1,10 +1,14 @@
 <div class="register-box">
     <div class="container-form">
-        <form class="register-form" method="post">
-            <h2>G<span style="color:green;">a</span>bbler</h2>
-            <input class="champs" type="text" placeholder="Nom" />
-            <input class="champs" type="email" placeholder="Email" />
-            <input class="champs" type="password" placeholder="Mot de passe" />
+        <form class="register-form" (click)="register()" method="post">
+            <h2 class="title">Gabbler</h2>
+            
+            <input class="champs" required type="text" name='lastname' [(ngModel)]="lastname" placeholder="Nom" />
+            <input class="champs" required type="text" name='firstname' [(ngModel)]="firstname" placeholder="Prénom" />
+            <input class="champs" required type="text" name='username' [(ngModel)]="username" placeholder="Pseudo" />
+            <input class="champs" required type="email" name='email'[(ngModel)]="email" placeholder="Email" />
+            <input class="champs" type="date" name='birthday' [(ngModel)]="birthday" placeholder="date de naissance" />
+            <input class="champs" required type="password" name='password' [(ngModel)]="password" placeholder="Mot de passe" />
             <input class="button-inscrire" type="submit" value="S'inscrire" />
             <div>
                 <p>S'inscrire avec Google</p>

@@ -16,6 +16,12 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
+  toRegister(){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['signUp/']);
+    });
+  }
+
   async onSubmit() {
     try {
       // Récupérez les valeurs de l'email et du mot de passe

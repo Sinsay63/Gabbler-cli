@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-body',
@@ -9,6 +10,9 @@ export class BodyComponent {
 
   @Input() collapsed = true;
   @Input() screenWidth = 0;
+
+  constructor(public router: Router) {
+  }
 
   getBodyClass(): string {
     let styleClass = '';

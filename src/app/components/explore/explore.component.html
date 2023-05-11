@@ -45,8 +45,16 @@
                               <div class="back-pp">
                                     <div  (click)="toProfil(user.uuid)"  class="pp" style="background-image: url('assets/images/{{ user?.avatar?.url}}');" ></div>
                               </div>
+
                               <div (click)="toProfil(user.uuid)" class="username">{{user.username}}</div>
-                              <div class="button-follow"> Suivre </div>
+
+                              <div *ngIf="uuidConnected != user.uuid && isConnected" (click)="follow(uuidConnected ,user.uuid)" class="button-follow"> Suivre </div>
+
+                              <div *ngIf="uuidConnected == user.uuid" (click)="toProfil(user.uuid)" class="button-follow"> voir mon profil </div>
+
+                              <div *ngIf="!isConnected" class="button-follow" [routerLink]="['/connexion']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                    <!--Renvoi sur la page de connexion--> Suivre
+                              </div>
                         </div>
                   </div>
             </div>

@@ -1,3 +1,6 @@
-<div class="body" [ngClass]="getBodyClass()">
+<div *ngIf="router.url !== '/connexion' && router.url !== '/signUp'" class="body" [ngClass]="getBodyClass()">
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="router.url == '/connexion' || router.url == '/signUp'" class="body-side-less">
     <router-outlet></router-outlet>
 </div>
