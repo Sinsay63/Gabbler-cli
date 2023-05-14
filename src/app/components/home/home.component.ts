@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit{
   countLike = 0;
   isConnected: boolean | undefined;
   idGab = new Gab;
+  interactionCUDRequest = new InteractionCUDRequest;
   formatDate=this.globalDataService.formatDate;
  
 
@@ -175,9 +176,11 @@ Toggle2(id: number): void {
   }
 }
 
-  Like(idGab : number, uuid : string, interaction : string){
-    this.interactionService.interactionCUD(idGab, uuid, interaction).subscribe(data => {
-      console.log(idGab)
+  Interraction(idGab : number, uuid : string, interaction : string){
+    this.interactionCUDRequest.gab_id = idGab;
+    this.interactionCUDRequest.user_uuid = uuid;
+    this.interactionCUDRequest.type = interaction;
+    this.interactionService.interactionCUD(this.interactionCUDRequest).subscribe(data => {
     });
   }
 }

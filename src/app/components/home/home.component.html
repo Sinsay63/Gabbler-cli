@@ -34,20 +34,20 @@
                 <div class="text-field">{{gab.content}}</div>
                 <div class="interactive-box" (click)="onClickInteractiveBox($event)">
                     <div *ngIf="getInteractionByGabId(gab.id ?? 0,'like')">
-                        <button [id]="'btnh1-' + gab.id" class="red" (click)="Toggle1(gab.id ?? 0)" (click)="Like(gab.id ?? 0, gab.user?.uuid ?? '', 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
+                        <button [id]="'btnh1-' + gab.id" class="red" (click)="Toggle1(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, gab.user?.uuid ?? '', 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
                     </div>
                     <div *ngIf="getInteractionByGabId(gab.id ?? 0,'like') ==  false">
-                        <button [id]="'btnh1-' + gab.id" class="btn" (click)="Toggle1(gab.id ?? 0)"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
+                        <button [id]="'btnh1-' + gab.id" class="btn" (click)="Toggle1(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, gab.user?.uuid ?? '', 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
                     </div>
                     <div>
                         <p class="nblike">{{gab.nbLikes}}</p>
                     </div>
                     <div  *ngIf="getInteractionByGabId(gab.id ?? 0,'dislike')">
-                        <button [id]="'btnh2-' + gab.id" class="red" (click)="Toggle2(gab.id ?? 0)"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
+                        <button [id]="'btnh2-' + gab.id" class="red" (click)="Toggle2(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, gab.user?.uuid ?? '', 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
                         {{gab.nbDislikes}}
                     </div>
                     <div  *ngIf="getInteractionByGabId(gab.id ?? 0,'dislike') == false">
-                        <button [id]="'btnh2-' + gab.id" class="btn" (click)="Toggle2(gab.id ?? 0)"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
+                        <button [id]="'btnh2-' + gab.id" class="btn" (click)="Toggle2(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, gab.user?.uuid ?? '', 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
                         {{gab.nbDislikes}}
                     </div>
                 </div>
