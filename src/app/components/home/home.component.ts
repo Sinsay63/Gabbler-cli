@@ -1,10 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { GabService, User, UserService, Gab, InteractionUser, GabCreation} from 'app/api';
+import { GabService, User, UserService, Gab, InteractionUser, GabCreation, InteractionCUDRequest} from 'app/api';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { InteractionService } from 'app/api';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -24,9 +24,11 @@ export class HomeComponent implements OnInit{
   showLoader = true;
   interactions ?= Array<InteractionUser>();
   heart = faHeart;
+  heartCrack = faHeartCrack;
   lastClickedLikeButton: HTMLElement | null = null;
   countLike = 0;
   isConnected: boolean | undefined;
+  idGab = new Gab;
   formatDate=this.globalDataService.formatDate;
  
 
@@ -116,7 +118,10 @@ export class HomeComponent implements OnInit{
     }
   }
 
-  toGab(id : any){
+  toGab(id : number): void{
+    const element = document.querySelector(`#btnh1-${id}`) as HTMLElement;
+    this.Toggle1(id);
+    this.Toggle2(id);
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate(['gab/' + id]);
     });
@@ -138,5 +143,41 @@ export class HomeComponent implements OnInit{
       }
     }
     return exist;
+  }
+
+Toggle1(id: number): void {
+  const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
+  btnvar1.classList.toggle('red');
+  btnvar1.classList.toggle('btn');
+  
+  const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
+  if (btnvar1.classList.contains('red')) {
+    btnvar2.classList.remove('red');
+    btnvar2.classList.add('btn');
+  } else {
+    btnvar2.classList.remove('btn');
+    btnvar2.classList.add('red');
+  }
+}
+
+Toggle2(id: number): void {
+  const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
+  btnvar2.classList.toggle('red');
+  btnvar2.classList.toggle('btn');
+  
+  const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
+  if (btnvar2.classList.contains('red')) {
+    btnvar1.classList.remove('red');
+    btnvar1.classList.add('btn');
+  } else {
+    btnvar1.classList.remove('btn');
+    btnvar1.classList.add('red');
+  }
+}
+
+  Like(idGab : number, uuid : string, interaction : string){
+    this.interactionService.interactionCUD(idGab, uuid, interaction).subscribe(data => {
+      console.log(idGab)
+    });
   }
 }
