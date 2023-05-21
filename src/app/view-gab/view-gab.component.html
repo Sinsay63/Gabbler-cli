@@ -2,7 +2,7 @@
     <div class="logo-container">
         <button (click)="retour()" class="logo"><fa-icon class="icon" [icon]="faArrowLeft"></fa-icon></button>
         <div  class="logo-text">Gab</div>
-      </div>
+    </div>
     <div class="gab-container">
         <div class="user" >
             <div class="img-user">
@@ -20,6 +20,92 @@
                 {{gab.content}}
             </div>
             <img *ngFor="let media of gab.medias" class="gab-img" [src]="'assets/images/' + media.url">
+        </div>
+        <div class="interactive-box">
+            <div class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'like')">
+                <button [id]="'btnh1-' + gab.id" class="red" (click)="Toggle1(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, gab.user?.uuid ?? '', 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
+            </div>
+            <div class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'like') ==  false">
+                <button [id]="'btnh1-' + gab.id" class="btn" (click)="Toggle1(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, gab.user?.uuid ?? '', 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
+            </div>
+            <div>
+                <p class="nblike">{{gab.nbLikes}}</p>
+            </div>
+            <div  class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'dislike')">
+                <button [id]="'btnh2-' + gab.id" class="red" (click)="Toggle2(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, gab.user?.uuid ?? '', 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
+            </div>
+            <div class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'dislike') == false">
+                <button [id]="'btnh2-' + gab.id" class="btn" (click)="Toggle2(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, gab.user?.uuid ?? '', 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
+            </div>
+            <div>
+                <p class="nblike">{{gab.nbDislikes}}</p>
+            </div>
+            <div class="interractionIcon">
+               <button class="btn"><fa-icon name="comments" class="icon" [icon]="faComment"></fa-icon></button> 
+            </div>
+            <div>
+                <p class="nblike">{{gab.nbComments}}</p>
+            </div>
+        </div>
+        <div class="commentaireInput" *ngIf="isConnected">
+            <div class="user-comment" >
+                <div class="img-user">
+                    <img src="assets/images/{{user?.avatar?.url}}" alt="Avatar" class="pp">
+                </div>
+            </div>
+            <div class="inputBox">
+                <input type="text" name="contentField" [(ngModel)]="contentField" required="required">
+                <span>Ta réponse</span>
+            </div>
+            <button (click)="createPost(contentField, gab.id ?? 0)" class="gab-button">Répondre</button>
+        </div>
+        <div class="containerComments" *ngFor="let comment of comments">
+            <hr>
+            <div (click)="comment.id && toGab(comment.id)" >
+                <div class="user" >
+                    <div class="img-user">
+                        <img  [src]="'assets/images/' + comment.user?.avatar?.url"  alt="Avatar" class="pp">
+                    </div>
+                    <div class="name-date-user">
+                        <div class="username"> {{comment.user?.username}}</div>
+                        <div class="gab-content-date">
+                            {{formatDate(comment.post_date)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="gab-content">
+                    <div class="gab-content-text">
+                        {{comment.content}}
+                    </div>
+                    <img *ngFor="let media of comment.medias" class="gab-img" [src]="'assets/images/' + media.url">
+                </div>
+                <div class="interactive-box" (click)="onClickInteractiveBox($event)">
+                    <div class="interractionIcon" *ngIf="getInteractionByGabId(comment.id ?? 0,'like')">
+                        <button [id]="'btnh1-' + comment.id" class="red" (click)="Toggle1(comment.id ?? 0)" (click)="Interraction(comment.id ?? 0, comment.user?.uuid ?? '', 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
+                    </div>
+                    <div class="interractionIcon" *ngIf="getInteractionByGabId(comment.id ?? 0,'like') ==  false">
+                        <button [id]="'btnh1-' + comment.id" class="btn" (click)="Toggle1(comment.id ?? 0)" (click)="Interraction(comment.id ?? 0, comment.user?.uuid ?? '', 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
+                    </div>
+                    <div>
+                        <p class="nblike">{{comment.nbLikes}}</p>
+                    </div>
+                    <div  class="interractionIcon" *ngIf="getInteractionByGabId(comment.id ?? 0,'dislike')">
+                        <button [id]="'btnh2-' + comment.id" class="red" (click)="Toggle2(comment.id ?? 0)" (click)="Interraction(comment.id ?? 0, comment.user?.uuid ?? '', 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
+                    </div>
+                    <div class="interractionIcon" *ngIf="getInteractionByGabId(comment.id ?? 0,'dislike') == false">
+                        <button [id]="'btnh2-' + comment.id" class="btn" (click)="Toggle2(comment.id ?? 0)" (click)="Interraction(comment.id ?? 0, comment.user?.uuid ?? '', 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
+                    </div>
+                    <div>
+                        <p class="nblike">{{comment.nbDislikes}}</p>
+                    </div>
+                    <div class="interractionIcon">
+                    <button class="btn"><fa-icon name="comments" class="icon" [icon]="faComment"></fa-icon></button> 
+                    </div>
+                    <div>
+                        <p class="nblike">{{comment.nbComments}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@ import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { InteractionService } from 'app/api';
-import { faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -29,36 +29,10 @@ export class HomeComponent implements OnInit{
   countLike = 0;
   isConnected: boolean | undefined;
   idGab = new Gab;
+  faComment = faComment;
   interactionCUDRequest = new InteractionCUDRequest;
   formatDate=this.globalDataService.formatDate;
- 
 
-  
-
-   toggleLike(event: MouseEvent) {
-    const likeButton = event.target as HTMLElement;
-  
-    if (likeButton.classList.contains('like')) {
-      // if (this.lastClickedLikeButton && this.lastClickedLikeButton !== likeButton) {
-      //   // Si l'utilisateur a cliqué sur un autre élément "like" depuis la dernière fois,
-      //   // on remet l'état du dernier élément cliqué à zéro
-      //   this.lastClickedLikeButton.classList.remove('anim-like');
-      //   this.lastClickedLikeButton.style.backgroundPosition = 'left';
-      //   this.countLike = 0;
-      // }
-  
-      if (this.countLike === 0) {
-        likeButton.classList.add('anim-like');
-        this.countLike = 1;
-        likeButton.style.backgroundPosition = 'right';
-      } else {
-        this.countLike = 0;
-        likeButton.style.backgroundPosition = 'left';
-      }
-  
-      // this.lastClickedLikeButton = likeButton;
-    }
-  }
 
   createPost(){
     if(this.isConnected){
@@ -152,12 +126,16 @@ Toggle1(id: number): void {
   btnvar1.classList.toggle('btn');
   
   const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
-  if (btnvar1.classList.contains('red')) {
-    btnvar2.classList.remove('red');
-    btnvar2.classList.add('btn');
-  } else {
-    btnvar2.classList.remove('btn');
-    btnvar2.classList.add('red');
+  if(this.isConnected){
+    if (btnvar1.classList.contains('red')) {
+      btnvar2.classList.remove('red');
+      btnvar2.classList.add('btn');
+    }
+  }
+  else{
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['connexion']);
+    });
   }
 }
 
@@ -167,12 +145,16 @@ Toggle2(id: number): void {
   btnvar2.classList.toggle('btn');
   
   const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
-  if (btnvar2.classList.contains('red')) {
-    btnvar1.classList.remove('red');
-    btnvar1.classList.add('btn');
-  } else {
-    btnvar1.classList.remove('btn');
-    btnvar1.classList.add('red');
+  if(this.isConnected){
+    if (btnvar2.classList.contains('red')) {
+      btnvar1.classList.remove('red');
+      btnvar1.classList.add('btn');
+    }
+  }
+  else{
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['connexion']);
+    });
   }
 }
 
