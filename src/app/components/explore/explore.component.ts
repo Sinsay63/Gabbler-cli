@@ -18,7 +18,7 @@ export class ExploreComponent implements OnInit{
 
   
 
-  constructor(private gabService: GabService,private relation: RelationshipService, private router: Router,  private globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService) {
+  constructor(private gabService: GabService,private relation: RelationshipService, private router: Router,  public globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService) {
    }
   gabsSearch ?= new Array<Gab>();
   faMagnifingGlass = faMagnifyingGlass;
@@ -52,69 +52,7 @@ export class ExploreComponent implements OnInit{
     }));
   }
 
-  /* Fonction de tri */
-
-  sortByNbInteractionsDesc(tab: Array<Gab>){
-    if (tab){
-      tab.sort((a,b)=>{
-        const nbInteractionsA = (a.nbDislikes ?? 0) + (a.nbLikes ?? 0);
-        const nbInteractionsB = (b.nbDislikes ?? 0) + (b.nbLikes ?? 0);
-        return nbInteractionsB - nbInteractionsA;
-      })
-    }
-  }
-  sortByLikesDESC(tab: Array<Gab>) {
-    if (tab) {
-        tab.sort((a, b) => {
-            if (a.nbLikes !== undefined && b.nbLikes !== undefined) {
-                return b.nbLikes - a.nbLikes;
-            }
-            return 0; // Valeur de retour par défaut
-        });
-    }
-  }
-
-  sortByDislikeDESC(tab: Array<Gab>){
-      if (tab) {
-          tab.sort((a, b) => {
-              if (a.nbDislikes !== undefined && b.nbDislikes !== undefined) {
-                  return b.nbDislikes - a.nbDislikes;
-              }
-              return 0; // Valeur de retour par défaut
-          });
-      }
-  }
-
-  sortByDateDESC(tab: Array<Gab>){
-    if (tab) {
-      tab.sort((a, b) => {
-          if (a.post_date != undefined && b.post_date != undefined) {
-              if (a.post_date < b.post_date) {
-                  return 1;
-              } else if (a.post_date > b.post_date) {
-                  return -1;
-              }
-          }
-          return 0; // Valeur de retour par défaut
-      });
-    }
-  }
-  sortByDateASC(tab: Array<Gab>) {
-    if (tab) {
-      tab.sort((a, b) => {
-          if (a.post_date != undefined && b.post_date != undefined) {
-              if (a.post_date < b.post_date) {
-                  return -1;
-              } else if (a.post_date > b.post_date) {
-                  return 1;
-              }
-          }
-          return 0; // Valeur de retour par défaut
-      });
-    }
-  }
-
-  /* Fin des Fonctions de tri */
+  
 
 displaytab1(){
   
@@ -159,7 +97,7 @@ displaytab1(){
     this.searchService.searchUser(this.exploreSearch).subscribe(data => {
       this.searchGabs = data.gabs;
       if(this.searchGabs != undefined){
-        this.sortByNbInteractionsDesc(this.searchGabs)
+        this.globalDataService.sortByNbInteractionsDesc(this.searchGabs)
       }
       this.searchUsers = data.users;
       console.log(this.exploreSearch);
@@ -225,7 +163,7 @@ displaytab1(){
       console.log(data);
       this.gabs= data;
       if(this.gabs != undefined){
-        this.sortByNbInteractionsDesc(this.gabs)
+        this.globalDataService.sortByNbInteractionsDesc(this.gabs)
       }
     }, (error => {
       console.log(error);

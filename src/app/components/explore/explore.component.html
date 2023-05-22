@@ -4,18 +4,18 @@
             <div class="dropdown">
                   <button class="dropbtn">Trier</button>
                   <div *ngIf="gabs && exploreSearch == ''" class="dropdown-content">
-                        <a (click)="sortByNbInteractionsDesc(gabs)">Plus populaires</a>
-                        <a (click)="sortByDateASC(gabs)">par Date ASC</a>
-                        <a (click)="sortByDateDESC(gabs)">par Date DESC</a>
-                        <a (click)="sortByLikesDESC(gabs)">Plus aimés</a>
-                        <a (click)="sortByDislikeDESC(gabs)">Moins aimés</a>
+                        <a (click)="this.globalDataService.sortByNbInteractionsDesc(gabs)">Plus populaires</a>
+                        <a (click)="this.globalDataService.sortByDateASC(gabs)">par Date ASC</a>
+                        <a (click)="this.globalDataService.sortByDateDESC(gabs)">par Date DESC</a>
+                        <a (click)="this.globalDataService.sortByLikesDESC(gabs)">Plus aimés</a>
+                        <a (click)="this.globalDataService.sortByDislikeDESC(gabs)">Moins aimés</a>
                   </div>
                   <div *ngIf="searchGabs && exploreSearch != ''" class="dropdown-content">
-                        <a (click)="sortByNbInteractionsDesc(searchGabs)">Plus populaires</a>
-                        <a (click)="sortByDateASC(searchGabs)">par Date ASC</a>
-                        <a (click)="sortByDateDESC(searchGabs)">par Date DESC</a>
-                        <a (click)="sortByLikesDESC(searchGabs)">Plus aimés</a>
-                        <a (click)="sortByDislikeDESC(searchGabs)">Moins aimés</a>
+                        <a (click)="this.globalDataService.sortByNbInteractionsDesc(searchGabs)">Plus populaires</a>
+                        <a (click)="this.globalDataService.sortByDateASC(searchGabs)">par Date ASC</a>
+                        <a (click)="this.globalDataService.sortByDateDESC(searchGabs)">par Date DESC</a>
+                        <a (click)="this.globalDataService.sortByLikesDESC(searchGabs)">Plus aimés</a>
+                        <a (click)="this.globalDataService.sortByDislikeDESC(searchGabs)">Moins aimés</a>
                   </div>
             </div>
       </div>
