@@ -8,7 +8,6 @@ import jwt_decode from 'jwt-decode';
   providedIn: 'root'
 })
 export class GlobalDataService {
-  isConnected: boolean = false;
   search: string = '';
   gabs ?= new Array<Gab>();
   users ?= new Array<User>();

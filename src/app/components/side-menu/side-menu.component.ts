@@ -83,7 +83,13 @@ export class SideMenuComponent implements OnInit{
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
-    this.isConnected=this.globalDataService.isConnected;
+    const token = sessionStorage.getItem('token');
+    if(token){
+      this.isConnected=true;
+    }
+    else{
+      this.isConnected=false;
+    }
     if(this.isConnected){
       const token = sessionStorage.getItem('token');
       if(token){
@@ -109,7 +115,7 @@ export class SideMenuComponent implements OnInit{
   }
   
   logOut(){
-    this.globalDataService.isConnected=false;
+    this.isConnected=false;
     sessionStorage.removeItem('token')
     this.isConnected=false;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {

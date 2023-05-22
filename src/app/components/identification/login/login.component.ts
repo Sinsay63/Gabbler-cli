@@ -30,7 +30,6 @@ export class LoginComponent {
       this.userAuth.password = this.password;
   
       const data = await this.authService.authenticateAndGetToken(this.userAuth).toPromise();
-      this.globalDataService.isConnected = true;
       if(data?.token != null){
         sessionStorage.setItem('token', data?.token);
       }
@@ -38,7 +37,7 @@ export class LoginComponent {
         this.router.navigate(['home']);
       });
     } catch (error) {
-      this.globalDataService.isConnected = false;
+      console.log("erreur lors de la connexion")
     }
   }
 }

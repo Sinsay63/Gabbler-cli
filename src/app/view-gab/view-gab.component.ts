@@ -16,19 +16,25 @@ export class ViewGabComponent {
   constructor( private route: ActivatedRoute, private userService: UserService, private gabService: GabService, private router: Router, private globalDataService: GlobalDataService, private location: Location,private interactionService: InteractionService) { }
   user = new User()
   gab = new Gab()
+  isConnected: boolean | undefined;
   comments ?= new Array<Gab>();
   interactionCUDRequest = new InteractionCUDRequest;
   interactions ?= Array<InteractionUser>();
   heart = faHeart;
   contentField: string = ''
-  isConnected: boolean | undefined;
   heartCrack = faHeartCrack;
   faArrowLeft = faArrowLeft;
   faComment = faComment;
   formatDate=this.globalDataService.formatDate;
 
   ngOnInit() {
-    this.isConnected=this.globalDataService.isConnected;
+    const token = sessionStorage.getItem('token');
+    if(token){
+      this.isConnected=true;
+    }
+    else{
+      this.isConnected=false;
+    }
     const stringId = this.route.snapshot.paramMap.get('id');
     const id = Number(stringId);
     this.gabService.getGabById( id ).pipe(

@@ -27,7 +27,8 @@ export class SuggestionComponent {
 
   //attributs
   users ?= new Array<User>();
-  usersSearch ?= this.globalDataService.users
+  usersSearch ?= this.globalDataService.users;
+  isConnected: boolean | undefined;
   faMagnifingGlass = faMagnifyingGlass;
   faCirclePlus = faCirclePlus;
   search: string = '';
@@ -48,8 +49,14 @@ export class SuggestionComponent {
 
    ngOnInit(): void {
 
-
-    if(this.globalDataService.isConnected){
+    const token = sessionStorage.getItem('token');
+    if(token){
+      this.isConnected=true;
+    }
+    else{
+      this.isConnected=false;
+    }
+    if(this.isConnected){
       const token = sessionStorage.getItem('token');
       if(token){
         const uuid = this.globalDataService.getUuidFromToken(token);

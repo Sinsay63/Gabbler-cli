@@ -20,6 +20,7 @@ export class ProfilComponent {
   constructor( private route: ActivatedRoute,private globalDataService: GlobalDataService, private userService: UserService) { }
 
   user = new UserInfosProfile()
+  isConnected: boolean | undefined;
   owner: boolean = false;
   faPencil = faPencil;
   
@@ -58,7 +59,14 @@ export class ProfilComponent {
     const uuid = this.route.snapshot.paramMap.get('uuid') ?? ""
     console.log(uuid + ' est l uuid de la personne');
     
-    if(this.globalDataService.isConnected){
+    const token = sessionStorage.getItem('token');
+    if(token){
+      this.isConnected=true;
+    }
+    else{
+      this.isConnected=false;
+    }
+    if(this.isConnected){
       const token = sessionStorage.getItem('token');
       if(token){
         const uuid2 = this.globalDataService.getUuidFromToken(token);

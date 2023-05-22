@@ -50,7 +50,7 @@
         <div class="commentaireInput" *ngIf="isConnected">
             <div class="user-comment" >
                 <div class="img-user">
-                    <img src="assets/images/{{user?.avatar?.url}}" alt="Avatar" class="pp">
+                    <img src="assets/images/{{user!.avatar!.url!}}" alt="Avatar" class="pp">
                 </div>
             </div>
             <div class="inputBox">

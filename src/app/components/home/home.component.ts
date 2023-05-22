@@ -63,9 +63,14 @@ export class HomeComponent implements OnInit{
   }
 
   async ngOnInit(): Promise<void> {
-    this.isConnected=this.globalDataService.isConnected;
+    const token = sessionStorage.getItem('token');
+    if(token){
+      this.isConnected=true;
+    }
+    else{
+      this.isConnected=false;
+    }
     if(this.isConnected){
-      const token = sessionStorage.getItem('token');
       if(token){
         const uuid = this.globalDataService.getUuidFromToken(token);
         await this.gabService.getFeedUserConnected(uuid).subscribe(data => {

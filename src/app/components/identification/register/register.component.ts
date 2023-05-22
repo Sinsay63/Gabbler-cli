@@ -34,8 +34,6 @@ export class RegisterComponent {
 
         const data = await this.authService.registerUser(user).toPromise();
 
-        this.globalDataService.isConnected = true;
-
         if(data?.token != null){
           sessionStorage.setItem('token', data?.token);
         }
@@ -44,7 +42,7 @@ export class RegisterComponent {
         });
       } 
     }catch (error) {
-      this.globalDataService.isConnected = false;
+      console.log("erreur lors de l'inscription")
     }
   }
 }
