@@ -55,7 +55,7 @@
                         <p class="nblike">{{gab.nbDislikes}}</p>
                     </div>
                     <div class="interractionIcon">
-                       <button class="btn"><fa-icon name="comments" class="icon" [icon]="faComment"></fa-icon></button> 
+                       <button (click)="scrollToComments(gab.id ?? 0)" class="btn"><fa-icon name="comments" class="icon" [icon]="faComment"></fa-icon></button> 
                     </div>
                     <div>
                         <p class="nblike">{{gab.nbComments}}</p>

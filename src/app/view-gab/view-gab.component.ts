@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User, UserService, Gab, GabService, InteractionService, InteractionUser, InteractionCUDRequest, GabCreation } from 'app/api';
+import { User, UserService, Gab, GabService, InteractionService, InteractionUser, GabCreation } from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { GlobalDataService } from 'app/global.data.service';
 import { faArrowLeft, faComment, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
@@ -18,7 +18,6 @@ export class ViewGabComponent {
   gab = new Gab()
   isConnected: boolean | undefined;
   comments ?= new Array<Gab>();
-  interactionCUDRequest = new InteractionCUDRequest;
   interactions ?= Array<InteractionUser>();
   heart = faHeart;
   contentField: string = ''
@@ -62,7 +61,7 @@ export class ViewGabComponent {
       }
     }
   }
-  
+
   retour(): void {
     this.location.back();
   }
@@ -148,12 +147,10 @@ export class ViewGabComponent {
   }
 
   Interraction(idGab : number, uuid : string, interaction : string){
-    this.interactionCUDRequest.gab_id = idGab;
-    this.interactionCUDRequest.user_uuid = uuid;
-    this.interactionCUDRequest.type = interaction;
-    this.interactionService.interactionCUD(this.interactionCUDRequest).subscribe(data => {
+    this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
     });
   }
+
   toGab(id : number): void{
     const element = document.querySelector(`#btnh1-${id}`) as HTMLElement;
     this.Toggle1(id);

@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { GabService, User, UserService, Gab, InteractionUser, GabCreation, InteractionCUDRequest} from 'app/api';
+import { GabService, User, UserService, Gab, InteractionUser, GabCreation} from 'app/api';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit{
   isConnected: boolean | undefined;
   idGab = new Gab;
   faComment = faComment;
-  interactionCUDRequest = new InteractionCUDRequest;
   formatDate=this.globalDataService.formatDate;
 
 
@@ -96,6 +95,11 @@ export class HomeComponent implements OnInit{
         console.log(error);
       }));
     }
+  }
+
+  scrollToComments(id : number): void {
+    const element = document.querySelector(`#btnh1-${id}`) as HTMLElement;
+    this.router.navigate(['gab/' + id], { fragment: 'monElement' });
   }
 
   toGab(id : number): void{
@@ -164,10 +168,7 @@ Toggle2(id: number): void {
 }
 
   Interraction(idGab : number, uuid : string, interaction : string){
-    this.interactionCUDRequest.gab_id = idGab;
-    this.interactionCUDRequest.user_uuid = uuid;
-    this.interactionCUDRequest.type = interaction;
-    this.interactionService.interactionCUD(this.interactionCUDRequest).subscribe(data => {
+    this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
     });
   }
 }

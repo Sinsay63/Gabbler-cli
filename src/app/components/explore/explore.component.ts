@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GabService, User, UserService, Gab, SearchService, RelationshipService, RelationshipsCUDRequest} from 'app/api';
+import { GabService, User, UserService, Gab, SearchService, RelationshipService, RelationUser} from 'app/api';
 import { faMagnifyingGlass, faCirclePlus} from '@fortawesome/free-solid-svg-icons'
 import { firstValueFrom } from 'rxjs';
 import { GlobalDataService } from 'app/global.data.service';
@@ -36,10 +36,10 @@ export class ExploreComponent implements OnInit{
 
   follow(uuidOwner: any, uuidToFollow: any){
 
-    var rel = new RelationshipsCUDRequest();
+    var rel = new RelationUser();
 
     rel.user_uuid = uuidOwner;
-    rel.user_related_uuid = uuidToFollow
+    rel.user_uuid_related = uuidToFollow
     rel.type= 'FOLLOWED'
     console.log(rel);
     
@@ -52,7 +52,45 @@ export class ExploreComponent implements OnInit{
     }));
   }
 
-  
+  sortByNbInteractionsDesc(tab: Array<Gab>){
+    if (tab){
+      tab.sort((a,b)=>{
+        const nbInteractionsA = (a.nbDislikes ?? 0) + (a.nbLikes ?? 0);
+        const nbInteractionsB = (b.nbDislikes ?? 0) + (b.nbLikes ?? 0);
+        return nbInteractionsB - nbInteractionsA;
+      })
+    }
+  }
+  sortByDateDESC(tab: Array<Gab>) {
+    if (tab) {
+        tab.sort((a, b) => {
+            if (a.post_date != undefined && b.post_date != undefined) {
+                if (a.post_date > b.post_date) {
+                    return -1;
+                } else if (a.post_date < b.post_date) {
+                    return 1;
+                }
+            }
+            return 0; // Valeur de retour par défaut
+        });
+    }
+}
+
+  sortByDateASC(tab: Array<Gab>) {
+    if (tab) {
+      tab.sort((a, b) => {
+          if (a.post_date != undefined && b.post_date != undefined) {
+              if (a.post_date < b.post_date) {
+                  return -1;
+              } else if (a.post_date > b.post_date) {
+                  return 1;
+              }
+          }
+          return 0; // Valeur de retour par défaut
+      });
+    }
+  }
+
 
 displaytab1(){
   
@@ -97,7 +135,7 @@ displaytab1(){
     this.searchService.searchUser(this.exploreSearch).subscribe(data => {
       this.searchGabs = data.gabs;
       if(this.searchGabs != undefined){
-        this.globalDataService.sortByNbInteractionsDesc(this.searchGabs)
+        this.sortByNbInteractionsDesc(this.searchGabs)
       }
       this.searchUsers = data.users;
       console.log(this.exploreSearch);
@@ -163,7 +201,7 @@ displaytab1(){
       console.log(data);
       this.gabs= data;
       if(this.gabs != undefined){
-        this.globalDataService.sortByNbInteractionsDesc(this.gabs)
+        this.sortByNbInteractionsDesc(this.gabs)
       }
     }, (error => {
       console.log(error);
