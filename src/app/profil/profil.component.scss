@@ -109,20 +109,20 @@
                 color: var(--text-color);
             }
         }
-        .button-follow{
+        .button-follow, .button-unfollow, .button-blocked{
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 5px;
             height: 40px;
-            width:75px;
+            padding: 0px 10px;
             cursor: pointer;
             border: solid 1px var(--text-color);
             border-radius: 10px;
             background-color: var(--bg-color);
             color: var(--text-color);
         }
-        .button-follow:hover{
+        .button-follow:hover, .button-unfollow:hover, .button-blocked:hover{
             background-color: var(--text-color);
             color: var(--bg-color);
         }

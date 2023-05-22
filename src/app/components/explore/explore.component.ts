@@ -61,6 +61,35 @@ export class ExploreComponent implements OnInit{
       })
     }
   }
+  sortByDateDESC(tab: Array<Gab>) {
+    if (tab) {
+        tab.sort((a, b) => {
+            if (a.post_date != undefined && b.post_date != undefined) {
+                if (a.post_date > b.post_date) {
+                    return -1;
+                } else if (a.post_date < b.post_date) {
+                    return 1;
+                }
+            }
+            return 0; // Valeur de retour par défaut
+        });
+    }
+}
+
+  sortByDateASC(tab: Array<Gab>) {
+    if (tab) {
+      tab.sort((a, b) => {
+          if (a.post_date != undefined && b.post_date != undefined) {
+              if (a.post_date < b.post_date) {
+                  return -1;
+              } else if (a.post_date > b.post_date) {
+                  return 1;
+              }
+          }
+          return 0; // Valeur de retour par défaut
+      });
+    }
+  }
 
 
 displaytab1(){
@@ -145,7 +174,13 @@ displaytab1(){
 
   ngOnInit(): void {
 
-    this.isConnected=this.globalDataService.isConnected;
+    const token = sessionStorage.getItem('token');
+    if(token){
+      this.isConnected=true;
+    }
+    else{
+      this.isConnected=false;
+    }
     if(this.isConnected){
       const token = sessionStorage.getItem('token');
       if(token){

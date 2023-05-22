@@ -1,5 +1,12 @@
 <div class="home-body">
-      <h1 class="title"> Explorer </h1>
+      <div class="header-box">
+            <h1 class="title"> Explorer </h1>
+            <select id="mySelect">
+                  <option selected value="option1">Trier par Nb Interaction</option>
+                  <option value="option2">Trier par Date ASC</option>
+                  <option value="option3">Trier par Date DESC</option>
+            </select>
+      </div>
 
       <form class="form-search" action="/explore" (input)="onSubmit()" method="get">
             <input class="search-bar" type="text" placeholder="Rechercher des utilisateurs ou des gabs" name= "exploreSearch" [(ngModel)]="exploreSearch" />

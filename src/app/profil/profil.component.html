@@ -29,7 +29,10 @@
                 </p>
                 <fa-icon *ngIf="owner" class="edit-username" [icon]="faPencil"></fa-icon>
             </div>
+            <div *ngIf="owner != true" class="button-unfollow">Ne plus suivre</div>
             <div *ngIf="owner != true" class="button-follow">Suivre</div>
+            <div *ngIf="owner != true"  class="button-blocked">Bloquer</div>
+            <div *ngIf="owner != true" class="button-blocked">Débloquer</div>
         </div>
     </div>
     <div class="home-body">
