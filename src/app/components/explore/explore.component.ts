@@ -52,6 +52,8 @@ export class ExploreComponent implements OnInit{
     }));
   }
 
+  /* Fonction de tri */
+
   sortByNbInteractionsDesc(tab: Array<Gab>){
     if (tab){
       tab.sort((a,b)=>{
@@ -61,21 +63,42 @@ export class ExploreComponent implements OnInit{
       })
     }
   }
-  sortByDateDESC(tab: Array<Gab>) {
+  sortByLikesDESC(tab: Array<Gab>) {
     if (tab) {
         tab.sort((a, b) => {
-            if (a.post_date != undefined && b.post_date != undefined) {
-                if (a.post_date > b.post_date) {
-                    return -1;
-                } else if (a.post_date < b.post_date) {
-                    return 1;
-                }
+            if (a.nbLikes !== undefined && b.nbLikes !== undefined) {
+                return b.nbLikes - a.nbLikes;
             }
             return 0; // Valeur de retour par défaut
         });
     }
-}
+  }
 
+  sortByDislikeDESC(tab: Array<Gab>){
+      if (tab) {
+          tab.sort((a, b) => {
+              if (a.nbDislikes !== undefined && b.nbDislikes !== undefined) {
+                  return b.nbDislikes - a.nbDislikes;
+              }
+              return 0; // Valeur de retour par défaut
+          });
+      }
+  }
+
+  sortByDateDESC(tab: Array<Gab>){
+    if (tab) {
+      tab.sort((a, b) => {
+          if (a.post_date != undefined && b.post_date != undefined) {
+              if (a.post_date < b.post_date) {
+                  return 1;
+              } else if (a.post_date > b.post_date) {
+                  return -1;
+              }
+          }
+          return 0; // Valeur de retour par défaut
+      });
+    }
+  }
   sortByDateASC(tab: Array<Gab>) {
     if (tab) {
       tab.sort((a, b) => {
@@ -91,6 +114,7 @@ export class ExploreComponent implements OnInit{
     }
   }
 
+  /* Fin des Fonctions de tri */
 
 displaytab1(){
   

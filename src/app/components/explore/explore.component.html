@@ -1,11 +1,23 @@
 <div class="home-body">
       <div class="header-box">
             <h1 class="title"> Explorer </h1>
-            <select id="mySelect">
-                  <option selected value="option1">Trier par Nb Interaction</option>
-                  <option value="option2">Trier par Date ASC</option>
-                  <option value="option3">Trier par Date DESC</option>
-            </select>
+            <div class="dropdown">
+                  <button class="dropbtn">Trier</button>
+                  <div *ngIf="gabs && exploreSearch == ''" class="dropdown-content">
+                        <a (click)="sortByNbInteractionsDesc(gabs)">Plus populaires</a>
+                        <a (click)="sortByDateASC(gabs)">par Date ASC</a>
+                        <a (click)="sortByDateDESC(gabs)">par Date DESC</a>
+                        <a (click)="sortByLikesDESC(gabs)">Plus aimés</a>
+                        <a (click)="sortByDislikeDESC(gabs)">Moins aimés</a>
+                  </div>
+                  <div *ngIf="searchGabs && exploreSearch != ''" class="dropdown-content">
+                        <a (click)="sortByNbInteractionsDesc(searchGabs)">Plus populaires</a>
+                        <a (click)="sortByDateASC(searchGabs)">par Date ASC</a>
+                        <a (click)="sortByDateDESC(searchGabs)">par Date DESC</a>
+                        <a (click)="sortByLikesDESC(searchGabs)">Plus aimés</a>
+                        <a (click)="sortByDislikeDESC(searchGabs)">Moins aimés</a>
+                  </div>
+            </div>
       </div>
 
       <form class="form-search" action="/explore" (input)="onSubmit()" method="get">
