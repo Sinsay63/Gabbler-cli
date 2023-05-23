@@ -167,8 +167,46 @@ Toggle2(id: number): void {
   }
 }
 
-  Interraction(idGab : number, uuid : string, interaction : string){
-    this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
-    });
+  Interraction(idGab : number, interaction : string){
+    const token = sessionStorage.getItem('token');
+      if(token){
+        const uuid = this.globalDataService.getUuidFromToken(token);
+        this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
+        let nbLike = document.querySelector('.nblike') as HTMLElement;
+        let nbDislike = document.querySelector('.nbdislike') as HTMLElement;
+        console.log(data);
+      
+        // 0 pour un ajout
+        if (data.gab_id == 0){
+          if(interaction == 'like'){
+          nbLike.innerText = (parseInt(nbLike.innerText) + 1).toString();
+          }
+          else if(interaction == 'dislike'){
+            nbDislike.innerText = (parseInt(nbDislike.innerText) + 1).toString();
+          }
+        }
+        // -1 pour une suppression
+        else if(data.gab_id == -1){
+          if(interaction == 'like'){
+
+          nbLike.innerText = (parseInt(nbLike.innerText) + -1).toString();
+          }
+          else if(interaction == 'dislike'){
+            nbDislike.innerText = (parseInt(nbDislike.innerText) + -1).toString();
+          }
+        }
+        // -2 pour une update (like -> dislike ou dislike -> like)
+        else if (data.gab_id == -2){
+          if(interaction == 'like'){
+            nbLike.innerText = (parseInt(nbLike.innerText) + 1).toString();
+            nbDislike.innerText = (parseInt(nbDislike.innerText) - 1).toString();
+          }
+          else if(interaction == 'dislike'){
+            nbLike.innerText = (parseInt(nbLike.innerText) - 1).toString();
+            nbDislike.innerText = (parseInt(nbDislike.innerText) + 1).toString();
+          }
+        }
+      });
+    }
   }
 }
