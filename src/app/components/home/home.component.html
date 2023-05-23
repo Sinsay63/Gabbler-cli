@@ -43,7 +43,7 @@
                         <button [id]="'btnh1-' + gab.id" class="btn" (click)="Toggle1(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
                     </div>
                     <div>
-                        <p class="nblike">{{gab.nbLikes}}</p>
+                        <p [ngClass] = "'nbLike'+ gab.id">{{gab.nbLikes}}</p>
                     </div>
                     <div  class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'dislike')">
                         <button [id]="'btnh2-' + gab.id" class="red" (click)="Toggle2(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
@@ -52,7 +52,7 @@
                         <button [id]="'btnh2-' + gab.id" class="btn" (click)="Toggle2(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
                     </div>
                     <div>
-                        <p class="nbdislike">{{gab.nbDislikes}}</p>
+                        <p [ngClass] = "'nbDislike'+ gab.id">{{gab.nbDislikes}}</p>
                     </div>
                     <div class="interractionIcon">
                        <button (click)="scrollToComments(gab.id ?? 0)" class="btn"><fa-icon name="comments" class="icon" [icon]="faComment"></fa-icon></button> 

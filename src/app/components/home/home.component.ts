@@ -172,8 +172,10 @@ Toggle2(id: number): void {
       if(token){
         const uuid = this.globalDataService.getUuidFromToken(token);
         this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
-        let nbLike = document.querySelector('.nblike') as HTMLElement;
-        let nbDislike = document.querySelector('.nbdislike') as HTMLElement;
+          console.log('.nbLike'+ idGab);
+          
+        let nbLike = document.querySelector('.nbLike'+ idGab) as HTMLElement;
+        let nbDislike = document.querySelector('.nbDislike'+ idGab) as HTMLElement;
         console.log(data);
       
         // 0 pour un ajout
