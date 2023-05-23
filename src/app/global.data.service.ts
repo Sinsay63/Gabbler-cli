@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { User, Gab, UserToken } from 'app/api';
+import { User, Gab, UserToken, InteractionUser, InteractionService, RelationshipService} from 'app/api';
 import jwt_decode from 'jwt-decode';
+import { RelationshipsCUDRequest } from './api/model/relationshipsCUDRequest';
 
 
 @Injectable({
@@ -11,7 +13,9 @@ export class GlobalDataService {
   search: string = '';
   gabs ?= new Array<Gab>();
   users ?= new Array<User>();
+  interactions ?= Array<InteractionUser>();
 
+  constructor(private router: Router, private interactionService: InteractionService, private relation : RelationshipService){}
 
   getDecodedToken(token: string): any {
     if (token) {
@@ -36,7 +40,6 @@ export class GlobalDataService {
   }
 
   /* Fonction de tri */
-
   sortByNbInteractionsDesc(tab: Array<Gab>){
     if (tab){
       tab.sort((a,b)=>{
@@ -96,6 +99,133 @@ export class GlobalDataService {
       });
     }
   }
-
   /* Fin des Fonctions de tri */
+
+/* Fonction pour follow */ 
+follow(uuidToFollow: any){
+  var uuidOwner = ''
+  const token = sessionStorage.getItem('token');
+  if(token){
+    uuidOwner = this.getUuidFromToken(token);
+  }
+  console.log(uuidOwner, uuidToFollow);
+  
+  if(uuidOwner != ''){
+    this.relation.relationshipsCUD(uuidOwner, uuidToFollow,'followed' ).subscribe(data => {
+      console.log(data);
+    },
+      (error =>{
+        console.log(error)
+    }));
+  }else{
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['login/']);
+    });
+  }
+}
+/* Fonction Pour Bloquer un utilisateur */
+block(uuidToFollow: any){
+  var uuidOwner = ''
+  const token = sessionStorage.getItem('token');
+  if(token){
+    uuidOwner = this.getUuidFromToken(token);
+  }
+  if(uuidOwner != ''){
+    this.relation.relationshipsCUD(uuidOwner, uuidToFollow,'blocked' ).subscribe(data => {
+      console.log(data);
+    },
+      (error =>{
+        console.log(error)
+    }));
+  }else{
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['login/']);
+    });
+  }
+}
+  /* Fonctions des gabs */ 
+  toGab(id : number): void{
+    const element = document.querySelector(`#btnh1-${id}`) as HTMLElement;
+    this.Toggle1(id);
+    this.Toggle2(id);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['gab/' + id]);
+    });
+  }
+
+  Toggle1(id: number): void {
+    const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
+    btnvar1.classList.toggle('red');
+    btnvar1.classList.toggle('btn');
+    
+    const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
+    const token = sessionStorage.getItem('token');
+    var isConnected = false;
+    if(token){
+      isConnected = true;
+    }
+    if(isConnected){
+      if (btnvar1.classList.contains('red')) {
+        btnvar2.classList.remove('red');
+        btnvar2.classList.add('btn');
+      }
+    }
+    else{
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate(['connexion']);
+      });
+    }
+  }
+  
+  Toggle2(id: number): void {
+    const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
+    btnvar2.classList.toggle('red');
+    btnvar2.classList.toggle('btn');
+    const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
+    const token = sessionStorage.getItem('token');
+    var isConnected = false;
+    if(token){
+      isConnected = true;
+    }
+    if(isConnected){
+      if (btnvar2.classList.contains('red')) {
+        btnvar1.classList.remove('red');
+        btnvar1.classList.add('btn');
+      }
+    }
+    else{
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate(['connexion']);
+      });
+    }
+  }
+
+  onClickInteractiveBox(event: MouseEvent): void {
+    event.stopPropagation();
+  }
+
+  getInteractionByGabId(gabId : number , interaction : string): Boolean{
+    let exist = false;
+    if(gabId > 0){
+      if(this.interactions){
+        for (let index = 0; index < this.interactions.length; index++) {
+          if(gabId == this.interactions[index].gab_id && this.interactions[index].interaction == interaction){
+            exist = true;
+          }
+        }
+      }
+    }
+    return exist;
+  }
+
+  Interraction(idGab : number, uuid : string, interaction : string){
+    this.interactionService.interactionCUD(idGab, uuid, interaction).subscribe(data => {
+    });
+  }
+
+
+
+
+
+
 }

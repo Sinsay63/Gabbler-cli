@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {  UserInfosProfile, User, UserService} from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faComment, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons'
 import { GlobalDataService } from 'app/global.data.service';
 import { Token } from '@angular/compiler';
 
@@ -17,12 +17,18 @@ import { Token } from '@angular/compiler';
 })
 export class ProfilComponent {
 
-  constructor( private route: ActivatedRoute,private globalDataService: GlobalDataService, private userService: UserService) { }
+  constructor( private route: ActivatedRoute,public globalDataService: GlobalDataService, private userService: UserService) { }
 
   user = new UserInfosProfile()
   isConnected: boolean | undefined;
   owner: boolean = false;
+
+  /* Icons */
+  heart = faHeart;
+  heartCrack  = faHeartCrack;
+  faComment = faComment;
   faPencil = faPencil;
+  uuidConnected: string = '';
   
   formatDate=this.globalDataService.formatDate;
 

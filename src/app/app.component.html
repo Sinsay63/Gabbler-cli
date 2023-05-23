@@ -2,12 +2,12 @@
 
     <side-menu *ngIf="router.url !== '/connexion' && router.url !== '/signUp'" (onToggleSideNav)="onToggleSideNav($event)" ></side-menu>
 
-    <app-body *ngIf="router.url != '/signUp'"
+    <app-body *ngIf="router.url != '/signUp' && router.url != '/login'"
       [collapsed]="isSideNavCollapsed"
       [screenWidth]="screenWidth">
     </app-body>
 
-    <app-body class="test" *ngIf="router.url == '/signUp'" >
+    <app-body class="test" *ngIf="router.url == '/signUp' || router.url == '/login'" >
     </app-body>
     
     <app-suggestion *ngIf="router.url !== '/connexion' && router.url !== '/signUp'"></app-suggestion>

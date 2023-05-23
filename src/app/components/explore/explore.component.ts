@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GabService, User, UserService, Gab, SearchService, RelationshipService, RelationUser} from 'app/api';
-import { faMagnifyingGlass, faCirclePlus} from '@fortawesome/free-solid-svg-icons'
+import { GabService, User, UserService, Gab, SearchService } from 'app/api';
+import { faMagnifyingGlass, faCirclePlus, faComment, faHeart, faHeartCrack} from '@fortawesome/free-solid-svg-icons'
 import { firstValueFrom } from 'rxjs';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
@@ -18,11 +18,16 @@ export class ExploreComponent implements OnInit{
 
   
 
-  constructor(private gabService: GabService,private relation: RelationshipService, private router: Router,  public globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService) {
+  constructor(private gabService: GabService, private router: Router,  public globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService) {
    }
   gabsSearch ?= new Array<Gab>();
+
   faMagnifingGlass = faMagnifyingGlass;
   faCirclePlus = faCirclePlus;
+  faComment = faComment
+  heart = faHeart;
+  heartCrack = faHeartCrack; 
+
   search = this.globalDataService.search
   exploreSearch = this.globalDataService.search;
   searchUsers ?= new Array<User>
@@ -33,24 +38,6 @@ export class ExploreComponent implements OnInit{
   uuidConnected: string = '';
   isConnected: boolean = false;
   formatDate=this.globalDataService.formatDate;
-
-  follow(uuidOwner: any, uuidToFollow: any){
-
-    var rel = new RelationUser();
-
-    rel.user_uuid = uuidOwner;
-    rel.user_uuid_related = uuidToFollow
-    rel.type= 'FOLLOWED'
-    console.log(rel);
-    
-
-    this.relation.relationshipsCUD(rel).subscribe(data => {
-      console.log(data);
-    },
-      (error =>{
-        console.log(error)
-    }));
-  }
 
   sortByNbInteractionsDesc(tab: Array<Gab>){
     if (tab){
@@ -176,16 +163,8 @@ displaytab1(){
 
     const token = sessionStorage.getItem('token');
     if(token){
-      this.isConnected=true;
-    }
-    else{
-      this.isConnected=false;
-    }
-    if(this.isConnected){
-      const token = sessionStorage.getItem('token');
-      if(token){
-        this.uuidConnected = this.globalDataService.getUuidFromToken(token);
-      }
+      this.isConnected = true;
+      this.uuidConnected = this.globalDataService.getUuidFromToken(token);
     }
 
     if(this.search != ''){

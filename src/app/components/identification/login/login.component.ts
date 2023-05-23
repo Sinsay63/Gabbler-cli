@@ -13,6 +13,7 @@ export class LoginComponent {
 
   constructor( private authService: AuthService, private userAuth: UserAuth, private globalDataService: GlobalDataService, private router: Router) {
    }
+
   email: string = '';
   password: string = '';
 
