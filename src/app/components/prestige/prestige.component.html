@@ -1,9 +1,8 @@
 <div class="container-prestige">
     <div class="wrapper">
       <div class="title">
-        Deviens un membre prestige en choisissant ton offre
+        Deviens un membre prestige en choisissant une de nos offres !
       </div>
-  
       <div class="container">
         <label class="option_item">
           <input type="checkbox" class="checkbox" value="1" [(ngModel)]="checkbox1" (change)="handleCheckboxChange(1)">
@@ -41,6 +40,8 @@
           </div>
         </label>
       </div>
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+
     </div>
   </div>
   

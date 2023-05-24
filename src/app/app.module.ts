@@ -22,6 +22,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfilComponent } from './profil/profil.component';
 import { ViewGabComponent } from './view-gab/view-gab.component';
 import { PrestigeComponent } from './components/prestige/prestige.component';
+import { NgxPayPalModule} from 'ngx-paypal'
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PrestigeComponent } from './components/prestige/prestige.component';
     HttpClientModule,
     NgImageSliderModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxPayPalModule
   ],
   providers: [UserAuth],
   bootstrap: [AppComponent]
