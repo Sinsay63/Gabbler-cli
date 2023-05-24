@@ -142,6 +142,10 @@
     border-radius: var(--border-radius);
     border: solid 1px black;
 }
+.blocked{
+    text-align: center;
+    padding-top: 10%;
+}
 
 /* Copie du scss de home */
 .home-body{

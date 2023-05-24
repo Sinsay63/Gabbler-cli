@@ -57,6 +57,19 @@ export class SideMenuComponent implements OnInit{
 
   constructor(public themeService: ThemeService, private globalDataService: GlobalDataService, private userService: UserService, private router: Router) {}
 
+  toMyProfil(){
+    const token = sessionStorage.getItem('token');
+    let uuid: string = '';
+      if(token){
+        uuid = this.globalDataService.getUuidFromToken(token);
+      }
+      console.log(uuid);
+      
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['profil/' + uuid]);
+    });
+  }
+
   setDefaultTheme() {
     this.themeService.setTheme('default');
     this.lightOn = true;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User, Gab, UserToken, InteractionUser, InteractionService, RelationshipService} from 'app/api';
+import { User, Gab, UserToken, InteractionUser, InteractionService, RelationshipService, RelationUser} from 'app/api';
 import jwt_decode from 'jwt-decode';
 import { RelationshipsCUDRequest } from './api/model/relationshipsCUDRequest';
 
@@ -15,7 +15,7 @@ export class GlobalDataService {
   users ?= new Array<User>();
   interactions ?= Array<InteractionUser>();
 
-  constructor(private router: Router, private interactionService: InteractionService, private relation : RelationshipService){}
+  constructor(private router: Router, private interactionService: InteractionService, private relationService : RelationshipService){}
 
   getDecodedToken(token: string): any {
     if (token) {
@@ -102,21 +102,27 @@ export class GlobalDataService {
   /* Fin des Fonctions de tri */
 
 /* Fonction pour follow */ 
-follow(uuidToFollow: any){
+follow(uuidToFollow: any, relation : RelationUser){
   var uuidOwner = ''
   const token = sessionStorage.getItem('token');
   if(token){
     uuidOwner = this.getUuidFromToken(token);
   }
   console.log(uuidOwner, uuidToFollow);
-  
+ 
+
   if(uuidOwner != ''){
-    this.relation.relationshipsCUD(uuidOwner, uuidToFollow,'followed' ).subscribe(data => {
+    this.relationService.relationshipsCUD(uuidOwner, uuidToFollow,'followed' ).subscribe(data => {
       console.log(data);
     },
       (error =>{
         console.log(error)
     }));
+    if(relation.type === 'followed'){
+      relation.type=''
+    }else{
+      relation.type = 'followed';
+    }
   }else{
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate(['login/']);
@@ -124,25 +130,32 @@ follow(uuidToFollow: any){
   }
 }
 /* Fonction Pour Bloquer un utilisateur */
-block(uuidToFollow: any){
+block(uuidToFollow: any, relation : RelationUser){
   var uuidOwner = ''
   const token = sessionStorage.getItem('token');
   if(token){
     uuidOwner = this.getUuidFromToken(token);
   }
   if(uuidOwner != ''){
-    this.relation.relationshipsCUD(uuidOwner, uuidToFollow,'blocked' ).subscribe(data => {
+    this.relationService.relationshipsCUD(uuidOwner, uuidToFollow,'blocked' ).subscribe(data => {
       console.log(data);
     },
       (error =>{
         console.log(error)
     }));
+    if(relation.type === 'blocked'){
+      relation.type=''
+    }else{
+      relation.type = 'blocked';
+    }
   }else{
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate(['login/']);
     });
   }
 }
+/* Fonction qui renvoie la relation de 2 users */
+
   /* Fonctions des gabs */ 
   toGab(id : number): void{
     const element = document.querySelector(`#btnh1-${id}`) as HTMLElement;

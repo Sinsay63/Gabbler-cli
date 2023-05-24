@@ -53,9 +53,6 @@ export class SuggestionComponent {
     if(token){
       this.isConnected=true;
     }
-    else{
-      this.isConnected=false;
-    }
     if(this.isConnected){
       const token = sessionStorage.getItem('token');
       if(token){

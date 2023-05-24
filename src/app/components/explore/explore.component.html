@@ -90,7 +90,7 @@
 
                               <div (click)="toProfil(user.uuid)" class="username">{{user.username}}</div>
 
-                              <div *ngIf="uuidConnected != user.uuid && isConnected" (click)="this.globalDataService.follow(user.uuid)" class="button-follow"> Suivre </div>
+                              <!--<div *ngIf="uuidConnected != user.uuid && isConnected" (click)="this.globalDataService.follow(user.uuid)" class="button-follow"> Suivre </div>-->
 
                               <div *ngIf="uuidConnected == user.uuid" (click)="toProfil(user.uuid)" class="button-follow"> voir mon profil </div>
 
