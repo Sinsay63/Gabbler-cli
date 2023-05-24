@@ -21,6 +21,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfilComponent } from './profil/profil.component';
 import { ViewGabComponent } from './view-gab/view-gab.component';
+import { PrestigeComponent } from './components/prestige/prestige.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ViewGabComponent } from './view-gab/view-gab.component';
     HomeComponent,
     SuggestionComponent,
     ProfilComponent,
-    ViewGabComponent
+    ViewGabComponent,
+    PrestigeComponent
   ],
   imports: [
     BrowserModule,

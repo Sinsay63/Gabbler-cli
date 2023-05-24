@@ -13,5 +13,10 @@ export const navbarData = [
         routeLink: 'parametre',
         icon: 'fal fa-cog',
         label: 'Paramétres'
+    },
+    {
+        routeLink: 'prestige',
+        icon: 'fal fa-star',
+        label: 'Gabbler Prestige'
     }
 ];

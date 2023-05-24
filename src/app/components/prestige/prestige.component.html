@@ -1,0 +1,46 @@
+<div class="container-prestige">
+    <div class="wrapper">
+      <div class="title">
+        Deviens un membre prestige en choisissant ton offre
+      </div>
+  
+      <div class="container">
+        <label class="option_item">
+          <input type="checkbox" class="checkbox" value="1" [(ngModel)]="checkbox1" (change)="handleCheckboxChange(1)">
+          <div class="option_inner un">
+            <div class="tickmark"></div>
+            <div class="icon"><fa-icon class="fab fa-1" name="un" [icon]="un"></fa-icon> mois</div>
+            <div class="name">5 euros</div>
+          </div>
+        </label>
+        <label class="option_item">
+          <input type="checkbox" class="checkbox" value="3" [(ngModel)]="checkbox2" (change)="handleCheckboxChange(2)">
+          <div class="option_inner deux">
+            <div class="tickmark"></div>
+            <div class="icon"><fa-icon class="fab fa-2" name="deux" [icon]="trois"></fa-icon> mois</div>
+            <div class="name">13.50 euros</div>
+            <div class="promo">* 10% de réduction</div>
+          </div>
+        </label>
+        <label class="option_item">
+          <input type="checkbox" class="checkbox" value="6" [(ngModel)]="checkbox3" (change)="handleCheckboxChange(3)">
+          <div class="option_inner trois">
+            <div class="tickmark"></div>
+            <div class="icon"><fa-icon class="fab fa-3" name="trois" [icon]="six"></fa-icon> mois</div>
+            <div class="name">25.50 euros</div>
+            <div class="promo">* 15% de réduction</div>
+          </div>
+        </label>
+        <label class="option_item">
+          <input type="checkbox" class="checkbox" value="12" [(ngModel)]="checkbox4" (change)="handleCheckboxChange(4)">
+          <div class="option_inner quatre">
+            <div class="tickmark"></div>
+            <div class="icon"><fa-icon class="fab fa-4" name="quatre" [icon]="un"></fa-icon><fa-icon class="fab fa-4" name="quatre" [icon]="deux"></fa-icon> mois</div>
+            <div class="name">48 euros</div>
+            <div class="promo">* 20% de réduction</div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+  
