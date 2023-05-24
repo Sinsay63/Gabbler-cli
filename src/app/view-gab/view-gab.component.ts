@@ -58,6 +58,11 @@ export class ViewGabComponent {
         }, (error => {
           console.log(error);
         }));
+        this.interactionService.getInteractionsByUserUuid(uuid).subscribe(data => {
+          this.interactions=data;
+        },(error => {
+          console.log(error);
+        }));
       }
     }
   }
@@ -69,9 +74,15 @@ export class ViewGabComponent {
     event.stopPropagation();
   }
   getInteractionByGabId(gabId : number , interaction : string): Boolean{
+    console.log("Début getInteractionByGabId");
+    
     let exist = false;
     if(gabId > 0){
+      console.log("gabId > 0  -> id : " + gabId);
+      
       if(this.interactions){
+        console.log("this.interactions");
+        console.log(this.interactions);
         for (let index = 0; index < this.interactions.length; index++) {
           if(gabId == this.interactions[index].gab_id && this.interactions[index].interaction == interaction){
             exist = true;
@@ -146,9 +157,49 @@ export class ViewGabComponent {
     }
   }
 
-  Interraction(idGab : number, uuid : string, interaction : string){
-    this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
-    });
+  Interraction(idGab : number, interaction : string){
+    const token = sessionStorage.getItem('token');
+      if(token){
+        const uuid = this.globalDataService.getUuidFromToken(token);
+        this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
+          console.log('.nbLike'+ idGab);
+          
+        let nbLike = document.querySelector('.nbLike'+ idGab) as HTMLElement;
+        let nbDislike = document.querySelector('.nbDislike'+ idGab) as HTMLElement;
+        console.log(data);
+      
+        // 0 pour un ajout
+        if (data.gab_id == 0){
+          if(interaction == 'like'){
+          nbLike.innerText = (parseInt(nbLike.innerText) + 1).toString();
+          }
+          else if(interaction == 'dislike'){
+            nbDislike.innerText = (parseInt(nbDislike.innerText) + 1).toString();
+          }
+        }
+        // -1 pour une suppression
+        else if(data.gab_id == -1){
+          if(interaction == 'like'){
+
+          nbLike.innerText = (parseInt(nbLike.innerText) + -1).toString();
+          }
+          else if(interaction == 'dislike'){
+            nbDislike.innerText = (parseInt(nbDislike.innerText) + -1).toString();
+          }
+        }
+        // -2 pour une update (like -> dislike ou dislike -> like)
+        else if (data.gab_id == -2){
+          if(interaction == 'like'){
+            nbLike.innerText = (parseInt(nbLike.innerText) + 1).toString();
+            nbDislike.innerText = (parseInt(nbDislike.innerText) - 1).toString();
+          }
+          else if(interaction == 'dislike'){
+            nbLike.innerText = (parseInt(nbLike.innerText) - 1).toString();
+            nbDislike.innerText = (parseInt(nbDislike.innerText) + 1).toString();
+          }
+        }
+      });
+    }
   }
 
   toGab(id : number): void{
