@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {  UserInfosProfile, User, UserService, RelationshipService, RelationUser} from 'app/api';
+import {  UserInfosProfile, User, UserService, RelationshipService, RelationUser, InteractionService} from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { faPencil, faComment, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons'
@@ -17,7 +17,7 @@ import { Token } from '@angular/compiler';
 })
 export class ProfilComponent {
 
-  constructor( private route: ActivatedRoute,public globalDataService: GlobalDataService, private userService: UserService, private relationService : RelationshipService) { }
+  constructor( private route: ActivatedRoute,public globalDataService: GlobalDataService, private userService: UserService, private relationService : RelationshipService, private interactionService: InteractionService) { }
 
   user = new UserInfosProfile()
   isConnected: boolean | undefined;
@@ -95,6 +95,8 @@ export class ProfilComponent {
     )
     .subscribe((user: UserInfosProfile) => {
       this.user = user;
+      console.log(user);
+      
     });
   }
 
@@ -104,6 +106,14 @@ export class ProfilComponent {
     const token = sessionStorage.getItem('token');
     if (token) {
       uuidOwner = this.globalDataService.getUuidFromToken(token);
+      this.interactionService.getInteractionsByUserUuid(this.uuidConnected).subscribe(
+        data => {
+          this.globalDataService.interactions = data;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
     }
     console.log("les uuid sont :" + uuidOwner, uuidToCompare);
     if (uuidOwner !== '') {
@@ -140,6 +150,12 @@ export class ProfilComponent {
 
   callblock(uuid : any, relation : RelationUser){
     this.globalDataService.block(uuid, this.relation);
+    const followersElement = document.getElementById('follows');
+    if(relation.type  == 'blocked' && this.user.follows != undefined){
+      if (followersElement) {
+        followersElement.innerText = (this.user.follows.length).toString();
+      }
+    }
   }
 }
   

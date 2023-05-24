@@ -166,57 +166,10 @@ block(uuidToFollow: any, relation : RelationUser){
     });
   }
 
-  Toggle1(id: number): void {
-    const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
-    btnvar1.classList.toggle('red');
-    btnvar1.classList.toggle('btn');
-    
-    const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
-    const token = sessionStorage.getItem('token');
-    var isConnected = false;
-    if(token){
-      isConnected = true;
-    }
-    if(isConnected){
-      if (btnvar1.classList.contains('red')) {
-        btnvar2.classList.remove('red');
-        btnvar2.classList.add('btn');
-      }
-    }
-    else{
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate(['connexion']);
-      });
-    }
-  }
-  
-  Toggle2(id: number): void {
-    const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
-    btnvar2.classList.toggle('red');
-    btnvar2.classList.toggle('btn');
-    const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
-    const token = sessionStorage.getItem('token');
-    var isConnected = false;
-    if(token){
-      isConnected = true;
-    }
-    if(isConnected){
-      if (btnvar2.classList.contains('red')) {
-        btnvar1.classList.remove('red');
-        btnvar1.classList.add('btn');
-      }
-    }
-    else{
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate(['connexion']);
-      });
-    }
-  }
-
   onClickInteractiveBox(event: MouseEvent): void {
     event.stopPropagation();
   }
-
+  
   getInteractionByGabId(gabId : number , interaction : string): Boolean{
     let exist = false;
     if(gabId > 0){
@@ -231,14 +184,102 @@ block(uuidToFollow: any, relation : RelationUser){
     return exist;
   }
 
-  Interraction(idGab : number, uuid : string, interaction : string){
-    this.interactionService.interactionCUD(idGab, uuid, interaction).subscribe(data => {
+Toggle1(id: number): void {
+  const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
+  btnvar1.classList.toggle('red');
+  btnvar1.classList.toggle('btn');
+  
+  const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
+  const token = sessionStorage.getItem('token');
+  var isConnected = false;
+    if(token){
+      isConnected = true;
+    }
+  if(isConnected){
+    if (btnvar1.classList.contains('red')) {
+      btnvar2.classList.remove('red');
+      btnvar2.classList.add('btn');
+    }
+  }
+  else{
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['connexion']);
     });
   }
+}
 
+Toggle2(id: number): void {
+  const btnvar2 = document.getElementById(`btnh2-${id}`) as HTMLElement;
+  btnvar2.classList.toggle('red');
+  btnvar2.classList.toggle('btn');
+  const token = sessionStorage.getItem('token');
+  const btnvar1 = document.getElementById(`btnh1-${id}`) as HTMLElement;
 
+  var isConnected = false;
+    if(token){
+      isConnected = true;
+    }
+  if(isConnected){
+    if (btnvar2.classList.contains('red')) {
+      btnvar1.classList.remove('red');
+      btnvar1.classList.add('btn');
+    }
+  }
+  else{
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['connexion']);
+    });
+  }
+}
 
+Interraction(idGab : number, interaction : string){
+  const token = sessionStorage.getItem('token');
+    if(token){
+      const uuid = this.getUuidFromToken(token);
+      this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
+        console.log('.nbLike'+ idGab);
+        
+      let nbLike = document.querySelector('.nbLike'+ idGab) as HTMLElement;
+      let nbDislike = document.querySelector('.nbDislike'+ idGab) as HTMLElement;
+      console.log(data);
+    
+      // 0 pour un ajout
+      if (data.gab_id == 0){
+        if(interaction == 'like'){
+        nbLike.innerText = (parseInt(nbLike.innerText) + 1).toString();
+        }
+        else if(interaction == 'dislike'){
+          nbDislike.innerText = (parseInt(nbDislike.innerText) + 1).toString();
+        }
+      }
+      // -1 pour une suppression
+      else if(data.gab_id == -1){
+        if(interaction == 'like'){
 
+        nbLike.innerText = (parseInt(nbLike.innerText) + -1).toString();
+        }
+        else if(interaction == 'dislike'){
+          nbDislike.innerText = (parseInt(nbDislike.innerText) + -1).toString();
+        }
+      }
+      // -2 pour une update (like -> dislike ou dislike -> like)
+      else if (data.gab_id == -2){
+        if(interaction == 'like'){
+          nbLike.innerText = (parseInt(nbLike.innerText) + 1).toString();
+          nbDislike.innerText = (parseInt(nbDislike.innerText) - 1).toString();
+        }
+        else if(interaction == 'dislike'){
+          nbLike.innerText = (parseInt(nbLike.innerText) - 1).toString();
+          nbDislike.innerText = (parseInt(nbDislike.innerText) + 1).toString();
+        }
+      }
+    });
+  }
+}
 
+scrollToComments(id : number): void {
+  const element = document.querySelector(`#btnh1-${id}`) as HTMLElement;
+  this.router.navigate(['gab/' + id], { fragment: 'monElement' });
+}
 
 }

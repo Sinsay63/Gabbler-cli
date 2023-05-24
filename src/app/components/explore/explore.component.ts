@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GabService, User, UserService, Gab, SearchService } from 'app/api';
+import { GabService, User, UserService, Gab, SearchService, InteractionService } from 'app/api';
 import { faMagnifyingGlass, faCirclePlus, faComment, faHeart, faHeartCrack} from '@fortawesome/free-solid-svg-icons'
 import { firstValueFrom } from 'rxjs';
 import { GlobalDataService } from 'app/global.data.service';
@@ -18,7 +18,7 @@ export class ExploreComponent implements OnInit{
 
   
 
-  constructor(private gabService: GabService, private router: Router,  public globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService) {
+  constructor(private gabService: GabService, private router: Router,  public globalDataService: GlobalDataService,private  searchService: SearchService, private userService: UserService, private interactionService: InteractionService) {
    }
   gabsSearch ?= new Array<Gab>();
 
@@ -162,9 +162,18 @@ displaytab1(){
   ngOnInit(): void {
 
     const token = sessionStorage.getItem('token');
+
     if(token){
+
       this.isConnected = true;
+
       this.uuidConnected = this.globalDataService.getUuidFromToken(token);
+      
+      this.interactionService.getInteractionsByUserUuid(this.uuidConnected).subscribe(data => {
+        this.globalDataService.interactions=data;
+      },(error => {
+        console.log(error);
+      }));
     }
 
     if(this.search != ''){

@@ -34,7 +34,7 @@
         </div>
 
         <div class="gabble" *ngFor= "let gab of feed" >
-            <div (click)="gab.id && toGab(gab.id)" >
+            <div (click)="gab.id && this.globalDataService.toGab(gab.id)" >
                 <div class="user">
                     <div class="img-user">
                         <img  [src]="'assets/images/' + gab.user?.avatar?.url"  alt="Avatar" class="pp">
@@ -47,27 +47,27 @@
 
                 <div class="text-field">{{gab.content}}</div>
                 <img *ngFor="let media of gab.medias" class="gab-img" [src]="'assets/images/' + media.url">
-                <div class="interactive-box" (click)="onClickInteractiveBox($event)">
-                    <div class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'like')">
-                        <button [id]="'btnh1-' + gab.id" class="red" (click)="Toggle1(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
+                <div class="interactive-box" (click)="this.globalDataService.onClickInteractiveBox($event)">
+                    <div class="interractionIcon" *ngIf="this.globalDataService.getInteractionByGabId(gab.id ?? 0,'like')">
+                        <button [id]="'btnh1-' + gab.id" class="red" (click)="this.globalDataService.Toggle1(gab.id ?? 0)" (click)="this.globalDataService.Interraction(gab.id ?? 0, 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
                     </div>
-                    <div class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'like') ==  false">
-                        <button [id]="'btnh1-' + gab.id" class="btn" (click)="Toggle1(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
+                    <div class="interractionIcon" *ngIf="this.globalDataService.getInteractionByGabId(gab.id ?? 0,'like') ==  false">
+                        <button [id]="'btnh1-' + gab.id" class="btn" (click)="this.globalDataService.Toggle1(gab.id ?? 0)" (click)="this.globalDataService.Interraction(gab.id ?? 0, 'like')"> <fa-icon name="heart" class="icon" [icon]="heart"></fa-icon> </button>
                     </div>
                     <div>
                         <p [ngClass] = "'nbLike'+ gab.id">{{gab.nbLikes}}</p>
                     </div>
-                    <div  class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'dislike')">
-                        <button [id]="'btnh2-' + gab.id" class="red" (click)="Toggle2(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
+                    <div  class="interractionIcon" *ngIf="this.globalDataService.getInteractionByGabId(gab.id ?? 0,'dislike')">
+                        <button [id]="'btnh2-' + gab.id" class="red" (click)="this.globalDataService.Toggle2(gab.id ?? 0)" (click)="this.globalDataService.Interraction(gab.id ?? 0, 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
                     </div>
-                    <div class="interractionIcon" *ngIf="getInteractionByGabId(gab.id ?? 0,'dislike') == false">
-                        <button [id]="'btnh2-' + gab.id" class="btn" (click)="Toggle2(gab.id ?? 0)" (click)="Interraction(gab.id ?? 0, 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
+                    <div class="interractionIcon" *ngIf="this.globalDataService.getInteractionByGabId(gab.id ?? 0,'dislike') == false">
+                        <button [id]="'btnh2-' + gab.id" class="btn" (click)="this.globalDataService.Toggle2(gab.id ?? 0)" (click)="this.globalDataService.Interraction(gab.id ?? 0, 'dislike')"> <fa-icon name="heartCrack" class="icon" [icon]="heartCrack"></fa-icon> </button>
                     </div>
                     <div>
                         <p [ngClass] = "'nbDislike'+ gab.id">{{gab.nbDislikes}}</p>
                     </div>
                     <div class="interractionIcon">
-                       <button (click)="scrollToComments(gab.id ?? 0)" class="btn"><fa-icon name="comments" class="icon" [icon]="faComment"></fa-icon></button> 
+                       <button (click)="this.globalDataService.scrollToComments(gab.id ?? 0)" class="btn"><fa-icon name="comments" class="icon" [icon]="faComment"></fa-icon></button> 
                     </div>
                     <div>
                         <p class="nbComments">{{gab.nbComments}}</p>
