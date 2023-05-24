@@ -123,7 +123,7 @@
         background-color: var(--bg-color-gab);
         width: 80%;
         border-radius: 15px;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         .containerComments{
             cursor: pointer;
         }
@@ -147,7 +147,7 @@
                 font-size: 20px;
                 width: 20px;
                 outline: none;
-                color: var(--color-logo);
+                color: var(--text-color);
                 cursor: pointer;
             }
             .red {
@@ -214,6 +214,7 @@
             width: 100%;
             display: flex;
             justify-content: flex-start;
+            color: var(--text-color);
         }
         .gab-img{
             margin-top: 0.938rem;

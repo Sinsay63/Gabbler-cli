@@ -4,7 +4,7 @@ import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { InteractionService } from 'app/api';
-import { faComment, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart, faHeartCrack, faImage, faSort } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ import { faComment, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-ic
 })
 export class HomeComponent implements OnInit{
 
-  constructor(private gabService: GabService, private globalDataService: GlobalDataService, private route: ActivatedRoute, private router: Router, private interactionService: InteractionService) {
+  constructor(private gabService: GabService, public globalDataService: GlobalDataService, private route: ActivatedRoute, private router: Router, private interactionService: InteractionService) {
    }
   
   contentField: string = ''
@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit{
   showLoader = true;
   interactions ?= Array<InteractionUser>();
   heart = faHeart;
+  sort = faSort;
+  image = faImage;
   heartCrack = faHeartCrack;
   lastClickedLikeButton: HTMLElement | null = null;
   countLike = 0;

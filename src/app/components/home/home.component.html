@@ -1,20 +1,32 @@
 <div class="home-body">
-    <h1 class="title">Accueil</h1>
 
-        <div class="add-box" *ngIf="isConnected">
-            <form>
-                <textarea class="text-field1"  name="contentField" [(ngModel)]="contentField" placeholder="Gabbl tes pensées ..."></textarea>
-            
-                <div class="post-box">
-                    <div class="add-attachement">
-                        <div class="photo"><i class="fa-regular fa-image"></i>Photo</div>
-                        <div class="video"><i class="fa-solid fa-clapperboard-play"></i>Vidéo</div>
-                    </div>
-                    <button (click)="createPost()" class="gab-button">Gabbler</button>
-                </div>
-
-            </form>
+    <div class="header-box">
+        <h1 class="title">Accueil</h1>
+        <div class="dropdown">
+              <button class="dropbtn"><fa-icon name="sort" class="icon" [icon]="sort"></fa-icon>Trier</button>
+              <div *ngIf="feed" class="dropdown-content">
+                    <a (click)="this.globalDataService.sortByNbInteractionsDesc(feed)">Plus populaires</a>
+                    <a (click)="this.globalDataService.sortByDateASC(feed)">par Date ASC</a>
+                    <a (click)="this.globalDataService.sortByDateDESC(feed)">par Date DESC</a>
+                    <a (click)="this.globalDataService.sortByLikesDESC(feed)">Plus aimés</a>
+                    <a (click)="this.globalDataService.sortByDislikeDESC(feed)">Moins aimés</a>
+              </div>
         </div>
+  </div>
+
+  <div class="inputBox" *ngIf="isConnected">
+    <textarea name="contentField" [(ngModel)]="contentField" required="required"></textarea>
+    <span> Gabble tes pensées ...</span>
+    <div class="actions">
+        <div class="image-upload">
+          <label for="image-input">
+            <fa-icon name="iamge" class="image-icon" [icon]="image"></fa-icon>
+          </label>
+          <input type="file" id="image-input" class="hidden">
+        </div>
+        <button (click)="createPost()" class="tweet-button">Gabbler</button>
+      </div>
+  </div>
 
         <div *ngIf="showLoader" id="loader" class="box-loader">
             <img class="loader" src="assets/images/loader.svg" />

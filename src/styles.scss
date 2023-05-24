@@ -14,11 +14,11 @@ body {
 // thème par défaut
 :root {
     --bg-color: #f0f0f0;
-    --text-color: #263238;
-    --text-color-hover: #263238;
+    --text-color: #000000;
+    --text-color-hover: #000000;
     --bg-color-hover: #fff;
     --bg-logo: #fff;
-    --color-logo: #263238;
+    --color-logo: #000000;
     --border-radius: 60% 40% 64% 36% / 40% 59% 41% 60%;
     --bg: #444857;
     --red: #FF3C41;
@@ -27,9 +27,9 @@ body {
   
   // thème sombre
   .theme-dark {
-    --bg-color: #263238;
+    --bg-color: #000000;
     --text-color: #f0f0f0;
-    --text-color-hover: #263238;
+    --text-color-hover: #000000;
     --bg-color-hover: #f0f0f0;
-    
+    --bg-color-gab: #202327;
   }
