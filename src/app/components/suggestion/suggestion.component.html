@@ -20,7 +20,10 @@
             <div class="user-info">
                 <div style="display:flex; align-items:center">
                     <div (click)="toProfil( user.uuid )" style="background-image: url('assets/images/{{ user.avatar?.url }} ')" class="suggest-pp"></div>
-                    <div (click)="toProfil( user.uuid )" class="suggest-name">{{user.username}}</div>
+                    <div (click)="toProfil( user.uuid )" class="suggest-name">
+                        {{user.username}}
+                        <div *ngIf="user.isPremium" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
+                    </div>
                 </div>
             </div>
         </div>

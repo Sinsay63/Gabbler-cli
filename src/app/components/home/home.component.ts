@@ -4,7 +4,7 @@ import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { InteractionService } from 'app/api';
-import { faComment, faHeart, faHeartCrack, faImage, faSort } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faCrown, faHeart, faHeartCrack, faImage, faSort } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit{
   isConnected: boolean | undefined;
   idGab = new Gab;
   faComment = faComment;
+  crown = faCrown;
   formatDate=this.globalDataService.formatDate;
 
 

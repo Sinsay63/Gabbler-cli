@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GabService, User, UserService, Gab, SearchService, InteractionService } from 'app/api';
-import { faMagnifyingGlass, faCirclePlus, faComment, faHeart, faHeartCrack} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faCirclePlus, faComment, faHeart, faHeartCrack, faCrown, faSort} from '@fortawesome/free-solid-svg-icons'
 import { firstValueFrom } from 'rxjs';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
@@ -27,6 +27,7 @@ export class ExploreComponent implements OnInit{
   faComment = faComment
   heart = faHeart;
   heartCrack = faHeartCrack; 
+  crown = faCrown;
 
   search = this.globalDataService.search
   exploreSearch = this.globalDataService.search;
@@ -37,6 +38,7 @@ export class ExploreComponent implements OnInit{
   countLike = 0;
   uuidConnected: string = '';
   isConnected: boolean = false;
+  sort = faSort;
   formatDate=this.globalDataService.formatDate;
 
   sortByNbInteractionsDesc(tab: Array<Gab>){

@@ -1,6 +1,6 @@
 import { transition, trigger, style, animate, keyframes} from '@angular/animations';
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import {  faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning, faLightbulb, faMoon, faUmbrellaBeach, faSun, faRightToBracket} from '@fortawesome/free-solid-svg-icons';
+import {  faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning, faLightbulb, faMoon, faUmbrellaBeach, faSun, faRightToBracket, faCrown} from '@fortawesome/free-solid-svg-icons';
 import { navbarData } from './nav-data';
 import { User, UserService } from 'app/api';
 import { ThemeService } from '../parametre/theme.service';
@@ -54,8 +54,9 @@ export class SideMenuComponent implements OnInit{
   faMoon = faMoon;
   user ?= new User;
   uuid: string = ''
+  crown = faCrown;
 
-  constructor(public themeService: ThemeService, private globalDataService: GlobalDataService, private userService: UserService, private router: Router) {}
+  constructor(public themeService: ThemeService, public globalDataService: GlobalDataService, private userService: UserService, private router: Router) {}
 
   toMyProfil(){
     const token = sessionStorage.getItem('token');

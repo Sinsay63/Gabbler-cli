@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {  UserInfosProfile, User, UserService, RelationshipService, RelationUser, InteractionService} from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { faPencil, faComment, faHeart, faHeartCrack, faClose } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faComment, faHeart, faHeartCrack, faClose, faCrow, faCrown, faSort } from '@fortawesome/free-solid-svg-icons'
 import { GlobalDataService } from 'app/global.data.service';
 import { Token } from '@angular/compiler';
 
@@ -29,8 +29,10 @@ export class ProfilComponent {
   faComment = faComment;
   faPencil = faPencil;
   faCross = faClose;
+  crown = faCrown;
   uuidConnected: string = '';
   relation = new RelationUser();
+  sort = faSort;
   beBlock =false;
   
   formatDate=this.globalDataService.formatDate;

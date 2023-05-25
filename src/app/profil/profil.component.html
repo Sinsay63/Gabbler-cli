@@ -10,7 +10,9 @@
                 </div>
             </div>
             <div class="profil-box">       
-                <div class="username">{{ user.username }} <fa-icon *ngIf="owner" class="edit-username" [icon]="faPencil"></fa-icon></div>
+                <div class="username">{{ user.username }} 
+                    <div *ngIf="this.globalDataService.isPremium && owner" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
+                    <fa-icon *ngIf="owner" class="edit-username" [icon]="faPencil"></fa-icon></div>
             </div>
         </div>
 
@@ -21,6 +23,18 @@
         </div>
         
     </div>
+    <div class="header-box">
+        <div class="dropdown">
+              <button class="dropbtn"><fa-icon name="sort" class="icon" [icon]="sort"></fa-icon>Trier</button>
+              <div *ngIf="user.gabs" class="dropdown-content">
+                    <a (click)="this.globalDataService.sortByNbInteractionsDesc(user.gabs)">Plus populaires</a>
+                    <a (click)="this.globalDataService.sortByDateASC(user.gabs)">par Date ASC</a>
+                    <a (click)="this.globalDataService.sortByDateDESC(user.gabs)">par Date DESC</a>
+                    <a (click)="this.globalDataService.sortByLikesDESC(user.gabs)">Plus aimés</a>
+                    <a (click)="this.globalDataService.sortByDislikeDESC(user.gabs)">Moins aimés</a>
+              </div>
+        </div>
+  </div>
     <div *ngIf="!this.beBlock" >
         <div class="info-user">
             <div class="first-line-info">

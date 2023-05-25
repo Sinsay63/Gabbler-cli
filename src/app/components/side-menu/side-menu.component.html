@@ -19,7 +19,15 @@
           </span>
         </a> 
       </li>
-
+      <li *ngIf="this.globalDataService.isPremium == false" class="sidenav-nav-item">
+        <a  class="sidenav-nav-link" routerLink="prestige" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+          <i class="sidenav-link-icon" [class]="'fal fa-crown'"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            Gabbler Prestige
+          </span>
+        </a> 
+      </li>
       <li class="sidenav-nav-item">
         <a *ngIf="uuid" class="sidenav-nav-link" (click)="toMyProfil()">
           <i class="sidenav-link-icon" [class]="'fal fa-user'"></i>
@@ -62,7 +70,10 @@
     <div class="user">
       <div class="profil" *ngIf="isConnected">
           <img  *ngIf="collapsed" @fadeInOut src="assets/images/{{user?.avatar?.url}}" alt="Avatar" class="pp">
-          <div *ngIf="collapsed" @fadeInOut class="user-name">{{user?.username}}</div>
+          <div *ngIf="collapsed" @fadeInOut class="user-name">
+            {{user?.username}}
+            <div *ngIf="this.globalDataService.isPremium" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
+          </div>
           <fa-icon class="icon" [icon]="faRightFromBracket" (click)="logOut()"></fa-icon>
       </div>
     </div>

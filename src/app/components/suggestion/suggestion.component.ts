@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SearchService, User, UserService} from 'app/api';
-import { faMagnifyingGlass, faCirclePlus} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faCirclePlus, faCrown} from '@fortawesome/free-solid-svg-icons'
 import { Router, NavigationEnd } from '@angular/router';
 import {GlobalDataService } from 'app/global.data.service'
 @Component({
@@ -9,6 +9,7 @@ import {GlobalDataService } from 'app/global.data.service'
   styleUrls: ['./suggestion.component.scss']
 })
 export class SuggestionComponent {
+  crown = faCrown;
 
   constructor(private userService: UserService, private searchService: SearchService, private router: Router, private globalDataService: GlobalDataService) {
    // Recuperation de l'url pour supprimer la barre de recherche si on est sur la page 'explore'

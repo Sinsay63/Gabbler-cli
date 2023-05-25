@@ -11,6 +11,63 @@
 .main-container{
     height:100vh;
     overflow-y: scroll;
+    .header-box{
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        width:100%;
+        margin-bottom: 10px;
+    }
+    .dropbtn {
+        background-color: transparent;
+        color: var(--text-color);
+        padding: 0.313rem;
+        width:8rem;
+        height: 3rem;
+        margin-right: 2rem;
+        margin-top: 1rem;
+        border: none;
+        border-radius: 0.313rem;
+        font-size: 15px;
+        .icon{
+            font-size: 18px;
+            margin-right: 0.7rem;
+        }
+      }
+      
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: var(--bg-color-gab);
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        cursor: pointer;
+        border-radius: 15px;
+        text-align: center;
+      }
+      
+      .dropdown-content a {
+        color: var(--text-color);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+      
+      .dropdown-content a:hover {
+        opacity: 0.6;
+        border-radius: 15px;
+    }
+      
+      .dropdown:hover .dropdown-content {display: block;}
+      
+      
+      /* FIN DROPDOWN */
 
 }
 .banner{
@@ -71,6 +128,20 @@
             font-size: 22px;
             font-weight: 500;
             padding: 10px 15px 0px 15px;
+            .containerIconPrestige{
+                margin-left: 5px;
+                height: 20px;
+                width: 20px;
+                clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+                background-color: #ffd700;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .iconPrestige{
+                    color: #fff;
+                    font-size: 10px;
+                }
+            }
         }
     }
     .follow-box{
@@ -102,7 +173,6 @@
     .first-line-info{
         display: flex;
         justify-content: space-around;
-        padding-top: 50px;
         .bio-box{
             display: flex;
             justify-content: space-between;

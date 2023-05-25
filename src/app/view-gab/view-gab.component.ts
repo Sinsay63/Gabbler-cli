@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User, UserService, Gab, GabService, InteractionService, InteractionUser, GabCreation } from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { GlobalDataService } from 'app/global.data.service';
-import { faArrowLeft, faComment, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faComment, faCrown, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
 import { Location } from '@angular/common'; 
 import { EMPTY } from 'rxjs';
 
@@ -24,6 +24,7 @@ export class ViewGabComponent {
   heartCrack = faHeartCrack;
   faArrowLeft = faArrowLeft;
   faComment = faComment;
+  crown = faCrown;
   formatDate=this.globalDataService.formatDate;
 
   ngOnInit() {
