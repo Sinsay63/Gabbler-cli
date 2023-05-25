@@ -1,26 +1,19 @@
 <div class="login-box">
-    <h2 class="title">Créer votre compte</h2>
+    <h2 class="title">Connectez-vous à votre compte</h2>
     <div class="container-form">
 
         <form class="login-form" method="post">
             
             <label for="email"> Email
-                <input class="champs" name="email" type="email" placeholder="Entrer votre email" [(ngModel)]="email"/>
+                <input class="champs" required name="email" type="email" placeholder="Entrer votre email" [(ngModel)]="email"/>
             </label>
 
             <label for="password">Mot de passe
-                <input class="champs" name="password" type="password" placeholder="Entrer votre mot de passe"  [(ngModel)]="password" />
+                <input class="champs" required name="password" type="password" placeholder="Entrer votre mot de passe"  [(ngModel)]="password" />
             </label>
-
-            <div class="forgot-password" > 
-                <p >mot de passe oublié ?</p>
+            <div class="box-button">        
+                <button class="button-login" type="submit" (click)="onSubmit()">Se connecter</button>
             </div>
-            <div>
-                <button class="button-login" type="submit" (click)="onSubmit()">Connexion</button>
-            </div>
-            
-            
-            <p>Vous n'avez pas de compte <span (click)="toRegister()" style="text-decoration: underline;">S'inscrire</span></p>
         </form>
     </div>
 </div>

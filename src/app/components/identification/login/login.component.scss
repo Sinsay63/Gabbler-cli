@@ -26,14 +26,37 @@
             input{
                 width: 100%;
                 padding : 10px 0px;
-                border-bottom: solid 2px blue;
+                border-bottom: solid 2px #202327;
             }
-            .forgot-password{
+            .box-button{
                 display: flex;
-                justify-content: flex-end;
-                margin: 10px 0px;
-                p{
-                    color: blue;
+                align-items: center;
+                justify-content: space-around;
+                padding-top: 20px;
+                .button-login{
+                    background-color: #202327;
+                    color: var(--bg-color);
+                    border: solid 1px var(--bg-color);
+                }
+                .button-register{
+                    background-color: var(--bg-color);
+                    color: #202327 ;
+                    border: solid 1px #202327;
+                }
+                .button-login, .button-register{
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+                .button-login:hover{
+                    background-color: var(--bg-color);
+                    color: #202327 ;
+                    border: solid 1px #202327;    
+                }
+                .button-register:hover{
+                    background-color: #202327;
+                    color: var(--bg-color);
+                    border: solid 1px var(--bg-color)
                 }
             }
         }

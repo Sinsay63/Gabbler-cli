@@ -10,7 +10,6 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { IdentificationComponent } from './components/identification/identification.component';
 import { LoginComponent } from './components/identification/login/login.component';
 import { RegisterComponent } from './components/identification/register/register.component';
-import { SliderComponent } from './components/identification/slider/slider.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
 import { BodyComponent } from './components/body/body.component';
@@ -31,7 +30,6 @@ import { NgxPayPalModule} from 'ngx-paypal'
     IdentificationComponent,
     LoginComponent,
     RegisterComponent,
-    SliderComponent,
     ExploreComponent,
     ParametreComponent,
     BodyComponent,

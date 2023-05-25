@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, UserRegister, UserToken } from 'app/api';
+import { AuthService, UserRegister } from 'app/api';
 import { GlobalDataService } from 'app/global.data.service';
 
 @Component({
@@ -9,16 +9,17 @@ import { GlobalDataService } from 'app/global.data.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  @HostBinding('class') className = 'sliderComp';
+
+  username: string = '';
+  lastname: string = '';
+  firstname: string = '';
+  email: string = '';
+  password: string = '';
+  birthday: string= '';
 
   constructor(private globalDataService : GlobalDataService, private authService: AuthService, private router: Router) {
   }
-
-  username: string = ''
-  lastname: string = ''
-  firstname: string = ''
-  email: string = ''
-  password: string = ''
-  birthday: string= ''
 
   async register(){
     try{
