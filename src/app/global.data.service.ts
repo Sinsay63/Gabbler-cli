@@ -169,6 +169,12 @@ block(uuidToFollow: any, relation : RelationUser){
     });
   }
 
+  toProfil(userUuid : any ){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['profil/' + userUuid]);
+    });
+  }
+
   onClickInteractiveBox(event: MouseEvent): void {
     event.stopPropagation();
   }

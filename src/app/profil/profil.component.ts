@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {  UserInfosProfile, User, UserService, RelationshipService, RelationUser, InteractionService} from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { faPencil, faComment, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faComment, faHeart, faHeartCrack, faClose } from '@fortawesome/free-solid-svg-icons'
 import { GlobalDataService } from 'app/global.data.service';
 import { Token } from '@angular/compiler';
 
@@ -28,6 +28,7 @@ export class ProfilComponent {
   heartCrack  = faHeartCrack;
   faComment = faComment;
   faPencil = faPencil;
+  faCross = faClose;
   uuidConnected: string = '';
   relation = new RelationUser();
   beBlock =false;
@@ -70,11 +71,18 @@ export class ProfilComponent {
     const uuid = this.route.snapshot.paramMap.get('uuid') ?? ""
     if(!this.owner){
     this.checkRelation(uuid);
-    }
-    
+    }   
     const token = sessionStorage.getItem('token');
     if(token){
       this.isConnected=true;
+      this.relationService.getRelationByUserAndUserRelated(uuid, this.globalDataService.getUuidFromToken(token)).subscribe(data => {
+        if(data.type == 'blocked'){
+          this.beBlock = true;
+        }
+      },
+        (error => {
+          console.log(error);
+        }));
     }
 
     if(this.isConnected){
@@ -101,37 +109,23 @@ export class ProfilComponent {
   }
 
 
-  checkRelation(uuidToCompare: any) {
+  checkRelation(uuidToCompare: any): string {
     let uuidOwner = '';
     const token = sessionStorage.getItem('token');
     if (token) {
       uuidOwner = this.globalDataService.getUuidFromToken(token);
-      this.interactionService.getInteractionsByUserUuid(this.uuidConnected).subscribe(
-        data => {
-          this.globalDataService.interactions = data;
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
     }
     console.log("les uuid sont :" + uuidOwner, uuidToCompare);
     if (uuidOwner !== '') {
       this.relationService.getRelationByUserAndUserRelated(uuidOwner, uuidToCompare).subscribe(data => {
         this.relation = data;
+        return data.type;
       },
         (error => {
           console.log(error);
         }));
     }
-    this.relationService.getRelationByUserAndUserRelated(uuidToCompare, uuidOwner).subscribe(data => {
-      if(data.type == 'blocked'){
-        this.beBlock = true;
-      }
-    },
-      (error => {
-        console.log(error);
-      }));
+    return '';
   }
   
   callfollow(uuid : any, relation : RelationUser){
@@ -155,6 +149,24 @@ export class ProfilComponent {
       if (followersElement) {
         followersElement.innerText = (this.user.follows.length).toString();
       }
+    }
+  }
+  
+  closePopUp(){
+    const pop1 = document.getElementById('popFollower');
+    const pop2 = document.getElementById('popFollow');
+
+    pop1?.classList.add('hidden');
+    pop2?.classList.add('hidden')
+  }
+  callPopUp(popName: string){
+    if(popName == 'follows'){
+      const popFollow = document.getElementById('popFollow');
+      popFollow?.classList.remove('hidden')
+    }
+    else if(popName == 'followers'){
+      const popFollower = document.getElementById('popFollower');
+      popFollower?.classList.remove('hidden')
     }
   }
 }

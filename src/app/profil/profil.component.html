@@ -3,9 +3,10 @@
         <div class="test">
             <div class="back-avatar">
                 <div class="profilpp" style="background-image: url('assets/images/{{ user.avatar?.url }}');">
-                    <div class="edit-pp" *ngIf="owner">
-                        <fa-icon class="icon" [icon]="faPencil"></fa-icon>
-                    </div>
+                    <label class="edit-pp"for="image-input">
+                        <fa-icon class="icon-edit-img"   [icon]="faPencil"></fa-icon>
+                    </label>
+                    <input type="file" id="image-input" class="hidden" />
                 </div>
             </div>
             <div class="profil-box">       
@@ -14,9 +15,9 @@
         </div>
 
         <div class="follow-box">
-            <p  class="text-banner">{{user.followers?.length}} followers</p>
+            <p (click)="callPopUp('follows')" class="text-banner"><span id="follows">{{user.follows?.length}}</span> followers</p>
             <hr class="test">
-            <p class="text-banner"><span id="follows">{{user.follows?.length}}</span> follows</p>
+            <p  (click)="callPopUp('followers')" class="text-banner">{{user.followers?.length}} follows</p>
         </div>
         
     </div>
@@ -37,15 +38,15 @@
                 </div>
             </div>
         </div>
-        <div class="home-body">
+        <div *ngIf="this.relation.type != 'blocked'" class="home-body">
                 <div class="gabble" *ngFor= "let gab of user?.gabs">
                     <div (click)="gab.id && this.globalDataService.toGab(gab.id)" >
                         <div class="user">
                             <div class="img-user">
-                                <img  [src]="'assets/images/' + gab.user?.avatar?.url"  alt="Avatar" class="pp">
+                                <img  [src]="'assets/images/' + user.avatar?.url"  alt="Avatar" class="pp">
                             </div>
                             <div class="name-date-box">
-                                <div class="user-name">{{gab.user?.username}}</div>
+                                <div class="user-name">{{user.username}}</div>
                                 <div class="date-field">{{formatDate(gab.post_date)}}</div>
                             </div>
                         </div>
@@ -82,5 +83,42 @@
                 </div>
             </div>
         </div>
-        <div class="blocked" *ngIf="this.beBlock"> Cet utilisateur vous a bloqué</div>
+        <div class="blocked" *ngIf="this.beBlock"> Cet utilisateur vous a bloqué.</div>
+        <div class="blocked" *ngIf="this.relation.type == 'blocked' "> Vous avez bloqué cet utilisateur.</div>
+</div>
+
+<div id="popFollower" (click)="closePopUp()" class="pop-up hidden">
+    <div (click)="this.globalDataService.onClickInteractiveBox($event)" class="box-follow">
+        <div class="closeBox">
+            <fa-icon class="close" (click)="closePopUp()" [icon]="faCross"></fa-icon>
+        </div>
+        <h2 class="title">Followers</h2>
+        <div class="liste">
+            <div  *ngFor="let follower of user.followers">
+                <div class="info-follow">
+                    <div class="popPp" style="background-image: url('assets/images/{{follower.avatar?.url}}');"></div>
+                    <p class="pop-text">{{follower.username}}</p>
+                    <div class='button-pop' (click)="this.globalDataService.toProfil(follower?.uuid)">Voir le profil</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popFollow" (click)="closePopUp()" class="pop-up hidden">
+    <div (click)="this.globalDataService.onClickInteractiveBox($event)" class="box-follower">
+        <div class="closeBox">
+            <fa-icon class="close" (click)="closePopUp()" [icon]="faCross"></fa-icon>
+        </div>
+        <h2 class="title">Follows</h2>
+        <div class="liste">
+            <div *ngFor="let follow of user.follows">
+                <div class="info-follow">
+                    <div class="popPp" style="background-image: url('assets/images/{{follow.avatar?.url}}');"></div>
+                    <p class="pop-text">{{follow.username}}</p>
+                    <div class='button-pop' (click)="this.globalDataService.toProfil(follow?.uuid)">Voir le profil</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

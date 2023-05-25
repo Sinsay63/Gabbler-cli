@@ -1,23 +1,24 @@
 <div class="login-box">
-    <h2 class="title">Gabbler</h2>
+    <h2 class="title">Créer votre compte</h2>
     <div class="container-form">
 
         <form class="login-form" method="post">
             
-            <label>
-                <input class="champs" name="email" type="email" placeholder="Email" [(ngModel)]="email"/>
+            <label for="email"> Email
+                <input class="champs" name="email" type="email" placeholder="Entrer votre email" [(ngModel)]="email"/>
             </label>
 
-            <label>
-                <input class="champs" name="password" type="password" placeholder="Mot de passe"  [(ngModel)]="password" />
+            <label for="password">Mot de passe
+                <input class="champs" name="password" type="password" placeholder="Entrer votre mot de passe"  [(ngModel)]="password" />
             </label>
 
-            <div style="display:flex; align-items: center; padding-top:10px;" > 
-                <input name="remember" type="checkbox" /><label class="remember" for="remember">Se souvenir de moi</label>
-                <span href="" style="text-decoration: underline;" >mot de passe oublié ?</span>
+            <div class="forgot-password" > 
+                <p >mot de passe oublié ?</p>
             </div>
-
-            <button class="button-login" type="submit" (click)="onSubmit()">Connexion</button>
+            <div>
+                <button class="button-login" type="submit" (click)="onSubmit()">Connexion</button>
+            </div>
+            
             
             <p>Vous n'avez pas de compte <span (click)="toRegister()" style="text-decoration: underline;">S'inscrire</span></p>
         </form>
