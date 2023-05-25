@@ -1,19 +1,36 @@
 <div class="register-box">
+        <h2 class="title">Créer votre compte</h2>
     <div class="container-form">
-        <form class="register-form" (click)="register()" method="post">
-            <h2 class="title">Gabbler</h2>
+
+        <form class="login-form" method="post">
             
-            <input class="champs" required type="text" name='lastname' [(ngModel)]="lastname" placeholder="Nom" />
-            <input class="champs" required type="text" name='firstname' [(ngModel)]="firstname" placeholder="Prénom" />
-            <input class="champs" required type="text" name='username' [(ngModel)]="username" placeholder="Pseudo" />
-            <input class="champs" required type="email" name='email'[(ngModel)]="email" placeholder="Email" />
-            <input class="champs" type="date" name='birthday' [(ngModel)]="birthday" placeholder="date de naissance" />
-            <input class="champs" required type="password" name='password' [(ngModel)]="password" placeholder="Mot de passe" />
-            <input class="button-inscrire" type="submit" value="S'inscrire" />
-            <div>
-                <p>S'inscrire avec Google</p>
+            <label for="email"> Nom
+                <input class="champs" required name="nom" type="text"  [(ngModel)]="lastname" placeholder="Entrer votre nom" />
+            </label>
+
+            <label for="email"> Prénom
+                <input class="champs" required name="prenom" type="text" [(ngModel)]="firstname" placeholder="Entrer votre prénom" />
+            </label>
+
+            <label for="email"> Pseudo
+                <input class="champs" required name="username" type="text" [(ngModel)]="username" placeholder="Entrer votre Pseudo" />
+            </label>
+
+            <label for="email"> Date de naissance
+                <input class="champs" required name="birthday" [(ngModel)]="birthday" type="date" />
+            </label>
+
+            <label for="email"> Email
+                <input class="champs" required name="email" [(ngModel)]="email" type="email" placeholder="Entrer votre email" />
+            </label>
+
+            <label for="password">Mot de passe
+                <input class="champs" required name="password" [(ngModel)]="password" type="password" placeholder="Entrer votre mot de passe" />
+            </label>
+            
+            <div class="box-button">        
+                <button class="button-register" (click)="register()" type="submit">S'inscrire</button>
             </div>
-            <p>Vous avez déja un compte <a>Se Connecter</a></p>
         </form>
     </div>
 </div>
