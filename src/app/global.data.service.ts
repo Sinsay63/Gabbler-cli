@@ -10,10 +10,12 @@ import { RelationshipsCUDRequest } from './api/model/relationshipsCUDRequest';
   providedIn: 'root'
 })
 export class GlobalDataService {
+  
   search: string = '';
   gabs ?= new Array<Gab>();
   users ?= new Array<User>();
   interactions ?= Array<InteractionUser>();
+  isPremium: boolean = false;
 
   constructor(private router: Router, private interactionService: InteractionService, private relationService : RelationshipService){}
 
@@ -36,6 +38,7 @@ export class GlobalDataService {
 
   getUuidFromToken(token: string): string{
     const decodedToken = this.getDecodedToken(token);
+    this.initPremiumUser(token);
     return decodedToken.uuid;
   }
 
@@ -280,6 +283,21 @@ Interraction(idGab : number, interaction : string){
 scrollToComments(id : number): void {
   const element = document.querySelector(`#btnh1-${id}`) as HTMLElement;
   this.router.navigate(['gab/' + id], { fragment: 'monElement' });
+}
+
+initPremiumUser(token: string | undefined) {
+  if(token){
+    const decodedToken = this.getDecodedToken(token);
+    let roles = decodedToken.roles;
+    const elements = roles.split(',');
+    if(elements[1] === 'PREMIUM'){
+      this.isPremium = true;
+    }
+  }
+}
+
+setIsPremium(token: string | undefined) {
+ 
 }
 
 }
