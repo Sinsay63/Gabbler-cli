@@ -6,6 +6,7 @@ import { GlobalDataService } from 'app/global.data.service';
 import { faArrowLeft, faComment, faCrown, faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
 import { Location } from '@angular/common'; 
 import { EMPTY } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-view-gab',
@@ -13,7 +14,7 @@ import { EMPTY } from 'rxjs';
   styleUrls: ['./view-gab.component.scss']
 })
 export class ViewGabComponent {
-  constructor( private route: ActivatedRoute, private userService: UserService, private gabService: GabService, private router: Router, private globalDataService: GlobalDataService, private location: Location,private interactionService: InteractionService) { }
+  constructor( private route: ActivatedRoute,private toastr: ToastrService, private userService: UserService, private gabService: GabService, private router: Router, private globalDataService: GlobalDataService, private location: Location,private interactionService: InteractionService) { }
   user = new User()
   gab = new Gab()
   isConnected: boolean | undefined;
@@ -132,7 +133,7 @@ export class ViewGabComponent {
     }
   }
 
-  createPost(content : string, idGabParent : number){
+createPost(content : string, idGabParent : number){
     if(this.isConnected){
       const token = sessionStorage.getItem('token');
       if(token){
@@ -146,10 +147,13 @@ export class ViewGabComponent {
         
         this.gabService.createGab(uuid, gab).subscribe(
           (response) => {
+            this.reloadComments(response)
+            this.toastr.success('Vous avez bien ajouté votre commentaire!');
             console.log('Réponse de l\'API :', response);
             // Traitez ici la réponse de l'API si nécessaire
           },
           (error) => {
+            this.toastr.error("Il y a un probleme lors de l'ajout de votre commentaire");
             console.error('Erreur de l\'API :', error);
             // Gérez ici les erreurs de l'API si nécessaire
           }
@@ -157,7 +161,9 @@ export class ViewGabComponent {
       }
     }
   }
-
+  reloadComments(newGab : Gab){
+    this.comments?.push(newGab);
+  }
   Interraction(idGab : number, interaction : string){
     const token = sessionStorage.getItem('token');
       if(token){

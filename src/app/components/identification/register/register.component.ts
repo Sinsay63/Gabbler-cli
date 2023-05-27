@@ -2,6 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, DocService, EmailDetails, UserRegister } from 'app/api';
 import { GlobalDataService } from 'app/global.data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent {
   password: string = '';
   birthday: string= '';
 
-  constructor(private globalDataService : GlobalDataService, private authService: AuthService, private router: Router, private mailService: DocService) {
+  constructor(private globalDataService : GlobalDataService,private toastr: ToastrService, private authService: AuthService, private router: Router, private mailService: DocService) {
   }
 
   async register(){
@@ -37,7 +38,7 @@ export class RegisterComponent {
 
         if(data?.token != null){
           sessionStorage.setItem('token', data?.token);
-
+          this.toastr.success("Vous êtes inscrit sur Gabbler","Bravo!");
           let emailDetails = new EmailDetails();
           emailDetails.recipient = this.email;
           emailDetails.subject = "[GABBLER] Confirmation de la création de votre compte";
@@ -59,6 +60,7 @@ export class RegisterComponent {
         }
       } 
     }catch (error) {
+      this.toastr.error("Erreur lors de l'inscription, veuillez réessayer", "Erreur");
       console.log("erreur lors de l'inscription")
     }
   }

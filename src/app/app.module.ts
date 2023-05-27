@@ -22,6 +22,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { ViewGabComponent } from './view-gab/view-gab.component';
 import { PrestigeComponent } from './components/prestige/prestige.component';
 import { NgxPayPalModule} from 'ngx-paypal'
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,9 @@ import { NgxPayPalModule} from 'ngx-paypal'
     NgImageSliderModule,
     FormsModule,
     FontAwesomeModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [UserAuth],
   bootstrap: [AppComponent]

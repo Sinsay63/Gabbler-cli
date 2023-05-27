@@ -19,7 +19,7 @@
           </span>
         </a> 
       </li>
-      <li *ngIf="this.globalDataService.isPremium == false" class="sidenav-nav-item">
+      <li *ngIf="this.globalDataService.isPremium == false && isConnected==true" class="sidenav-nav-item">
         <a  class="sidenav-nav-link" routerLink="prestige" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">
           <i class="sidenav-link-icon" [class]="'fal fa-crown'"></i>

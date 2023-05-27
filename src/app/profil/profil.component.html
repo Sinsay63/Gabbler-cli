@@ -12,7 +12,7 @@
             <div class="profil-box">       
                 <div *ngIf="this.usernameEditMod == false" class="username">
                     {{ user.username }} 
-                    <div *ngIf="this.globalDataService.isPremium && owner" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
+                    <div *ngIf="user.isPremium" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
                     <fa-icon *ngIf="owner && this.globalDataService.isPremium == true" (click)="toggleEditMod('username')" class="edit-username" [icon]="faPencil"></fa-icon>
                 </div>
                 <!-- Edit de l'username-->
@@ -80,7 +80,10 @@
                                 <img  [src]="'assets/images/' + user.avatar?.url"  alt="Avatar" class="pp">
                             </div>
                             <div class="name-date-box">
-                                <div class="user-name">{{user.username}}</div>
+                                <div class="user-name">
+                                    {{user.username}}
+                                    <div *ngIf="user.isPremium" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
+                                </div>
                                 <div class="date-field">{{formatDate(gab.post_date)}}</div>
                             </div>
                         </div>

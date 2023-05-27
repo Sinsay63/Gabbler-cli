@@ -283,6 +283,21 @@
             .user-name{
                 color:black;
                 font-size: 18px;
+                display: flex;
+                .containerIconPrestige{
+                    margin-left: 5px;
+                    height: 20px;
+                    width: 20px;
+                    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+                    background-color: #ffd700;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .iconPrestige{
+                        color: #fff;
+                        font-size: 10px;
+                    }
+                }
             }
             .date-field{
                 color:gray;

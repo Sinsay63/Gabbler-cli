@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { InteractionService } from 'app/api';
 import { faComment, faCrown, faHeart, faHeartCrack, faImage, faSort } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ import { faComment, faCrown, faHeart, faHeartCrack, faImage, faSort } from '@for
 })
 export class HomeComponent implements OnInit{
 
-  constructor(private gabService: GabService, public globalDataService: GlobalDataService, private route: ActivatedRoute, private router: Router, private interactionService: InteractionService) {
+  constructor(private gabService: GabService, private toastr: ToastrService, public globalDataService: GlobalDataService, private route: ActivatedRoute, private router: Router, private interactionService: InteractionService) {
    }
   
   contentField: string = ''
@@ -50,10 +51,12 @@ export class HomeComponent implements OnInit{
         
         this.gabService.createGab(uuid, gab).subscribe(
           (response) => {
+            this.toastr.success("Vous avez bien créé votre gab");
             console.log('Réponse de l\'API :', response);
             // Traitez ici la réponse de l'API si nécessaire
           },
           (error) => {
+            this.toastr.error("Il y a un probleme lors de la création de votre gab");
             console.error('Erreur de l\'API :', error);
             // Gérez ici les erreurs de l'API si nécessaire
           }

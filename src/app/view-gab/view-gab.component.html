@@ -70,7 +70,8 @@
                         <img  [src]="'assets/images/' + comment.user?.avatar?.url"  alt="Avatar" class="pp">
                     </div>
                     <div class="name-date-user">
-                        <div class="username"> {{comment.user?.username}}
+                        <div class="username"> 
+                            {{comment.user?.username}}
                             <div *ngIf="comment.user?.isPremium" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
                         </div>
                         <div class="gab-content-date">
