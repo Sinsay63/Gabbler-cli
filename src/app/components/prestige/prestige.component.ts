@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { fa1, fa2, fa3, fa4, fa6, faLaptopHouse } from '@fortawesome/free-solid-svg-icons';
 import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal'
+import { SubscriptionService } from 'app/api';
+import { GlobalDataService } from 'app/global.data.service';
 
 @Component({
   selector: 'app-prestige',
   templateUrl: './prestige.component.html',
   styleUrls: ['./prestige.component.scss']
 })
-export class PrestigeComponent implements OnInit{
+
+export class PrestigeComponent{
   un = fa1;
   deux = fa2;
   trois = fa3;
@@ -20,11 +23,7 @@ export class PrestigeComponent implements OnInit{
   checkbox4 = false;
   public payPalConfig?: IPayPalConfig;
 
-
-  ngOnInit(): void {
-    this.initConfig();
-    
-  }
+constructor(private subscriptionService: SubscriptionService, private globalDataService: GlobalDataService) { }
   
   handleCheckboxChange(selectedCheckbox: number) {
     //Bien laisser ces chiffres car ils correspondent aux ids des offres en bdd
@@ -62,8 +61,6 @@ export class PrestigeComponent implements OnInit{
       }
     }
     
-  }
-  private initConfig(): void {
   }
 
   private editPaypalConfig(nbChoice: number): void {
@@ -123,8 +120,17 @@ export class PrestigeComponent implements OnInit{
       
       onApprove: (data, actions) =>
           actions.order.capture().then((details: any) => {
-              console.log('Transaction completed:', details);
-              // Redirect to success page or show success message
+            const userUuid = this.globalDataService.getUuidFromToken(sessionStorage.getItem("token") ?? "");
+            this.subscriptionService.subscribeUser(userUuid,nbChoice).subscribe(
+              (data) => {
+                //Faire en sorte que ça actualise le token ou alors faire le user se reconnecter
+                // et afficher un message de succès
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+
           }),
           onError: err => {
           console.log('Error:', err);
