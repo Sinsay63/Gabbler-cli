@@ -10,9 +10,18 @@
                 </div>
             </div>
             <div class="profil-box">       
-                <div class="username">{{ user.username }} 
+                <div *ngIf="this.usernameEditMod == false" class="username">
+                    {{ user.username }} 
                     <div *ngIf="this.globalDataService.isPremium && owner" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
-                    <fa-icon *ngIf="owner" class="edit-username" [icon]="faPencil"></fa-icon></div>
+                    <fa-icon *ngIf="owner" (click)="toggleEditMod('username')" class="edit-username" [icon]="faPencil"></fa-icon>
+                </div>
+                <!-- Edit de l'username-->
+                <div *ngIf="this.usernameEditMod == true" class="username">
+                    <form (ngSubmit)="validEdit('username')">
+                        <input type="text" minlength="4" maxlength="12" [(ngModel)]="username" name="username" #usernameInput="ngModel" required/>
+                        <button class="button-check-bio" type="submit"><fa-icon *ngIf="owner"  class="edit-username" [icon]="faCheckCircle"></fa-icon></button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -24,12 +33,12 @@
         
     </div>
     <div class="header-box">
-        <div class="dropdown">
+        <div *ngIf="user?.gabs?.length ?? 0 > 0" class="dropdown">
               <button class="dropbtn"><fa-icon name="sort" class="icon" [icon]="sort"></fa-icon>Trier</button>
               <div *ngIf="user.gabs" class="dropdown-content">
                     <a (click)="this.globalDataService.sortByNbInteractionsDesc(user.gabs)">Plus populaires</a>
-                    <a (click)="this.globalDataService.sortByDateASC(user.gabs)">par Date ASC</a>
-                    <a (click)="this.globalDataService.sortByDateDESC(user.gabs)">par Date DESC</a>
+                    <a (click)="this.globalDataService.sortByDateASC(user.gabs)">Par Date croissant</a>
+                    <a (click)="this.globalDataService.sortByDateDESC(user.gabs)">Par Date décroissant</a>
                     <a (click)="this.globalDataService.sortByLikesDESC(user.gabs)">Plus aimés</a>
                     <a (click)="this.globalDataService.sortByDislikeDESC(user.gabs)">Moins aimés</a>
               </div>
@@ -38,12 +47,23 @@
     <div *ngIf="!this.beBlock" >
         <div class="info-user">
             <div class="first-line-info">
-                <div class="bio-box">
+
+                <div *ngIf="bioEditMod == false" class="bio-box">
                     <p class="bio">
                         {{ user.biography }}
                     </p>
-                    <fa-icon *ngIf="owner" class="edit-username" [icon]="faPencil"></fa-icon>
+                    <p *ngIf="owner && user.biography == null" class="bio">
+                        Entrez votre biographie ici.
+                    </p>
+                    <fa-icon *ngIf="owner" (click)="toggleEditMod('bio')" class="edit-username" [icon]="faPencil"></fa-icon>
                 </div>
+                <!-- Edit de la bio -->
+                <div *ngIf="bioEditMod == true" class="bio-box">
+                    <textarea class="bio-area"  rows="4" maxlength="100">{{ user.biography }}</textarea>
+                    <button  class="button-check-bio"(click)="validEdit('bio')"><fa-icon *ngIf="owner" class="icon-bio" [icon]="faCheckCircle"></fa-icon></button>
+                </div>
+
+
                 <div *ngIf="owner != true">
                     <div *ngIf= "this.relation.type === 'followed'" (click)="callfollow(user.uuid, this.relation)" class="button-unfollow">Ne plus suivre</div>
                     <div *ngIf="this.relation.type === ''" (click)="callfollow(user.uuid, this.relation)" class="button-follow">Suivre</div>

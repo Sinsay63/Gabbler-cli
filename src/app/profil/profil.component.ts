@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {  UserInfosProfile, User, UserService, RelationshipService, RelationUser, InteractionService} from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { faPencil, faComment, faHeart, faHeartCrack, faClose, faCrow, faCrown, faSort } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faComment, faHeart, faHeartCrack, faClose, faCrown, faSort, faCheckCircle} from '@fortawesome/free-solid-svg-icons'
 import { GlobalDataService } from 'app/global.data.service';
 import { Token } from '@angular/compiler';
 
@@ -30,10 +30,21 @@ export class ProfilComponent {
   faPencil = faPencil;
   faCross = faClose;
   crown = faCrown;
+  faCheckCircle = faCheckCircle;
+  sort = faSort;
+  /*FIN ICONS */
+
   uuidConnected: string = '';
   relation = new RelationUser();
-  sort = faSort;
+ 
   beBlock =false;
+
+  /* variable des Edit */
+  usernameEditMod = false;
+  bioEditMod = false;
+  /* Champs Modifiable */
+  bio: string = ''
+  username: string = ''
   
   formatDate=this.globalDataService.formatDate;
 
@@ -110,6 +121,28 @@ export class ProfilComponent {
     });
   }
 
+  toggleEditMod(value: string){
+    if(value === 'username'){
+      if(this.usernameEditMod == false){
+        this.usernameEditMod = true;
+      }else{
+        this.usernameEditMod = false;
+      }
+    }
+    else if(value === 'bio'){
+      if(this.bioEditMod == false){
+        this.bioEditMod = true;
+      }else{
+        this.bioEditMod = false;
+      }
+    }
+  }
+
+  validEdit(value :string){
+      if(value == 'username'){
+        this.toggleEditMod(value)
+      }
+  }
 
   checkRelation(uuidToCompare: any): string {
     let uuidOwner = '';

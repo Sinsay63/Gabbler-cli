@@ -173,11 +173,32 @@
     .first-line-info{
         display: flex;
         justify-content: space-around;
+        margin-top: 30px;
         .bio-box{
             display: flex;
             justify-content: space-between;
+            width:50%;
             .bio{
                 color: var(--text-color);
+            }
+            textarea{
+                width: 100%;
+                border-radius: 10px;
+                padding:20px;
+                height: 100px;
+                border: none;
+                resize: none;
+            }
+            .button-check-bio{
+                margin:10px;
+                border: none;
+                background-color: transparent;
+                cursor: pointer;
+            }
+            .icon-bio{
+                font-size: 40px;
+                color: var(--text-color);
+                
             }
         }
         .button-follow, .button-unfollow, .button-blocked{
@@ -407,5 +428,12 @@ display: none;
         }
     }
     
+}
+.error-message{
+    position: absolute;
+    top: 0%;
+    left:50;
+    width: 60%;
+    background-color: rgba(255, 0, 0, 0.232);
 }
 /* -------- FIN ----------*/
