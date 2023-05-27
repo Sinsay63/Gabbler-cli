@@ -13,7 +13,7 @@
                 <div *ngIf="this.usernameEditMod == false" class="username">
                     {{ user.username }} 
                     <div *ngIf="this.globalDataService.isPremium && owner" class="containerIconPrestige"> <fa-icon class="iconPrestige" [icon]="crown"></fa-icon> </div>
-                    <fa-icon *ngIf="owner" (click)="toggleEditMod('username')" class="edit-username" [icon]="faPencil"></fa-icon>
+                    <fa-icon *ngIf="owner && this.globalDataService.isPremium == true" (click)="toggleEditMod('username')" class="edit-username" [icon]="faPencil"></fa-icon>
                 </div>
                 <!-- Edit de l'username-->
                 <div *ngIf="this.usernameEditMod == true" class="username">
@@ -55,12 +55,12 @@
                     <p *ngIf="owner && user.biography == null" class="bio">
                         Entrez votre biographie ici.
                     </p>
-                    <fa-icon *ngIf="owner" (click)="toggleEditMod('bio')" class="edit-username" [icon]="faPencil"></fa-icon>
+                    <fa-icon *ngIf="owner" (click)="toggleEditMod('biography')" class="edit-username" [icon]="faPencil"></fa-icon>
                 </div>
                 <!-- Edit de la bio -->
                 <div *ngIf="bioEditMod == true" class="bio-box">
-                    <textarea class="bio-area"  rows="4" maxlength="100">{{ user.biography }}</textarea>
-                    <button  class="button-check-bio"(click)="validEdit('bio')"><fa-icon *ngIf="owner" class="icon-bio" [icon]="faCheckCircle"></fa-icon></button>
+                    <textarea class="bio-area" [(ngModel)]="bio" rows="4" maxlength="100">{{ user.biography }}</textarea>
+                    <button  class="button-check-bio"(click)="validEdit('biography')"><fa-icon *ngIf="owner" class="icon-bio" [icon]="faCheckCircle"></fa-icon></button>
                 </div>
 
 

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {  UserInfosProfile, User, UserService, RelationshipService, RelationUser, InteractionService} from 'app/api';
+import {  UserInfosProfile, User, UserService, RelationshipService, RelationUser, InteractionService, UserEditProfile} from 'app/api';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { faPencil, faComment, faHeart, faHeartCrack, faClose, faCrown, faSort, faCheckCircle} from '@fortawesome/free-solid-svg-icons'
 import { GlobalDataService } from 'app/global.data.service';
 import { Token } from '@angular/compiler';
+import { LoginComponent } from 'app/components/identification/login/login.component';
 
 @Component({
   selector: 'app-profil',
@@ -43,8 +44,10 @@ export class ProfilComponent {
   usernameEditMod = false;
   bioEditMod = false;
   /* Champs Modifiable */
-  bio: string = ''
-  username: string = ''
+  bio: string = '';
+  username: string = '';
+
+  erreur: string = '';
   
   formatDate=this.globalDataService.formatDate;
 
@@ -121,15 +124,15 @@ export class ProfilComponent {
     });
   }
 
-  toggleEditMod(value: string){
-    if(value === 'username'){
+  toggleEditMod(type: string){
+    if(type === 'username'){
       if(this.usernameEditMod == false){
         this.usernameEditMod = true;
       }else{
         this.usernameEditMod = false;
       }
     }
-    else if(value === 'bio'){
+    else if(type === 'biography'){
       if(this.bioEditMod == false){
         this.bioEditMod = true;
       }else{
@@ -138,10 +141,46 @@ export class ProfilComponent {
     }
   }
 
-  validEdit(value :string){
-      if(value == 'username'){
-        this.toggleEditMod(value)
+  validEdit(type: string){
+    console.log("vamos");
+    
+      if(type == 'username' && this.username != this.user.username){
+        console.log("username : " + this.username.length + " - " + type);
+        if(this.username.length >= 4){
+          this.editProfil(type, this.username)
+          this.toggleEditMod(type)
+        }
       }
+      if(type == 'biography'){
+        console.log("bio : " + this.bio);
+        if(this.bio.length > 4){
+          this.editProfil(type, this.bio)
+          this.toggleEditMod(type)
+        }else{
+          this.erreur = "Le champs remplie est trop cours"
+        }
+      }
+  }
+
+  editProfil(type: string, value : string ){
+    const token = sessionStorage.getItem('token');
+    if(token){
+
+      const uuid = this.globalDataService.getUuidFromToken(token);
+      
+      let profil = new UserEditProfile();
+      profil.type = type;
+      profil.value = value;
+
+      console.log(profil);
+      console.log("uuid : " + uuid);
+      
+      this.userService.editUserProfile(uuid, profil ).subscribe(
+        (error: any) => {
+          console.log(error);
+        });
+        this.user.biography = value;
+    }
   }
 
   checkRelation(uuidToCompare: any): string {
@@ -206,3 +245,7 @@ export class ProfilComponent {
   }
 }
   
+function subscribe(arg0: (error: any) => void) {
+  throw new Error('Function not implemented.');
+}
+
