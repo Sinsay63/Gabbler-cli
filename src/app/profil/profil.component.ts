@@ -260,8 +260,3 @@ export class ProfilComponent {
     }
   }
 }
-  
-function subscribe(arg0: (error: any) => void) {
-  throw new Error('Function not implemented.');
-}
-
