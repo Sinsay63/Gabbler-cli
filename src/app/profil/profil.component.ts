@@ -7,6 +7,7 @@ import { faPencil, faComment, faHeart, faHeartCrack, faClose, faCrown, faSort, f
 import { GlobalDataService } from 'app/global.data.service';
 import { Token } from '@angular/compiler';
 import { LoginComponent } from 'app/components/identification/login/login.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profil',
@@ -18,7 +19,7 @@ import { LoginComponent } from 'app/components/identification/login/login.compon
 })
 export class ProfilComponent {
 
-  constructor( private route: ActivatedRoute,public globalDataService: GlobalDataService, private userService: UserService, private relationService : RelationshipService, private interactionService: InteractionService) { }
+  constructor( private route: ActivatedRoute,private toastr: ToastrService,public globalDataService: GlobalDataService, private userService: UserService, private relationService : RelationshipService, private interactionService: InteractionService) { }
 
   user = new UserInfosProfile()
   isConnected: boolean | undefined;
@@ -150,6 +151,9 @@ export class ProfilComponent {
           this.editProfil(type, this.username)
           this.toggleEditMod(type)
         }
+        else{
+          this.toastr.warning("Le pseudo renseigné est trop court, veuillez réessayer", "Attention");
+        }
       }
       if(type == 'biography'){
         console.log("bio : " + this.bio);
@@ -157,7 +161,7 @@ export class ProfilComponent {
           this.editProfil(type, this.bio)
           this.toggleEditMod(type)
         }else{
-          this.erreur = "Le champs remplie est trop cours"
+          this.toastr.warning("La biographie renseignée est trop courte, veuillez réessayer", "Attention");
         }
       }
   }
@@ -174,12 +178,24 @@ export class ProfilComponent {
 
       console.log(profil);
       console.log("uuid : " + uuid);
-      
-      this.userService.editUserProfile(uuid, profil ).subscribe(
-        (error: any) => {
-          console.log(error);
-        });
-        this.user.biography = value;
+      this.userService.editUserProfile(uuid, profil ).subscribe(data => {
+        if(profil.type == 'biography'){
+          this.toastr.success("Votre biographie a été changée","Bravo!");
+          this.user.biography = value;
+        }
+        else if(profil.type == 'username'){
+          this.toastr.success("Votre pseudo a été changée","Bravo!");
+          this.user.username = value;
+        }
+      },
+        (error =>{
+          if(profil.type == 'biography'){
+            this.toastr.error("Erreur survenue lors de la modification de la biographie", "Erreur");
+          }
+          else if(profil.type == 'username'){
+            this.toastr.error("Erreur survenue lors de la modification du pseudo", "Erreur");
+          }
+      }));        
     }
   }
 

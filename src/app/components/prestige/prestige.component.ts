@@ -3,6 +3,7 @@ import { fa1, fa2, fa3, fa4, fa6, faLaptopHouse } from '@fortawesome/free-solid-
 import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal'
 import { SubscriptionService } from 'app/api';
 import { GlobalDataService } from 'app/global.data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-prestige',
@@ -23,7 +24,7 @@ export class PrestigeComponent{
   checkbox4 = false;
   public payPalConfig?: IPayPalConfig;
 
-constructor(private subscriptionService: SubscriptionService, private globalDataService: GlobalDataService) { }
+constructor(private subscriptionService: SubscriptionService,private toastr: ToastrService, private globalDataService: GlobalDataService) { }
   
   handleCheckboxChange(selectedCheckbox: number) {
     //Bien laisser ces chiffres car ils correspondent aux ids des offres en bdd
@@ -123,10 +124,10 @@ constructor(private subscriptionService: SubscriptionService, private globalData
             const userUuid = this.globalDataService.getUuidFromToken(sessionStorage.getItem("token") ?? "");
             this.subscriptionService.subscribeUser(userUuid,nbChoice).subscribe(
               (data) => {
-                //Faire en sorte que ça actualise le token ou alors faire le user se reconnecter
-                // et afficher un message de succès
+                this.toastr.success("Vous êtes maintenant membre Gabbler Prestige","Bravo!");
               },
               (error) => {
+                this.toastr.error("Erreur survenue sur le serveur", "Erreur");
                 console.log(error);
               }
             );
@@ -134,7 +135,7 @@ constructor(private subscriptionService: SubscriptionService, private globalData
           }),
           onError: err => {
           console.log('Error:', err);
-          // Show error message to user
+          this.toastr.error("Erreur survenue lors du paiement", "Erreur");
           }
       };
   }
