@@ -11,7 +11,6 @@ import { IdentificationComponent } from './components/identification/identificat
 import { LoginComponent } from './components/identification/login/login.component';
 import { RegisterComponent } from './components/identification/register/register.component';
 import { ExploreComponent } from './components/explore/explore.component';
-import { ParametreComponent } from './components/parametre/parametre.component';
 import { BodyComponent } from './components/body/body.component';
 import { HomeComponent } from './components/home/home.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
@@ -32,7 +31,6 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     RegisterComponent,
     ExploreComponent,
-    ParametreComponent,
     BodyComponent,
     HomeComponent,
     SuggestionComponent,

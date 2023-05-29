@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ThemeService } from './components/parametre/theme.service';
+import { ThemeService } from './components/theme.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 interface SideNavToggle {

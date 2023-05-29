@@ -3,7 +3,7 @@ import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/
 import {  faMagnifyingGlass, faCirclePlus, faRightFromBracket, faPersonRunning, faLightbulb, faMoon, faUmbrellaBeach, faSun, faRightToBracket, faCrown} from '@fortawesome/free-solid-svg-icons';
 import { navbarData } from './nav-data';
 import { User, UserService } from 'app/api';
-import { ThemeService } from '../parametre/theme.service';
+import { ThemeService } from '../theme.service';
 import { GlobalDataService } from 'app/global.data.service';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
