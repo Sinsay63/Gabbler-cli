@@ -18,8 +18,8 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
 import { UserAuth } from './api';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ProfilComponent } from './profil/profil.component';
-import { ViewGabComponent } from './view-gab/view-gab.component';
+import { ProfilComponent } from './components/profil/profil.component';
+import { ViewGabComponent } from './components/view-gab/view-gab.component';
 import { PrestigeComponent } from './components/prestige/prestige.component';
 import { NgxPayPalModule} from 'ngx-paypal'
 import { ToastrModule } from 'ngx-toastr';

@@ -4,8 +4,8 @@ import { IdentificationComponent } from './components/identification/identificat
 import { ExploreComponent } from './components/explore/explore.component';
 import { HomeComponent } from './components/home/home.component';
 import { ParametreComponent } from './components/parametre/parametre.component';
-import { ProfilComponent } from './profil/profil.component';
-import { ViewGabComponent } from './view-gab/view-gab.component';
+import { ProfilComponent } from './components/profil/profil.component';
+import { ViewGabComponent } from './components/view-gab/view-gab.component';
 import { RegisterComponent } from './components/identification/register/register.component';
 import { PrestigeComponent } from './components/prestige/prestige.component';
 
