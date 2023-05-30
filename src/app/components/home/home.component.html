@@ -15,7 +15,7 @@
   </div>
 
   <div class="inputBox" *ngIf="isConnected">
-    <textarea name="contentField" [(ngModel)]="contentField" required="required"></textarea>
+    <textarea name="contentField" [(ngModel)]="contentField" required="required" maxlength="255"></textarea>
     <span> Gabble tes pensées ...</span>
     <div class="actions">
         <div class="image-upload">
