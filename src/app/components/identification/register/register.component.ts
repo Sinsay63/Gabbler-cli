@@ -48,9 +48,11 @@ export class RegisterComponent {
 
           this.mailService.sendMail(emailDetails).subscribe(
             data => {
+              this.toastr.info("Un email de validation a été envoyé","Information!");
               console.log(data);
             },
             error => {
+              this.toastr.error("Erreur lors de l'envoie du mail de validation, veuillez réessayer", "Erreur");
               console.log(error);
             }
           );
