@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit{
         var gab = new GabCreation();
 
         gab.content = this.contentField;
-        gab.user_uuid = uuid;
         
         console.log(gab);
         
@@ -80,6 +79,7 @@ export class HomeComponent implements OnInit{
         await this.gabService.getFeedUserConnected(uuid).subscribe(data => {
           console.log(data);
           this.feed= data;
+          this.globalDataService.sortByDateDESC(this.feed);
           this.showLoader = false;
         }, (error => {
           console.log(error);
@@ -96,6 +96,7 @@ export class HomeComponent implements OnInit{
       await this.gabService.getFeedUserNotConnected().subscribe(data => {
         console.log(data);
         this.feed= data;
+        this.globalDataService.sortByDateDESC(this.feed);
         this.showLoader = false;
       }, (error => {
         console.log(error);

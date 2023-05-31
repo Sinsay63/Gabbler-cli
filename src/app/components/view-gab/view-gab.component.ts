@@ -142,7 +142,6 @@ createPost(content : string, idGabParent : number){
         var gab = new GabCreation();
 
         gab.content = content;
-        gab.user_uuid = uuid;
         gab.parent_gab_id = idGabParent;
         
         this.gabService.createGab(uuid, gab).subscribe(
