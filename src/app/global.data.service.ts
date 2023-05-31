@@ -110,12 +110,10 @@ follow(uuidToFollow: any, relation : RelationUser){
   if(token){
     uuidOwner = this.getUuidFromToken(token);
   }
-  console.log(uuidOwner, uuidToFollow);
  
 
   if(uuidOwner != ''){
     this.relationService.relationshipsCUD(uuidOwner, uuidToFollow,'followed' ).subscribe(data => {
-      console.log(data);
     },
       (error =>{
         console.log(error)
@@ -140,7 +138,6 @@ block(uuidToFollow: any, relation : RelationUser){
   }
   if(uuidOwner != ''){
     this.relationService.relationshipsCUD(uuidOwner, uuidToFollow,'blocked' ).subscribe(data => {
-      console.log(data);
     },
       (error =>{
         console.log(error)
@@ -245,11 +242,9 @@ Interraction(idGab : number, interaction : string){
     if(token){
       const uuid = this.getUuidFromToken(token);
       this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
-        console.log('.nbLike'+ idGab);
         
       let nbLike = document.querySelector('.nbLike'+ idGab) as HTMLElement;
       let nbDislike = document.querySelector('.nbDislike'+ idGab) as HTMLElement;
-      console.log(data);
     
       // 0 pour un ajout
       if (data.gab_id == 0){

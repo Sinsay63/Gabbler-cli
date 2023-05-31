@@ -64,8 +64,6 @@ export class SideMenuComponent implements OnInit{
       if(token){
         uuid = this.globalDataService.getUuidFromToken(token);
       }
-      console.log(uuid);
-      
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate(['profil/' + uuid]);
     });
@@ -109,10 +107,7 @@ export class SideMenuComponent implements OnInit{
       if(token){
         this.uuid = this.globalDataService.getUuidFromToken(token);
         this.userService.getUserByUuid(this.uuid).subscribe(data => {
-          console.log(data);
           this.user=data;
-          console.log(this.user);
-          
         }, (error => {
           console.log(error);
         }));
