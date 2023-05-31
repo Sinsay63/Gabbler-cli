@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,7 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProfilComponent } from './components/profil/profil.component';
 import { ViewGabComponent } from './components/view-gab/view-gab.component';
 import { PrestigeComponent } from './components/prestige/prestige.component';
-import { NgxPayPalModule} from 'ngx-paypal'
+import { NgxPayPalModule} from 'ngx-paypal';
+import { AuthInterceptor } from './authInterceptor';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -50,7 +51,12 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [UserAuth],
+  providers: [
+    UserAuth,
+    {
+    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
