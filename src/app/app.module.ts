@@ -21,7 +21,6 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { ViewGabComponent } from './components/view-gab/view-gab.component';
 import { PrestigeComponent } from './components/prestige/prestige.component';
 import { NgxPayPalModule} from 'ngx-paypal';
-import { AuthInterceptor } from './authInterceptor';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -52,10 +51,7 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot(),
   ],
   providers: [
-    UserAuth,
-    {
-    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-    }
+    UserAuth
   ],
   bootstrap: [AppComponent]
 })
