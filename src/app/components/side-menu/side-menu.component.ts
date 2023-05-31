@@ -111,6 +111,8 @@ export class SideMenuComponent implements OnInit{
         this.userService.getUserByUuid(this.uuid).subscribe(data => {
           console.log(data);
           this.user=data;
+          console.log(this.user);
+          
         }, (error => {
           console.log(error);
         }));

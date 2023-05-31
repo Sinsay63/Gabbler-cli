@@ -79,10 +79,6 @@ export class ProfilComponent {
       // this.lastClickedLikeButton = likeButton;
     }
   }
-  test(){
-    console.log(this.relation);
-    
-  }
   ngOnInit() {
     
     const uuid = this.route.snapshot.paramMap.get('uuid') ?? ""
@@ -120,7 +116,6 @@ export class ProfilComponent {
     )
     .subscribe((user: UserInfosProfile) => {
       this.user = user;
-      console.log(user);
       
     });
   }
@@ -143,10 +138,8 @@ export class ProfilComponent {
   }
 
   validEdit(type: string){
-    console.log("vamos");
     
       if(type == 'username' && this.username != this.user.username){
-        console.log("username : " + this.username.length + " - " + type);
         if(this.username.length >= 4){
           this.editProfil(type, this.username)
           this.toggleEditMod(type)
@@ -156,7 +149,6 @@ export class ProfilComponent {
         }
       }
       if(type == 'biography'){
-        console.log("bio : " + this.bio);
         if(this.bio.length > 4){
           this.editProfil(type, this.bio)
           this.toggleEditMod(type)
@@ -176,8 +168,6 @@ export class ProfilComponent {
       profil.type = type;
       profil.value = value;
 
-      console.log(profil);
-      console.log("uuid : " + uuid);
       this.userService.editUserProfile(uuid, profil ).subscribe(data => {
         if(profil.type == 'biography'){
           this.toastr.success("Votre biographie a été changée","Bravo!");
@@ -205,7 +195,6 @@ export class ProfilComponent {
     if (token) {
       uuidOwner = this.globalDataService.getUuidFromToken(token);
     }
-    console.log("les uuid sont :" + uuidOwner, uuidToCompare);
     if (uuidOwner !== '') {
       this.relationService.getRelationByUserAndUserRelated(uuidOwner, uuidToCompare).subscribe(data => {
         this.relation = data;

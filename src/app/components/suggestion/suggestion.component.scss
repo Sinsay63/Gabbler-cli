@@ -30,6 +30,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     background-color: rgba(0, 0, 0, 0.83); /* Couleur noire semi-transparente */
     opacity: 1; /* Opacité de l'élément, pas de la couleur */
     width:90%;
@@ -124,9 +127,9 @@
 }
 .add-button{
     display: flex;
-    justify-content: flex-end;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 100;
     margin: 10px 10px 0px 0px;
 }
 .add-container{

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User, Gab, UserToken, InteractionUser, InteractionService, RelationshipService, RelationUser} from 'app/api';
+import { User, Gab, InteractionUser, InteractionService, RelationshipService, RelationUser} from 'app/api';
 import jwt_decode from 'jwt-decode';
-import { RelationshipsCUDRequest } from './api/model/relationshipsCUDRequest';
 
 
 @Injectable({

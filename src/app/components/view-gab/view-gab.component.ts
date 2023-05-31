@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./view-gab.component.scss']
 })
 export class ViewGabComponent {
-  constructor( private route: ActivatedRoute,private toastr: ToastrService, private userService: UserService, private gabService: GabService, private router: Router, private globalDataService: GlobalDataService, private location: Location,private interactionService: InteractionService) { }
+  constructor( private route: ActivatedRoute,private toastr: ToastrService, private userService: UserService, private gabService: GabService, private router: Router, public globalDataService: GlobalDataService, private location: Location,private interactionService: InteractionService) { }
   user = new User()
   gab = new Gab()
   isConnected: boolean | undefined;
@@ -49,6 +49,7 @@ export class ViewGabComponent {
     });
     this.gabService.getCommentsByGabId(id).subscribe(data => {
       this.comments = data;
+      this.globalDataService.sortByDateDESC(this.comments);
     });
     if(this.isConnected){
       const token = sessionStorage.getItem('token');
@@ -149,6 +150,7 @@ createPost(content : string, idGabParent : number){
             this.reloadComments(response)
             this.toastr.success('Vous avez bien ajouté votre commentaire!');
             console.log('Réponse de l\'API :', response);
+            this.ngOnInit();
             // Traitez ici la réponse de l'API si nécessaire
           },
           (error) => {

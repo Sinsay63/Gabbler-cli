@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SearchService, User, UserService} from 'app/api';
+import { RelationUser, SearchService, User, UserService} from 'app/api';
 import { faMagnifyingGlass, faCirclePlus, faCrown} from '@fortawesome/free-solid-svg-icons'
 import { Router, NavigationEnd } from '@angular/router';
 import {GlobalDataService } from 'app/global.data.service'
@@ -47,6 +47,29 @@ export class SuggestionComponent {
       this.router.navigate(['profil/' + userUuid]);
     });
   }
+  async followReload(uuidToFollow: any){
+    let relation = new RelationUser()
+    const token = sessionStorage.getItem('token');
+    if(token){
+      relation.user_uuid = this.globalDataService.getUuidFromToken(token)
+      relation.type = 'followed';
+      relation.user_uuid_related = uuidToFollow;
+    }
+
+    await this.globalDataService.follow(uuidToFollow, relation );
+
+    if(this.isConnected){
+      if(token){
+        const uuid = this.globalDataService.getUuidFromToken(token);
+        this.userService.getSuggestionUserConnected(uuid).subscribe(data => {
+          this.users= data;
+        }, (error => {
+          console.log(error);
+        }));
+    }
+    }
+
+  }
 
    ngOnInit(): void {
 
@@ -55,11 +78,9 @@ export class SuggestionComponent {
       this.isConnected=true;
     }
     if(this.isConnected){
-      const token = sessionStorage.getItem('token');
       if(token){
         const uuid = this.globalDataService.getUuidFromToken(token);
         this.userService.getSuggestionUserConnected(uuid).subscribe(data => {
-          console.log(data);
           this.users= data;
         }, (error => {
           console.log(error);

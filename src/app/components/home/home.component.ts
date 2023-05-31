@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit{
           (response) => {
             this.toastr.success("Vous avez bien créé votre gab");
             console.log('Réponse de l\'API :', response);
+            this.ngOnInit();
             // Traitez ici la réponse de l'API si nécessaire
           },
           (error) => {

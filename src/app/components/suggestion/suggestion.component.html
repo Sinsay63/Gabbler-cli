@@ -13,8 +13,8 @@
         <div class="suggest-user" style="background-image:url('assets/images/{{ user.banner?.url }}');" >
             
             <div class="add-container">
-                <div class="add-button">
-                    <fa-icon class="icon" [icon]="faCirclePlus"></fa-icon>
+                <div *ngIf="isConnected"(click)="this.followReload(user?.uuid)" class="add-button">
+                    <fa-icon  class="icon" [icon]="faCirclePlus"></fa-icon>
                 </div>
             </div>
             <div class="user-info">
