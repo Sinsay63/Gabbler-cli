@@ -56,7 +56,6 @@ export class ViewGabComponent {
       if(token){
         const uuid = this.globalDataService.getUuidFromToken(token);
         this.userService.getUserByUuid(uuid).subscribe(data => {
-          console.log(data);
           this.user=data;
         }, (error => {
           console.log(error);
@@ -77,15 +76,11 @@ export class ViewGabComponent {
     event.stopPropagation();
   }
   getInteractionByGabId(gabId : number , interaction : string): Boolean{
-    console.log("Début getInteractionByGabId");
     
     let exist = false;
     if(gabId > 0){
-      console.log("gabId > 0  -> id : " + gabId);
       
       if(this.interactions){
-        console.log("this.interactions");
-        console.log(this.interactions);
         for (let index = 0; index < this.interactions.length; index++) {
           if(gabId == this.interactions[index].gab_id && this.interactions[index].interaction == interaction){
             exist = true;
@@ -149,7 +144,6 @@ createPost(content : string, idGabParent : number){
           (response) => {
             this.reloadComments(response)
             this.toastr.success('Vous avez bien ajouté votre commentaire!');
-            console.log('Réponse de l\'API :', response);
             this.ngOnInit();
             // Traitez ici la réponse de l'API si nécessaire
           },
@@ -170,11 +164,9 @@ createPost(content : string, idGabParent : number){
       if(token){
         const uuid = this.globalDataService.getUuidFromToken(token);
         this.interactionService.interactionCUD(idGab,uuid,interaction).subscribe(data => {
-          console.log('.nbLike'+ idGab);
           
         let nbLike = document.querySelector('.nbLike'+ idGab) as HTMLElement;
         let nbDislike = document.querySelector('.nbDislike'+ idGab) as HTMLElement;
-        console.log(data);
       
         // 0 pour un ajout
         if (data.gab_id == 0){
