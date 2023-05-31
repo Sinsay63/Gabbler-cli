@@ -46,19 +46,14 @@ export class HomeComponent implements OnInit{
 
         gab.content = this.contentField;
         
-        console.log(gab);
-        
         this.gabService.createGab(uuid, gab).subscribe(
           (response) => {
             this.toastr.success("Vous avez bien créé votre gab");
-            console.log('Réponse de l\'API :', response);
             this.ngOnInit();
-            // Traitez ici la réponse de l'API si nécessaire
           },
           (error) => {
             this.toastr.error("Il y a un probleme lors de la création de votre gab");
             console.error('Erreur de l\'API :', error);
-            // Gérez ici les erreurs de l'API si nécessaire
           }
         );
         
@@ -78,7 +73,6 @@ export class HomeComponent implements OnInit{
       if(token){
         const uuid = this.globalDataService.getUuidFromToken(token);
         await this.gabService.getFeedUserConnected(uuid).subscribe(data => {
-          console.log(data);
           this.feed= data;
           this.globalDataService.sortByDateDESC(this.feed);
           this.showLoader = false;
@@ -95,7 +89,6 @@ export class HomeComponent implements OnInit{
     }
     else{
       await this.gabService.getFeedUserNotConnected().subscribe(data => {
-        console.log(data);
         this.feed= data;
         this.globalDataService.sortByDateDESC(this.feed);
         this.showLoader = false;
